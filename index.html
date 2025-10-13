@@ -438,11 +438,20 @@
             font-weight: 500;
         }
 
+        /* Table wrapper for mobile scrolling */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+        }
+
         table {
             width: 100%;
+            min-width: 600px;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 24px 0;
+            margin: 0;
             background: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 12px;
@@ -1094,6 +1103,7 @@
         @media (max-width: 768px) {
             body {
                 padding-left: 0;
+                font-size: 15px;
             }
             
             body.sidebar-closed {
@@ -1101,111 +1111,300 @@
             }
             
             .container {
-                padding: 24px;
-                margin: 10px auto;
+                padding: 16px;
+                margin: 0;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
             }
             
             h1 {
-                font-size: 2em;
-                margin-bottom: 24px;
-                padding-bottom: 16px;
+                font-size: 1.75em;
+                margin-bottom: 20px;
+                padding-bottom: 12px;
+                line-height: 1.3;
             }
             
             h2 {
-                font-size: 1.6em;
-                margin-top: 32px;
-                margin-bottom: 16px;
+                font-size: 1.4em;
+                margin-top: 28px;
+                margin-bottom: 14px;
+                line-height: 1.3;
             }
 
             h3 {
-                font-size: 1.3em;
+                font-size: 1.2em;
+                margin-top: 20px;
+                margin-bottom: 12px;
+            }
+
+            h4 {
+                font-size: 1.1em;
             }
             
+            p {
+                line-height: 1.6;
+            }
+
+            /* Make tables horizontally scrollable */
             table {
-                font-size: 0.85em;
+                font-size: 0.8em;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Ensure table header and body scroll together */
+            thead, tbody, tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
             }
 
             th {
-                padding: 12px;
-                font-size: 0.85em;
+                padding: 10px 8px;
+                font-size: 0.8em;
             }
 
             td {
-                padding: 10px 12px;
+                padding: 8px;
+                font-size: 0.85em;
+            }
+
+            /* Make lists more compact */
+            ul, ol {
+                padding-left: 24px;
+                margin: 12px 0;
+            }
+
+            li {
+                margin: 8px 0;
+                line-height: 1.5;
+            }
+
+            /* Code blocks */
+            code {
+                font-size: 0.85em;
+                padding: 2px 6px;
+                word-break: break-word;
+            }
+
+            /* Blockquotes */
+            blockquote {
+                padding: 16px;
+                margin: 16px 0;
+                font-size: 0.95em;
             }
             
             .sidebar {
-                width: 300px;
-                left: -300px;
+                width: 280px;
+                left: -280px;
             }
             
             .sidebar.closed {
-                left: -300px;
+                left: -280px;
             }
             
             .sidebar-toggle {
                 left: 10px;
-                width: 44px;
-                height: 44px;
+                width: 48px;
+                height: 48px;
+                font-size: 1.5em;
+                touch-action: manipulation;
             }
             
             .sidebar-toggle.sidebar-closed {
                 left: 10px;
             }
 
+            .sidebar-header {
+                padding: 16px;
+            }
+
+            .sidebar-header h2 {
+                font-size: 1.3em;
+            }
+
+            .sidebar-nav {
+                padding: 12px;
+            }
+
+            .sidebar-nav a {
+                padding: 10px 14px;
+                font-size: 0.9em;
+            }
+
             .sidebar-actions {
                 flex-direction: column;
                 gap: 8px;
+                padding: 12px;
             }
 
             .sidebar-action-btn {
                 min-width: 100%;
+                padding: 12px;
+                font-size: 0.9em;
+                touch-action: manipulation;
             }
             
             .modal-content {
                 width: 95%;
-                margin: 10px auto;
+                max-width: 95vw;
+                margin: 5px auto;
                 border-radius: 12px;
+                max-height: 95vh;
+                overflow: hidden;
             }
             
             .modal-header {
-                padding: 20px 24px;
+                padding: 16px 20px;
             }
             
             .modal-header h2 {
-                font-size: 1.5em;
+                font-size: 1.3em;
             }
 
             .modal-close {
-                width: 36px;
-                height: 36px;
+                width: 40px;
+                height: 40px;
                 font-size: 2em;
+                touch-action: manipulation;
             }
             
             .modal-body {
-                padding: 24px;
-                max-height: 65vh;
+                padding: 20px;
+                max-height: calc(95vh - 80px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             #reading-progress-percent {
                 top: 10px;
                 right: 10px;
-                font-size: 0.8em;
-                padding: 6px 12px;
+                font-size: 0.75em;
+                padding: 5px 10px;
             }
 
             .toc {
-                padding: 20px;
-                margin: 24px 0;
+                padding: 16px;
+                margin: 20px 0;
+                font-size: 0.9em;
             }
 
+            .toc li {
+                margin: 6px 0;
+            }
+            
+            /* Mermaid diagrams mobile optimization */
             .mermaid {
+                padding: 12px;
+                margin: 20px -16px;
+                border-radius: 0;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                font-size: 12px !important;
+            }
+
+            /* Ensure mermaid SVG elements are touch-scrollable */
+            .mermaid svg {
+                max-width: 100%;
+                height: auto;
+                min-width: 600px;
+            }
+
+            /* Score inputs for touch */
+            .score-input {
+                width: 60px;
+                padding: 12px 8px;
+                font-size: 1em;
+                touch-action: manipulation;
+            }
+
+            /* Achievement boxes */
+            .achievement {
                 padding: 16px;
-                margin: 24px 0;
+                margin: 16px 0;
+                font-size: 0.9em;
+            }
+
+            /* Page breaks */
+            .page-break {
+                margin: 32px 0;
+            }
+
+            hr {
+                margin: 32px 0;
+            }
+
+            /* Better touch targets for links */
+            a {
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            /* Responsive images if any */
+            img {
+                max-width: 100%;
+                height: auto;
             }
         }
 
-        /* Loading Screen */
+        /* Extra small devices (phones in portrait mode) */
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.25em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            table {
+                font-size: 0.75em;
+            }
+
+            th, td {
+                padding: 6px;
+            }
+
+            .sidebar {
+                width: 90vw;
+                left: -90vw;
+            }
+
+            .sidebar.closed {
+                left: -90vw;
+            }
+
+            .modal-content {
+                width: 98%;
+                max-width: 98vw;
+            }
+
+            .mermaid {
+                margin: 20px -12px;
+                padding: 8px;
+                font-size: 10px !important;
+            }
+
+            .mermaid svg {
+                min-width: 500px;
+            }
+        }        /* Loading Screen */
         #loading-screen {
             position: fixed;
             top: 0;
