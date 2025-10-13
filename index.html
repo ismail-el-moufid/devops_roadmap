@@ -148,6 +148,9 @@
             background: linear-gradient(135deg, #020617 0%, #0a0e1a 100%);
             scroll-behavior: smooth;
             scroll-padding-top: 80px; /* Offset for fixed elements at top */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* Tech Icon Styles */
@@ -292,6 +295,8 @@
             margin: 0;
             padding-left: 480px;
             transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
         
         body.sidebar-closed {
@@ -436,6 +441,22 @@
             font-size: 0.9em;
             border: 1px solid rgba(251, 191, 36, 0.2);
             font-weight: 500;
+        }
+
+        pre {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            margin: 16px 0;
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
         }
 
         /* Table wrapper for mobile scrolling */
@@ -1402,7 +1423,13 @@
             .mermaid svg {
                 min-width: 500px;
             }
-        }        /* Loading Screen */
+
+            .table-wrapper {
+                margin: 20px -12px;
+            }
+        }
+
+        /* Loading Screen */
         #loading-screen {
             position: fixed;
             top: 0;
