@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>DevOps Learning Roadmap</title>
     <meta name="description" content="Comprehensive DevOps Learning Roadmap">
     <!-- DevOps Favicon -->
@@ -2703,6 +2703,20 @@
         // Also hide on window load as final fallback
         window.addEventListener('load', () => {
             setTimeout(hideLoadingScreen, 1000);
+        });
+
+        // Wrap all tables in responsive wrapper for mobile scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            const tables = document.querySelectorAll('.container table');
+            tables.forEach(table => {
+                // Check if table is not already wrapped
+                if (!table.parentElement.classList.contains('table-wrapper')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'table-wrapper';
+                    table.parentNode.insertBefore(wrapper, table);
+                    wrapper.appendChild(table);
+                }
+            });
         });
 
         // Reading Progress Bar with weighted phases
