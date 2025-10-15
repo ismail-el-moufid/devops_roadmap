@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>DevOps Learning Roadmap</title>
     <meta name="description" content="Comprehensive DevOps Learning Roadmap">
     <!-- DevOps Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%233730a3'/><path d='M30 35 Q50 25 70 35 L65 50 Q50 40 35 50 Z' fill='%2360a5fa'/><path d='M30 65 Q50 75 70 65 L65 50 Q50 60 35 50 Z' fill='%2310b981'/><circle cx='50' cy='50' r='8' fill='%23f1f5f9'/></svg>" type="image/svg+xml">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%233730a3'/><path d='M30 35 Q50 25 70 35 L65 50 Q50 40 35 50 Z' fill='%2360a5fa'/><path d='M30 65 Q50 75 70 65 L65 50 Q50 60 35 50 Z' fill='%2310b981'/><circle cx='50' cy='50' r='8' fill='%23f1f5f9'/></svg>"
+        type="image/svg+xml">
     <!-- Font Awesome for general icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Devicon for tech logos -->
@@ -15,30 +18,31 @@
     <link rel="stylesheet" href="mermaid-fix.css">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script src="scripts.js"></script>
-    
+
 </head>
+
 <body class="sidebar-closed">
     <!-- Reading Progress Bar -->
     <div id="reading-progress-bar"></div>
-    
+
     <!-- Reading Progress Percentage -->
     <div id="reading-progress-percent">0%</div>
-    
+
     <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="loader"></div>
         <div class="loading-text">Loading DevOps Roadmap<span class="loading-dots"></span></div>
         <div class="loading-subtext">Rendering diagrams and initializing content</div>
     </div>
-    
+
     <!-- Sidebar Toggle Button -->
     <button class="sidebar-toggle sidebar-closed" id="sidebarToggle" onclick="toggleSidebar()" title="Toggle sidebar">
         <i class="fas fa-bars"></i>
     </button>
-    
+
     <!-- Sidebar Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-    
+
     <!-- I'm Stuck Modal -->
     <div id="stuckModal" class="modal">
         <div class="modal-content">
@@ -47,7 +51,8 @@
                 <button class="modal-close" onclick="closeStuckModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <p><strong>Feeling overwhelmed or blocked? Here's step-by-step help for common situations when you don't know what to do next.</strong></p>
+                <p><strong>Feeling overwhelmed or blocked? Here's step-by-step help for common situations when you don't
+                        know what to do next.</strong></p>
 
                 <h3>🤔 "I Don't Understand the Concept"</h3>
                 <h4>Problem: The theory/documentation is confusing</h4>
@@ -62,7 +67,8 @@
                     <li><strong>Use the ELI5 (Explain Like I'm 5) Approach:</strong>
                         <ul>
                             <li>Search Reddit: "ELI5 Kubernetes" or "ELI5 Docker"</li>
-                            <li>Ask ChatGPT/Claude: "Explain Docker to me like I'm a beginner with simple analogies"</li>
+                            <li>Ask ChatGPT/Claude: "Explain Docker to me like I'm a beginner with simple analogies"
+                            </li>
                             <li>YouTube: "Docker explained in 100 seconds" (Fireship channel)</li>
                         </ul>
                     </li>
@@ -121,14 +127,16 @@
                     <li><strong>Ask for Help (The Right Way):</strong>
                         <ul>
                             <li><strong>Don't ask:</strong> "My code doesn't work, help!"</li>
-                            <li><strong>Do ask:</strong> "I'm getting [exact error] when running [exact command]. I've tried [what you tried]. Here's my code: [paste]. What am I missing?"</li>
+                            <li><strong>Do ask:</strong> "I'm getting [exact error] when running [exact command]. I've
+                                tried [what you tried]. Here's my code: [paste]. What am I missing?"</li>
                             <li>Include: OS, tool versions, exact commands, full error messages</li>
                         </ul>
                     </li>
                     <li><strong>Where to Ask:</strong>
                         <ul>
                             <li><strong>Stack Overflow:</strong> Search first, then ask with all details</li>
-                            <li><strong>Discord/Slack Communities:</strong> Real-time help (see Community Resources)</li>
+                            <li><strong>Discord/Slack Communities:</strong> Real-time help (see Community Resources)
+                            </li>
                             <li><strong>ChatGPT/Claude:</strong> Great for explaining errors and debugging</li>
                             <li><strong>GitHub Issues:</strong> If you suspect it's a tool bug</li>
                         </ul>
@@ -176,14 +184,16 @@
                     <li><strong>Immediate Actions:</strong>
                         <ul>
                             <li><strong>Stop Everything:</strong> Go to EC2, RDS, and STOP all running instances</li>
-                            <li><strong>Check Cost Explorer:</strong> AWS Console → Billing → Cost Explorer to see what's expensive</li>
+                            <li><strong>Check Cost Explorer:</strong> AWS Console → Billing → Cost Explorer to see
+                                what's expensive</li>
                             <li><strong>Set Budget Alert:</strong> AWS Budgets → Create alert at $10, $25, $50</li>
                         </ul>
                     </li>
                     <li><strong>Common Cost Culprits:</strong>
                         <ul>
                             <li><strong>NAT Gateway:</strong> $32/month per gateway → Use single NAT or VPN instead</li>
-                            <li><strong>Forgotten EC2:</strong> Running instances 24/7 → Use <code>terraform destroy</code> daily</li>
+                            <li><strong>Forgotten EC2:</strong> Running instances 24/7 → Use
+                                <code>terraform destroy</code> daily</li>
                             <li><strong>RDS Multi-AZ:</strong> Doubles cost → Use single-AZ for learning</li>
                             <li><strong>Data Transfer:</strong> Downloading large amounts → Stay within same region</li>
                             <li><strong>EBS Snapshots:</strong> Old snapshots pile up → Delete unused snapshots</li>
@@ -191,7 +201,8 @@
                     </li>
                     <li><strong>Free/Cheap Alternatives:</strong>
                         <ul>
-                            <li><strong>Can't afford EKS ($75/month)?</strong> → Use Minikube locally or k3s on single EC2</li>
+                            <li><strong>Can't afford EKS ($75/month)?</strong> → Use Minikube locally or k3s on single
+                                EC2</li>
                             <li><strong>RDS too expensive?</strong> → PostgreSQL in Docker on EC2</li>
                             <li><strong>Need persistent lab?</strong> → Use LocalStack for AWS simulation</li>
                             <li><strong>Alternative cloud:</strong> Google Cloud ($300 free credits for 90 days)</li>
@@ -277,7 +288,9 @@
                 </table>
 
                 <blockquote style="margin-top: 30px;">
-                    <strong>🎯 Remember:</strong> Getting stuck is not failing - it's learning! Every error message is teaching you something. Every "I'm stuck" moment that you push through makes you a stronger engineer.
+                    <strong>🎯 Remember:</strong> Getting stuck is not failing - it's learning! Every error message is
+                    teaching you something. Every "I'm stuck" moment that you push through makes you a stronger
+                    engineer.
                 </blockquote>
             </div>
         </div>
@@ -335,16 +348,20 @@
                         <td><strong>CNCF (Cloud Native)</strong></td>
                         <td>Cloud Native Computing Foundation projects</td>
                         <td>8K+</td>
-                        <td><a href="https://cloud-native.slack.com" target="_blank">cloud-native.slack.com</a> (Slack)</td>
+                        <td><a href="https://cloud-native.slack.com" target="_blank">cloud-native.slack.com</a> (Slack)
+                        </td>
                     </tr>
                 </table>
 
                 <h3>📱 Slack Communities</h3>
                 <ul>
-                    <li><strong>Kubernetes:</strong> <a href="https://slack.k8s.io/" target="_blank">slack.k8s.io</a> - Official K8s Slack with 170K+ members</li>
-                    <li><strong>HashiCorp:</strong> <a href="https://hashicorp-community.slack.com" target="_blank">hashicorp-community.slack.com</a> - Terraform, Vault, Packer support</li>
+                    <li><strong>Kubernetes:</strong> <a href="https://slack.k8s.io/" target="_blank">slack.k8s.io</a> -
+                        Official K8s Slack with 170K+ members</li>
+                    <li><strong>HashiCorp:</strong> <a href="https://hashicorp-community.slack.com"
+                            target="_blank">hashicorp-community.slack.com</a> - Terraform, Vault, Packer support</li>
                     <li><strong>AWS Community:</strong> Search "AWS Community Builders" - Regional AWS groups</li>
-                    <li><strong>DevOps Chat:</strong> <a href="https://devopschat.co/" target="_blank">devopschat.co</a> - Active DevOps practitioners</li>
+                    <li><strong>DevOps Chat:</strong> <a href="https://devopschat.co/" target="_blank">devopschat.co</a>
+                        - Active DevOps practitioners</li>
                 </ul>
 
                 <h3>🌍 Reddit Communities</h3>
@@ -415,21 +432,28 @@
 
                 <h3>📖 Blogs & Newsletters</h3>
                 <ul>
-                    <li><strong>DevOps Weekly:</strong> <a href="https://www.devopsweekly.com/" target="_blank">devopsweekly.com</a> - Curated newsletter</li>
-                    <li><strong>DevOps'ish:</strong> <a href="https://devopsish.com/" target="_blank">devopsish.com</a> - Weekly DevOps news</li>
-                    <li><strong>Kubernetes Podcast:</strong> <a href="https://kubernetespodcast.com/" target="_blank">kubernetespodcast.com</a> - From Google</li>
-                    <li><strong>Last Week in AWS:</strong> <a href="https://lastweekinaws.com/" target="_blank">lastweekinaws.com</a> - Snarky AWS updates</li>
-                    <li><strong>The New Stack:</strong> <a href="https://thenewstack.io/" target="_blank">thenewstack.io</a> - Cloud-native news</li>
+                    <li><strong>DevOps Weekly:</strong> <a href="https://www.devopsweekly.com/"
+                            target="_blank">devopsweekly.com</a> - Curated newsletter</li>
+                    <li><strong>DevOps'ish:</strong> <a href="https://devopsish.com/" target="_blank">devopsish.com</a>
+                        - Weekly DevOps news</li>
+                    <li><strong>Kubernetes Podcast:</strong> <a href="https://kubernetespodcast.com/"
+                            target="_blank">kubernetespodcast.com</a> - From Google</li>
+                    <li><strong>Last Week in AWS:</strong> <a href="https://lastweekinaws.com/"
+                            target="_blank">lastweekinaws.com</a> - Snarky AWS updates</li>
+                    <li><strong>The New Stack:</strong> <a href="https://thenewstack.io/"
+                            target="_blank">thenewstack.io</a> - Cloud-native news</li>
                 </ul>
 
                 <h3>🏢 Meetups & Conferences</h3>
                 <ul>
-                    <li><strong>DevOpsDays:</strong> <a href="https://devopsdays.org/" target="_blank">devopsdays.org</a> - Global conference series</li>
+                    <li><strong>DevOpsDays:</strong> <a href="https://devopsdays.org/"
+                            target="_blank">devopsdays.org</a> - Global conference series</li>
                     <li><strong>KubeCon + CloudNativeCon:</strong> Premier Kubernetes conference</li>
                     <li><strong>AWS re:Invent:</strong> Annual AWS mega-conference (Vegas)</li>
                     <li><strong>HashiConf:</strong> HashiCorp user conference</li>
                     <li><strong>Meetup.com:</strong> Search "DevOps" + your city for local groups</li>
-                    <li><strong>CNCF Meetups:</strong> <a href="https://community.cncf.io/" target="_blank">community.cncf.io</a></li>
+                    <li><strong>CNCF Meetups:</strong> <a href="https://community.cncf.io/"
+                            target="_blank">community.cncf.io</a></li>
                 </ul>
 
                 <h3>🎓 Learning Platforms</h3>
@@ -442,7 +466,8 @@
 
                 <h3>🤝 Finding Mentors</h3>
                 <ul>
-                    <li><strong>ADPList:</strong> <a href="https://adplist.org/" target="_blank">adplist.org</a> - Free mentorship platform</li>
+                    <li><strong>ADPList:</strong> <a href="https://adplist.org/" target="_blank">adplist.org</a> - Free
+                        mentorship platform</li>
                     <li><strong>MentorCruise:</strong> Paid mentorship with industry professionals</li>
                     <li><strong>LinkedIn:</strong> Reach out to DevOps engineers with thoughtful messages</li>
                     <li><strong>Twitter/X:</strong> Follow #DevOps hashtag, engage with community</li>
@@ -451,7 +476,8 @@
                 <h3>📝 Best Practices for Getting Help</h3>
                 <ol>
                     <li><strong>Search First:</strong> Google the exact error message before asking</li>
-                    <li><strong>Provide Context:</strong> Share error logs, configuration files (sanitized!), what you've tried</li>
+                    <li><strong>Provide Context:</strong> Share error logs, configuration files (sanitized!), what
+                        you've tried</li>
                     <li><strong>Use Code Blocks:</strong> Format code properly in Discord/Slack/SO</li>
                     <li><strong>Don't Ask to Ask:</strong> Just ask your question directly with details</li>
                     <li><strong>Share Your Solution:</strong> Once solved, post the solution for others</li>
@@ -459,7 +485,9 @@
                 </ol>
 
                 <blockquote>
-                    <strong>💡 Community Tip:</strong> Join 2-3 communities max to start. Being active in a few is better than lurking in many. Contribute by asking good questions, sharing your learning progress, and helping others when you can.
+                    <strong>💡 Community Tip:</strong> Join 2-3 communities max to start. Being active in a few is
+                    better than lurking in many. Contribute by asking good questions, sharing your learning progress,
+                    and helping others when you can.
                 </blockquote>
             </div>
         </div>
@@ -473,7 +501,8 @@
                 <button class="modal-close" onclick="closeCostModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Detailed monthly cost estimates for each learning phase. Costs are for US East (N. Virginia) region and assume Free Tier where applicable.</p>
+                <p>Detailed monthly cost estimates for each learning phase. Costs are for US East (N. Virginia) region
+                    and assume Free Tier where applicable.</p>
 
                 <h3>📊 Phase-by-Phase Cost Table</h3>
 
@@ -494,19 +523,24 @@
                         <td><strong>Phase 3</strong><br>Linux Basics</td>
                         <td>1x t3.micro EC2 (Free Tier eligible)</td>
                         <td><strong>$0 - $10</strong></td>
-                        <td>Use Free Tier 750 hrs/month. Stop instance when not learning. Alternative: Use WSL/VirtualBox locally</td>
+                        <td>Use Free Tier 750 hrs/month. Stop instance when not learning. Alternative: Use
+                            WSL/VirtualBox locally</td>
                     </tr>
                     <tr>
                         <td><strong>Phase 4</strong><br>AWS Infrastructure</td>
-                        <td>• 2x t3.small EC2<br>• RDS db.t3.micro<br>• ALB<br>• NAT Gateway<br>• S3 (minimal)<br>• CloudFront (Free Tier)</td>
+                        <td>• 2x t3.small EC2<br>• RDS db.t3.micro<br>• ALB<br>• NAT Gateway<br>• S3 (minimal)<br>•
+                            CloudFront (Free Tier)</td>
                         <td><strong>$50 - $80</strong></td>
-                        <td>• Use single NAT Gateway instead of 2 ($32/mo savings)<br>• Use RDS Free Tier first 750 hrs<br>• Delete resources nightly, recreate with Terraform<br>• Use t3.micro instead of t3.small (-$10/mo)</td>
+                        <td>• Use single NAT Gateway instead of 2 ($32/mo savings)<br>• Use RDS Free Tier first 750
+                            hrs<br>• Delete resources nightly, recreate with Terraform<br>• Use t3.micro instead of
+                            t3.small (-$10/mo)</td>
                     </tr>
                     <tr>
                         <td><strong>Phase 5</strong><br>Terraform</td>
                         <td>Same as Phase 4 + S3 for state</td>
                         <td><strong>$50 - $80</strong></td>
-                        <td>• Create/destroy infrastructure daily<br>• Use <code>terraform destroy</code> at end of each session<br>• S3 state storage is pennies/month</td>
+                        <td>• Create/destroy infrastructure daily<br>• Use <code>terraform destroy</code> at end of each
+                            session<br>• S3 state storage is pennies/month</td>
                     </tr>
                     <tr>
                         <td><strong>Phase 6</strong><br>Ansible</td>
@@ -518,37 +552,46 @@
                         <td><strong>Phase 7</strong><br>Docker</td>
                         <td>• ECR repository (500MB Free Tier)<br>• 1x t3.medium EC2 (for Docker)</td>
                         <td><strong>$20 - $35</strong></td>
-                        <td>• Use Docker Desktop locally first<br>• ECR storage is $0.10/GB after Free Tier<br>• Delete old images regularly</td>
+                        <td>• Use Docker Desktop locally first<br>• ECR storage is $0.10/GB after Free Tier<br>• Delete
+                            old images regularly</td>
                     </tr>
                     <tr>
                         <td><strong>Phase 8</strong><br>Kubernetes/EKS</td>
-                        <td>• EKS cluster control plane<br>• 2x t3.medium worker nodes<br>• ALB<br>• EBS volumes<br>• NAT Gateway</td>
+                        <td>• EKS cluster control plane<br>• 2x t3.medium worker nodes<br>• ALB<br>• EBS volumes<br>•
+                            NAT Gateway</td>
                         <td><strong>$120 - $180</strong><br>(HIGHEST COST)</td>
-                        <td>• <strong>EKS control plane:</strong> $72/mo (unavoidable)<br>• Use t3.small workers instead (-$30/mo)<br>• Alternative: Use Minikube/k3s locally, deploy to EKS only for demos<br>• Delete cluster daily: <code>eksctl delete cluster</code><br>• Use Spot Instances for nodes (-60%)</td>
+                        <td>• <strong>EKS control plane:</strong> $72/mo (unavoidable)<br>• Use t3.small workers instead
+                            (-$30/mo)<br>• Alternative: Use Minikube/k3s locally, deploy to EKS only for demos<br>•
+                            Delete cluster daily: <code>eksctl delete cluster</code><br>• Use Spot Instances for nodes
+                            (-60%)</td>
                     </tr>
                     <tr>
                         <td><strong>Phase 9</strong><br>CI/CD</td>
                         <td>GitHub Actions (2000 min/mo free)</td>
                         <td><strong>$0 - $10</strong></td>
-                        <td>• GitHub Actions free for public repos<br>• Optimize workflow run time<br>• Self-host runners on existing EC2</td>
+                        <td>• GitHub Actions free for public repos<br>• Optimize workflow run time<br>• Self-host
+                            runners on existing EC2</td>
                     </tr>
                     <tr>
                         <td><strong>Phase 10</strong><br>Monitoring</td>
                         <td>• Prometheus/Grafana on EKS (included)<br>• CloudWatch Logs<br>• CloudWatch Metrics</td>
                         <td><strong>$10 - $30</strong></td>
-                        <td>• Use CloudWatch Free Tier (10 metrics)<br>• Reduce log retention to 7 days<br>• Filter noisy logs<br>• Use CloudWatch Logs Insights sparingly</td>
+                        <td>• Use CloudWatch Free Tier (10 metrics)<br>• Reduce log retention to 7 days<br>• Filter
+                            noisy logs<br>• Use CloudWatch Logs Insights sparingly</td>
                     </tr>
                     <tr>
                         <td><strong>Phase 11</strong><br>Security</td>
                         <td>• GuardDuty<br>• Security Hub<br>• AWS Config<br>• Secrets Manager</td>
                         <td><strong>$25 - $50</strong></td>
-                        <td>• GuardDuty: 30-day free trial<br>• Disable after learning<br>• Use Parameter Store (free) instead of Secrets Manager<br>• Limit Config rule evaluations</td>
+                        <td>• GuardDuty: 30-day free trial<br>• Disable after learning<br>• Use Parameter Store (free)
+                            instead of Secrets Manager<br>• Limit Config rule evaluations</td>
                     </tr>
                     <tr>
                         <td><strong>Phase 12</strong><br>Serverless</td>
                         <td>• Lambda (1M req/mo free)<br>• API Gateway<br>• DynamoDB (25GB free)<br>• EventBridge</td>
                         <td><strong>$5 - $15</strong></td>
-                        <td>• Stay within Free Tier limits<br>• Use on-demand pricing for DynamoDB<br>• API Gateway: first 1M calls free for 12 months</td>
+                        <td>• Stay within Free Tier limits<br>• Use on-demand pricing for DynamoDB<br>• API Gateway:
+                            first 1M calls free for 12 months</td>
                     </tr>
                 </table>
 
@@ -556,7 +599,8 @@
 
                 <ul>
                     <li><strong>Months 1-3 (Fundamentals):</strong> $50 - $150 total</li>
-                    <li><strong>Months 4-6 (Containers & Kubernetes):</strong> $300 - $500 total (highest cost period)</li>
+                    <li><strong>Months 4-6 (Containers & Kubernetes):</strong> $300 - $500 total (highest cost period)
+                    </li>
                     <li><strong>Months 7-9 (Advanced & Polish):</strong> $100 - $200 total</li>
                     <li><strong>Grand Total:</strong> $450 - $850 over 9 months (~$50-95/month average)</li>
                 </ul>
@@ -639,12 +683,14 @@
                 </ul>
 
                 <blockquote>
-                    <strong>⚠️ Important:</strong> The single biggest cost is <strong>EKS cluster control plane ($72/month)</strong>. Consider learning Kubernetes with Minikube locally and only spinning up EKS for your final portfolio demonstration.
+                    <strong>⚠️ Important:</strong> The single biggest cost is <strong>EKS cluster control plane
+                        ($72/month)</strong>. Consider learning Kubernetes with Minikube locally and only spinning up
+                    EKS for your final portfolio demonstration.
                 </blockquote>
             </div>
         </div>
     </div>
-    
+
     <!-- Sidebar Navigation -->
     <nav class="sidebar closed" id="sidebar">
         <div class="sidebar-header">
@@ -653,54 +699,77 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        
+
         <!-- Action Buttons in Sidebar -->
         <div class="sidebar-actions">
-            <button class="sidebar-action-btn sidebar-stuck-btn" onclick="openStuckModal()" title="Get help when you're stuck">
+            <button class="sidebar-action-btn sidebar-stuck-btn" onclick="openStuckModal()"
+                title="Get help when you're stuck">
                 <i class="fas fa-life-ring"></i> I'm Stuck!
             </button>
-            <button class="sidebar-action-btn sidebar-community-btn" onclick="openCommunityModal()" title="Join DevOps communities">
+            <button class="sidebar-action-btn sidebar-community-btn" onclick="openCommunityModal()"
+                title="Join DevOps communities">
                 <i class="fas fa-users"></i> Community
             </button>
-            <button class="sidebar-action-btn sidebar-cost-btn" onclick="openCostModal()" title="View AWS cost breakdown">
+            <button class="sidebar-action-btn sidebar-cost-btn" onclick="openCostModal()"
+                title="View AWS cost breakdown">
                 <i class="fas fa-dollar-sign"></i> AWS Costs
             </button>
         </div>
-        
+
         <div class="sidebar-content">
             <ol>
-                <li><a href="#readiness-quiz"><i class="fas fa-clipboard-check tech-icon"></i> Prerequisites Self-Assessment Quiz</a></li>
+                <li><a href="#readiness-quiz"><i class="fas fa-clipboard-check tech-icon"></i> Prerequisites
+                        Self-Assessment Quiz</a></li>
                 <li><a href="#quick-start"><i class="fas fa-bolt tech-icon"></i> Quick Start Track (2-3 Weeks)</a></li>
-                <li><a href="#project-architecture"><i class="fas fa-project-diagram tech-icon"></i> Project Architecture Overview</a></li>
-                <li><a href="#project-alternatives"><i class="fas fa-code-branch tech-icon"></i> Project Alternatives & Options</a></li>
-                <li><a href="#impact-statement"><i class="fas fa-star tech-icon"></i> Professional Impact Statement</a></li>
-                <li><a href="#prerequisites"><i class="fas fa-book-open tech-icon"></i> Prerequisites & Preparation</a></li>
+                <li><a href="#project-architecture"><i class="fas fa-project-diagram tech-icon"></i> Project
+                        Architecture Overview</a></li>
+                <li><a href="#project-alternatives"><i class="fas fa-code-branch tech-icon"></i> Project Alternatives &
+                        Options</a></li>
+                <li><a href="#impact-statement"><i class="fas fa-star tech-icon"></i> Professional Impact Statement</a>
+                </li>
+                <li><a href="#prerequisites"><i class="fas fa-book-open tech-icon"></i> Prerequisites & Preparation</a>
+                </li>
                 <li><a href="#phase1"><i class="fas fa-flag tech-icon"></i> Phase 1: DevOps Fundamentals</a></li>
-                <li><a href="#phase2"><i class="devicon-git-plain tech-icon icon-git"></i> Phase 2: Version Control & Collaboration</a></li>
-                <li><a href="#phase3"><i class="devicon-linux-plain tech-icon icon-linux"></i> Phase 3: Linux Administration & Networking</a></li>
-                <li><a href="#phase4"><i class="devicon-amazonwebservices-original tech-icon icon-aws"></i> Phase 4: Cloud Infrastructure (AWS)</a></li>
-                <li><a href="#phase5"><i class="devicon-terraform-plain tech-icon icon-terraform"></i> Phase 5: Infrastructure as Code (Terraform)</a></li>
-                <li><a href="#phase6"><i class="devicon-ansible-plain tech-icon icon-ansible"></i> Phase 6: Configuration Management (Ansible)</a></li>
-                <li><a href="#phase7"><i class="devicon-docker-plain tech-icon icon-docker"></i> Phase 7: Containerization (Docker)</a></li>
-                <li><a href="#phase8"><i class="devicon-kubernetes-plain tech-icon icon-kubernetes"></i> Phase 8: Orchestration (Kubernetes)</a></li>
-                <li><a href="#phase9"><i class="devicon-github-original tech-icon icon-github"></i> Phase 9: CI/CD Automation</a></li>
-                <li><a href="#phase10"><i class="devicon-prometheus-original tech-icon icon-prometheus"></i> Phase 10: Monitoring & Observability</a></li>
-                <li><a href="#phase11"><i class="fas fa-shield-alt tech-icon"></i> Phase 11: Security & Compliance</a></li>
-                <li><a href="#phase12"><i class="devicon-amazonwebservices-original tech-icon icon-aws"></i> Phase 12: Serverless & Advanced Patterns</a></li>
-                <li><a href="#soft-skills"><i class="fas fa-users tech-icon"></i> Soft Skills & Professional Development</a></li>
-                <li><a href="#final-polish"><i class="fas fa-gem tech-icon"></i> Final Polish & Portfolio Preparation</a></li>
+                <li><a href="#phase2"><i class="devicon-git-plain tech-icon icon-git"></i> Phase 2: Version Control &
+                        Collaboration</a></li>
+                <li><a href="#phase3"><i class="devicon-linux-plain tech-icon icon-linux"></i> Phase 3: Linux
+                        Administration & Networking</a></li>
+                <li><a href="#phase4"><i class="devicon-amazonwebservices-original tech-icon icon-aws"></i> Phase 4:
+                        Cloud Infrastructure (AWS)</a></li>
+                <li><a href="#phase5"><i class="devicon-terraform-plain tech-icon icon-terraform"></i> Phase 5:
+                        Infrastructure as Code (Terraform)</a></li>
+                <li><a href="#phase6"><i class="devicon-ansible-plain tech-icon icon-ansible"></i> Phase 6:
+                        Configuration Management (Ansible)</a></li>
+                <li><a href="#phase7"><i class="devicon-docker-plain tech-icon icon-docker"></i> Phase 7:
+                        Containerization (Docker)</a></li>
+                <li><a href="#phase8"><i class="devicon-kubernetes-plain tech-icon icon-kubernetes"></i> Phase 8:
+                        Orchestration (Kubernetes)</a></li>
+                <li><a href="#phase9"><i class="devicon-github-original tech-icon icon-github"></i> Phase 9: CI/CD
+                        Automation</a></li>
+                <li><a href="#phase10"><i class="devicon-prometheus-original tech-icon icon-prometheus"></i> Phase 10:
+                        Monitoring & Observability</a></li>
+                <li><a href="#phase11"><i class="fas fa-shield-alt tech-icon"></i> Phase 11: Security & Compliance</a>
+                </li>
+                <li><a href="#phase12"><i class="devicon-amazonwebservices-original tech-icon icon-aws"></i> Phase 12:
+                        Serverless & Advanced Patterns</a></li>
+                <li><a href="#soft-skills"><i class="fas fa-users tech-icon"></i> Soft Skills & Professional
+                        Development</a></li>
+                <li><a href="#final-polish"><i class="fas fa-gem tech-icon"></i> Final Polish & Portfolio
+                        Preparation</a></li>
                 <li><a href="#career-tips"><i class="fas fa-briefcase tech-icon"></i> Career Advancement Tips</a></li>
-                <li><a href="#final-thoughts"><i class="fas fa-rocket tech-icon"></i> Final Thoughts & Next Steps</a></li>
+                <li><a href="#final-thoughts"><i class="fas fa-rocket tech-icon"></i> Final Thoughts & Next Steps</a>
+                </li>
             </ol>
         </div>
     </nav>
-    
+
     <script src="scripts.js"></script>
     <div class="container">
         <h1>DevOps Learning Roadmap</h1>
 
         <h2 id="readiness-quiz">Prerequisites Self-Assessment Quiz</h2>
-        <p><strong>Complete this quick assessment to determine your starting point and identify areas for preparation.</strong></p>
+        <p><strong>Complete this quick assessment to determine your starting point and identify areas for
+                preparation.</strong></p>
 
         <h3>Technical Readiness - Score yourself based on what you can do</h3>
 
@@ -719,7 +788,8 @@
                 <td>Know cd and ls, rarely use it</td>
                 <td>Navigate, create files/folders, use pipes and grep regularly</td>
                 <td>Fluent with complex commands, scripting, and troubleshooting</td>
-                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0" data-skill="commandline"></td>
+                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0"
+                        data-skill="commandline"></td>
             </tr>
             <tr>
                 <td><strong>Programming</strong></td>
@@ -727,7 +797,8 @@
                 <td>Followed tutorials, understand variables and loops</td>
                 <td>Write scripts for automation, understand functions and error handling</td>
                 <td>Build complex applications, understand OOP and design patterns</td>
-                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0" data-skill="programming"></td>
+                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0"
+                        data-skill="programming"></td>
             </tr>
             <tr>
                 <td><strong>Networking</strong></td>
@@ -735,7 +806,8 @@
                 <td>Know what IP address is, understand URLs</td>
                 <td>Understand ports, DNS lookups, HTTP methods (GET/POST)</td>
                 <td>Configure networks, troubleshoot connectivity, understand TCP/IP layers</td>
-                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0" data-skill="networking"></td>
+                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0"
+                        data-skill="networking"></td>
             </tr>
             <tr>
                 <td><strong>Web Development</strong></td>
@@ -743,7 +815,8 @@
                 <td>Created simple HTML pages or followed tutorials</td>
                 <td>Built full-stack apps with databases, deployed to hosting</td>
                 <td>Designed architecture, optimized performance, handled production issues</td>
-                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0" data-skill="webdev"></td>
+                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0"
+                        data-skill="webdev"></td>
             </tr>
             <tr>
                 <td><strong>Linux/Unix</strong></td>
@@ -751,7 +824,8 @@
                 <td>Used Linux in VM, know apt/yum basics</td>
                 <td>Install packages, manage services (systemctl), edit configs</td>
                 <td>Server administration, security hardening, kernel tuning</td>
-                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0" data-skill="linux"></td>
+                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0"
+                        data-skill="linux"></td>
             </tr>
             <tr>
                 <td><strong>Version Control</strong></td>
@@ -759,7 +833,8 @@
                 <td>Used GitHub Desktop, understand commits</td>
                 <td>Use Git CLI, branch/merge, resolve conflicts, PRs</td>
                 <td>Manage complex workflows, rebase, cherry-pick, Git hooks</td>
-                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0" data-skill="git"></td>
+                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0"
+                        data-skill="git"></td>
             </tr>
             <tr>
                 <td><strong>Cloud Platforms</strong></td>
@@ -767,7 +842,8 @@
                 <td>Created account, explored console, launched EC2/VM</td>
                 <td>Deploy apps, use S3/Storage, configure networking</td>
                 <td>Design cloud architecture, optimize costs, multi-region deployments</td>
-                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0" data-skill="cloud"></td>
+                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0"
+                        data-skill="cloud"></td>
             </tr>
             <tr>
                 <td><strong>Problem Solving</strong></td>
@@ -775,22 +851,28 @@
                 <td>Google errors, follow Stack Overflow solutions</td>
                 <td>Read docs, debug systematically, learn from error messages</td>
                 <td>Troubleshoot complex issues, read source code, contribute fixes</td>
-                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0" data-skill="problemsolving"></td>
+                <td style="text-align: center;"><input type="number" class="score-input" min="0" max="3" value="0"
+                        data-skill="problemsolving"></td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: right; font-weight: bold; font-size: 1.2em;">Total Score:</td>
-                <td style="font-weight: bold; font-size: 1.3em; color: #10b981;"><span id="total-score">0</span> / 24</td>
+                <td style="font-weight: bold; font-size: 1.3em; color: #10b981;"><span id="total-score">0</span> / 24
+                </td>
             </tr>
         </table>
 
         <h3>📊 Score Interpretation</h3>
-        <div id="score-interpretation" style="padding: 20px; background: #1e293b; border-radius: 8px; border-left: 4px solid #3730a3; margin: 20px 0;">
-            <p style="color: #94a3b8; font-style: italic;">Fill in your scores above to see your personalized interpretation...</p>
+        <div id="score-interpretation"
+            style="padding: 20px; background: #1e293b; border-radius: 8px; border-left: 4px solid #3730a3; margin: 20px 0;">
+            <p style="color: #94a3b8; font-style: italic;">Fill in your scores above to see your personalized
+                interpretation...</p>
         </div>
 
-        <div id="weak-areas-focus" style="display: none; padding: 20px; background: #1e293b; border-radius: 8px; border-left: 4px solid #f59e0b; margin: 20px 0;">
+        <div id="weak-areas-focus"
+            style="display: none; padding: 20px; background: #1e293b; border-radius: 8px; border-left: 4px solid #f59e0b; margin: 20px 0;">
             <h4 style="margin-top: 0; color: #fbbf24;">🎯 Recommended Focus Areas</h4>
-            <p style="color: #cbd5e1;">Based on your weaker areas (scores 0-1), here are the phases you should pay extra attention to:</p>
+            <p style="color: #cbd5e1;">Based on your weaker areas (scores 0-1), here are the phases you should pay extra
+                attention to:</p>
             <div id="focus-phases-list"></div>
         </div>
 
@@ -802,16 +884,20 @@
         </ul>
 
         <blockquote>
-            <strong>💡 Pro Tip:</strong> If your score is below 9, don't rush! Building a strong foundation will accelerate your progress later. Complete a basic programming course and Linux fundamentals before diving into DevOps.
+            <strong>💡 Pro Tip:</strong> If your score is below 9, don't rush! Building a strong foundation will
+            accelerate your progress later. Complete a basic programming course and Linux fundamentals before diving
+            into DevOps.
         </blockquote>
 
         <div class="page-break"></div>
 
         <h2 id="quick-start">⚡ Quick Start Track (2-3 Weeks)</h2>
 
-        <p><strong>Not sure if DevOps is for you? Want to see tangible results before committing to the full 34-week roadmap?</strong></p>
+        <p><strong>Not sure if DevOps is for you? Want to see tangible results before committing to the full 34-week
+                roadmap?</strong></p>
 
-        <p>This accelerated track gets you from zero to a working deployed application in just <strong>2-3 weeks</strong>, giving you a taste of the full DevOps workflow. Perfect for:</p>
+        <p>This accelerated track gets you from zero to a working deployed application in just <strong>2-3
+                weeks</strong>, giving you a taste of the full DevOps workflow. Perfect for:</p>
         <ul>
             <li>🎯 Testing if DevOps aligns with your interests</li>
             <li>Building momentum before the full roadmap</li>
@@ -820,7 +906,9 @@
         </ul>
 
         <blockquote>
-            <strong>⚠️ Important:</strong> This is a compressed overview, NOT a replacement for the full roadmap. You'll learn "just enough" to deploy a working app, but you'll skip important concepts like security, monitoring, and production best practices. Think of this as a "proof of concept" to build confidence!
+            <strong>⚠️ Important:</strong> This is a compressed overview, NOT a replacement for the full roadmap. You'll
+            learn "just enough" to deploy a working app, but you'll skip important concepts like security, monitoring,
+            and production best practices. Think of this as a "proof of concept" to build confidence!
         </blockquote>
 
         <h3>📅 3-Week Sprint Schedule</h3>
@@ -856,7 +944,8 @@
 
         <h4>Day 1-2 : Git Basics (3-4 hours)</h4>
         <ul>
-            <li><strong>Watch:</strong> <a href="https://www.youtube.com/watch?v=RGOj5yH7evk" target="_blank">Git & GitHub for Beginners</a> (1 hour)</li>
+            <li><strong>Watch:</strong> <a href="https://www.youtube.com/watch?v=RGOj5yH7evk" target="_blank">Git &
+                    GitHub for Beginners</a> (1 hour)</li>
             <li><strong>Practice:</strong>
                 <ul>
                     <li>Install Git</li>
@@ -873,14 +962,16 @@
         <ul>
             <li><strong>Option A - Python (Beginner-Friendly):</strong> Flask "Todo List" app
                 <ul>
-                    <li>Tutorial: <a href="https://www.youtube.com/watch?v=Z1RJmh_OqeA" target="_blank">Flask Crash Course</a></li>
+                    <li>Tutorial: <a href="https://www.youtube.com/watch?v=Z1RJmh_OqeA" target="_blank">Flask Crash
+                            Course</a></li>
                     <li>Features: Add/delete tasks, simple form</li>
                     <li>No database needed (use JSON file)</li>
                 </ul>
             </li>
             <li><strong>Option B - JavaScript:</strong> Express.js "Note Taking" app
                 <ul>
-                    <li>Tutorial: <a href="https://www.youtube.com/watch?v=SccSCuHhOw0" target="_blank">Express.js Crash Course</a></li>
+                    <li>Tutorial: <a href="https://www.youtube.com/watch?v=SccSCuHhOw0" target="_blank">Express.js Crash
+                            Course</a></li>
                     <li>Features: Create/read notes, REST API</li>
                 </ul>
             </li>
@@ -892,7 +983,8 @@
             </li>
         </ul>
         <blockquote>
-            <strong>🆘 Stuck on coding?</strong> Use ChatGPT/Claude to help debug errors. Copy error messages exactly and ask: "How do I fix this Flask error: [paste error]"
+            <strong>🆘 Stuck on coding?</strong> Use ChatGPT/Claude to help debug errors. Copy error messages exactly
+            and ask: "How do I fix this Flask error: [paste error]"
         </blockquote>
 
         <h4>Day 6-7 : Git Workflow (2 hours)</h4>
@@ -907,12 +999,14 @@
 
         <h4>Day 8-10 : Docker Basics (5-6 hours)</h4>
         <ul>
-            <li><strong>Watch:</strong> <a href="https://www.youtube.com/watch?v=fqMOX6JJhGo" target="_blank">Docker in 100 Seconds + Full Course</a> (first 2 hours)</li>
+            <li><strong>Watch:</strong> <a href="https://www.youtube.com/watch?v=fqMOX6JJhGo" target="_blank">Docker in
+                    100 Seconds + Full Course</a> (first 2 hours)</li>
             <li><strong>Practice:</strong>
                 <ul>
                     <li>Install Docker Desktop</li>
                     <li>Write a Dockerfile for your app</li>
-                    <li>Build and run: <code>docker build -t myapp .</code> then <code>docker run -p 5000:5000 myapp</code></li>
+                    <li>Build and run: <code>docker build -t myapp .</code> then
+                        <code>docker run -p 5000:5000 myapp</code></li>
                     <li>Test: Open browser to <code>localhost:5000</code></li>
                 </ul>
             </li>
@@ -937,11 +1031,13 @@
                     <li>Test: Access via public IP</li>
                 </ol>
             </li>
-            <li><strong>Tutorial:</strong> <a href="https://www.youtube.com/watch?v=Ia-UEYYR44s" target="_blank">Deploy Docker Container to AWS EC2</a></li>
+            <li><strong>Tutorial:</strong> <a href="https://www.youtube.com/watch?v=Ia-UEYYR44s" target="_blank">Deploy
+                    Docker Container to AWS EC2</a></li>
         </ul>
 
         <blockquote>
-            <strong>💡 Cost Tip:</strong> t2.micro is FREE for 750 hours/month in first year. Always STOP instances when not using!
+            <strong>💡 Cost Tip:</strong> t2.micro is FREE for 750 hours/month in first year. Always STOP instances when
+            not using!
         </blockquote>
 
         <h4>✅ Week 2 Complete:</h4>
@@ -951,7 +1047,8 @@
 
         <h4>Day 15-18 : GitHub Actions CI/CD (6-8 hours)</h4>
         <ul>
-            <li><strong>Watch:</strong> <a href="https://www.youtube.com/watch?v=R8_veQiYBjI" target="_blank">GitHub Actions Tutorial</a> (first hour)</li>
+            <li><strong>Watch:</strong> <a href="https://www.youtube.com/watch?v=R8_veQiYBjI" target="_blank">GitHub
+                    Actions Tutorial</a> (first hour)</li>
             <li><strong>Implement:</strong>
                 <ul>
                     <li>Create <code>.github/workflows/deploy.yml</code></li>
@@ -982,19 +1079,26 @@
             </li>
             <li><strong>Resume Bullet:</strong>
                 <ul>
-                    <li>"Developed and deployed containerized web application to AWS EC2 with automated CI/CD pipeline using GitHub Actions and Docker"</li>
+                    <li>"Developed and deployed containerized web application to AWS EC2 with automated CI/CD pipeline
+                        using GitHub Actions and Docker"</li>
                 </ul>
             </li>
         </ul>
 
         <h3>🎯 Quick Start Completion Checklist</h3>
         <ul class="interactive-checklist" id="quickstart-checklist">
-            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="github"> <span>Working application pushed to GitHub</span></li>
-            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="docker"> <span>Dockerized application (Dockerfile + .dockerignore)</span></li>
-            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="aws"> <span>Deployed to AWS and accessible via public URL</span></li>
-            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="actions"> <span>GitHub Actions workflow automating deployment</span></li>
-            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="readme"> <span>Professional README with architecture diagram</span></li>
-            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="social"> <span>Shared on LinkedIn/social media</span></li>
+            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="github">
+                <span>Working application pushed to GitHub</span></li>
+            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="docker">
+                <span>Dockerized application (Dockerfile + .dockerignore)</span></li>
+            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="aws">
+                <span>Deployed to AWS and accessible via public URL</span></li>
+            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="actions">
+                <span>GitHub Actions workflow automating deployment</span></li>
+            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="readme">
+                <span>Professional README with architecture diagram</span></li>
+            <li><input type="checkbox" class="checklist-item" data-checklist="quickstart" data-item="social">
+                <span>Shared on LinkedIn/social media</span></li>
         </ul>
         <div class="checklist-progress" id="quickstart-progress">
             <strong>Progress:</strong> <span class="progress-text">0 / 6 completed</span>
@@ -1009,8 +1113,10 @@
             <strong>Decision Point:</strong> After completing this quick start, you should be able to answer:
             <ul>
                 <li>✅ <strong>YES, I'm excited!</strong> → Continue with Phase 1 of the full roadmap</li>
-                <li>🤔 <strong>Interested but overwhelmed?</strong> → Spend 2 more weeks practicing Week 1-3, then start full roadmap</li>
-                <li>❌ <strong>Not for me:</strong> That's okay! You learned valuable skills and have a portfolio project</li>
+                <li>🤔 <strong>Interested but overwhelmed?</strong> → Spend 2 more weeks practicing Week 1-3, then start
+                    full roadmap</li>
+                <li>❌ <strong>Not for me:</strong> That's okay! You learned valuable skills and have a portfolio project
+                </li>
             </ul>
         </blockquote>
 
@@ -1033,14 +1139,17 @@
 
         <div class="achievement">
             ✅ <strong>Quick Start Achievement Unlocked:</strong><br>
-            <em>"Deployed first cloud application with automated CI/CD pipeline - ready to level up to production-grade DevOps!"</em>
+            <em>"Deployed first cloud application with automated CI/CD pipeline - ready to level up to production-grade
+                DevOps!"</em>
         </div>
 
         <div class="page-break"></div>
 
         <h2 id="project-alternatives">🎯 Project Alternatives & Options</h2>
 
-        <p>While <strong>CloudTask</strong> is the primary project used throughout this roadmap, you may choose an alternative based on your interests and career goals. Each option provides equivalent learning opportunities.</p>
+        <p>While <strong>CloudTask</strong> is the primary project used throughout this roadmap, you may choose an
+            alternative based on your interests and career goals. Each option provides equivalent learning
+            opportunities.</p>
 
         <table>
             <tr>
@@ -1096,13 +1205,15 @@
         <h3>🔄 Switching Projects Mid-Journey</h3>
         <p>All concepts learned (Terraform, Kubernetes, CI/CD) apply to any project. You can:</p>
         <ul>
-            <li><strong>Start with CloudTask</strong> for simplicity, then migrate to a different project in Phase 8-9</li>
+            <li><strong>Start with CloudTask</strong> for simplicity, then migrate to a different project in Phase 8-9
+            </li>
             <li><strong>Build multiple smaller projects</strong> instead of one comprehensive app</li>
             <li><strong>Contribute to open-source projects</strong> and apply DevOps practices to them</li>
         </ul>
 
         <blockquote>
-            <strong>💡 Recommendation:</strong> Choose a project aligned with your target industry. If interviewing for FinTech, build a payment processing system. For media companies, create a video streaming platform.
+            <strong>💡 Recommendation:</strong> Choose a project aligned with your target industry. If interviewing for
+            FinTech, build a payment processing system. For media companies, create a video streaming platform.
         </blockquote>
 
         <div class="page-break"></div>
@@ -1149,10 +1260,15 @@
         <h2 id="impact-statement">🎖️ Professional Impact Statement</h2>
 
         <blockquote>
-            <strong>"Architected and deployed CloudTask, a production-ready SaaS platform serving 1000+ users. Implemented complete DevOps lifecycle including Infrastructure as Code, CI/CD automation, and comprehensive monitoring. Achieved 99.9% uptime with automated scaling, reduced deployment time by 90%, and maintained security compliance through automated vulnerability scanning and IAM best practices."</strong>
+            <strong>"Architected and deployed CloudTask, a production-ready SaaS platform serving 1000+ users.
+                Implemented complete DevOps lifecycle including Infrastructure as Code, CI/CD automation, and
+                comprehensive monitoring. Achieved 99.9% uptime with automated scaling, reduced deployment time by 90%,
+                and maintained security compliance through automated vulnerability scanning and IAM best
+                practices."</strong>
         </blockquote>
 
-        <p><strong>Total Estimated Duration: 34-40 weeks</strong> <em>(approximately 8-9 months at 10-15 hours/week)</em></p>
+        <p><strong>Total Estimated Duration: 34-40 weeks</strong> <em>(approximately 8-9 months at 10-15
+                hours/week)</em></p>
 
         <div class="mermaid" data-chart-id="timeline"></div>
 
@@ -1160,9 +1276,11 @@
 
         <h3>Required Background</h3>
         <ul>
-            <li><strong>Basic Programming Knowledge:</strong> Familiarity with at least one programming language (Python, JavaScript, or similar)</li>
+            <li><strong>Basic Programming Knowledge:</strong> Familiarity with at least one programming language
+                (Python, JavaScript, or similar)</li>
             <li><strong>Command Line Comfort:</strong> Basic understanding of terminal/command prompt usage</li>
-            <li><strong>Web Development Basics:</strong> Understanding of HTTP, APIs, and web application architecture</li>
+            <li><strong>Web Development Basics:</strong> Understanding of HTTP, APIs, and web application architecture
+            </li>
             <li><strong>Problem-Solving Mindset:</strong> Willingness to troubleshoot and learn from documentation</li>
         </ul>
 
@@ -1206,10 +1324,16 @@
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Video:</strong> <a href="https://www.freecodecamp.org/news/devops-engineering-course-for-beginners/" target="_blank">freeCodeCamp – DevOps Engineering Course</a></li>
-            <li><strong>Channel:</strong> <a href="https://www.youtube.com/@TechWorldwithNana" target="_blank">TechWorld with Nana – DevOps for Beginners</a></li>
-            <li><strong>Documentation:</strong> <a href="https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/introduction-to-devops.html" target="_blank">AWS DevOps Whitepaper</a></li>
-            <li><strong>Guide:</strong> <a href="https://www.atlassian.com/devops/what-is-devops" target="_blank">Atlassian – What is DevOps</a></li>
+            <li><strong>Video:</strong> <a
+                    href="https://www.freecodecamp.org/news/devops-engineering-course-for-beginners/"
+                    target="_blank">freeCodeCamp – DevOps Engineering Course</a></li>
+            <li><strong>Channel:</strong> <a href="https://www.youtube.com/@TechWorldwithNana" target="_blank">TechWorld
+                    with Nana – DevOps for Beginners</a></li>
+            <li><strong>Documentation:</strong> <a
+                    href="https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/introduction-to-devops.html"
+                    target="_blank">AWS DevOps Whitepaper</a></li>
+            <li><strong>Guide:</strong> <a href="https://www.atlassian.com/devops/what-is-devops"
+                    target="_blank">Atlassian – What is DevOps</a></li>
         </ul>
 
         <h4>📖 Additional Reading</h4>
@@ -1236,29 +1360,35 @@
             </tr>
             <tr>
                 <td><strong>"This is too theoretical"</strong></td>
-                <td>✅ That's OK! Phase 1 is foundational. You'll apply these concepts starting Phase 2. Take notes on key terms for reference later.</td>
+                <td>✅ That's OK! Phase 1 is foundational. You'll apply these concepts starting Phase 2. Take notes on
+                    key terms for reference later.</td>
             </tr>
             <tr>
                 <td><strong>"I don't have development/operations experience"</strong></td>
-                <td>✅ Not required! The concepts will become clearer as you build CloudTask. Think of this phase as a preview of what's coming.</td>
+                <td>✅ Not required! The concepts will become clearer as you build CloudTask. Think of this phase as a
+                    preview of what's coming.</td>
             </tr>
             <tr>
                 <td><strong>"I'm confused by all the acronyms"</strong></td>
-                <td>✅ Create a glossary document. Add each new term (CI/CD, DORA, MTTR, etc.) with a simple definition. Review weekly.</td>
+                <td>✅ Create a glossary document. Add each new term (CI/CD, DORA, MTTR, etc.) with a simple definition.
+                    Review weekly.</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> If you're spending more than a week on Phase 1, move forward! Come back to review these concepts after completing a few practical phases.
+            <strong>🆘 Stuck?</strong> If you're spending more than a week on Phase 1, move forward! Come back to review
+            these concepts after completing a few practical phases.
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase2"><i class="devicon-git-plain tech-icon-lg icon-git"></i> Phase 2: Version Control & Collaboration</h2>
+        <h2 id="phase2"><i class="devicon-git-plain tech-icon-lg icon-git"></i> Phase 2: Version Control & Collaboration
+        </h2>
         <h3>📅 Timeline: Phase 2 - Git & Version Control (Week 2)</h3>
 
         <h4>Learning Objectives</h4>
-        <p>Before diving deeper, master <strong>version control & collaboration</strong> — the foundation of every DevOps pipeline.</p>
+        <p>Before diving deeper, master <strong>version control & collaboration</strong> — the foundation of every
+            DevOps pipeline.</p>
 
         <h4>Core Concepts</h4>
         <ul>
@@ -1272,10 +1402,15 @@
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=RGOj5yH7evk" target="_blank">freeCodeCamp – Git & GitHub for Beginners</a></li>
-            <li><strong>Guide:</strong> <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow" target="_blank">Git Branching Strategies Explained</a></li>
-            <li><strong>Documentation:</strong> <a href="https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html" target="_blank">GitLab Workflow</a></li>
-            <li><strong>Practice:</strong> <a href="https://learngitbranching.js.org/" target="_blank">Learn Git Branching</a> <em>(Interactive tutorial)</em></li>
+            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=RGOj5yH7evk"
+                    target="_blank">freeCodeCamp – Git & GitHub for Beginners</a></li>
+            <li><strong>Guide:</strong> <a
+                    href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow"
+                    target="_blank">Git Branching Strategies Explained</a></li>
+            <li><strong>Documentation:</strong> <a href="https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html"
+                    target="_blank">GitLab Workflow</a></li>
+            <li><strong>Practice:</strong> <a href="https://learngitbranching.js.org/" target="_blank">Learn Git
+                    Branching</a> <em>(Interactive tutorial)</em></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation</h4>
@@ -1288,7 +1423,8 @@
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Implemented collaborative Git workflow with PR-based reviews and automated CI triggers for CloudTask development."</em>
+            <em>"Implemented collaborative Git workflow with PR-based reviews and automated CI triggers for CloudTask
+                development."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -1301,32 +1437,42 @@
             </tr>
             <tr>
                 <td><strong>Merge Conflicts</strong></td>
-                <td>Git shows conflict markers (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>)</td>
-                <td>1. Open conflicted files<br>2. Choose correct code version<br>3. Remove conflict markers<br>4. <code>git add .</code> → <code>git commit</code><br><strong>Prevention:</strong> Pull before pushing, use feature branches</td>
+                <td>Git shows conflict markers (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>,
+                    <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>)</td>
+                <td>1. Open conflicted files<br>2. Choose correct code version<br>3. Remove conflict markers<br>4.
+                    <code>git add .</code> → <code>git commit</code><br><strong>Prevention:</strong> Pull before
+                    pushing, use feature branches</td>
             </tr>
             <tr>
                 <td><strong>Committed Secrets</strong></td>
                 <td>API keys/passwords visible in commit history</td>
-                <td>1. Use <code>git-filter-repo</code> to remove from history<br>2. Rotate all exposed credentials immediately<br>3. Add to <code>.gitignore</code><br><strong>Prevention:</strong> Use <code>.env</code> files + <code>.gitignore</code>, pre-commit hooks</td>
+                <td>1. Use <code>git-filter-repo</code> to remove from history<br>2. Rotate all exposed credentials
+                    immediately<br>3. Add to <code>.gitignore</code><br><strong>Prevention:</strong> Use
+                    <code>.env</code> files + <code>.gitignore</code>, pre-commit hooks</td>
             </tr>
             <tr>
                 <td><strong>Detached HEAD</strong></td>
                 <td>Git warnings about not being on a branch</td>
-                <td><code>git checkout main</code> or <code>git switch -c new-branch</code> to save work<br><strong>Prevention:</strong> Always create branches for new work</td>
+                <td><code>git checkout main</code> or <code>git switch -c new-branch</code> to save
+                    work<br><strong>Prevention:</strong> Always create branches for new work</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> If Git feels overwhelming, focus on these 5 commands first: <code>git add</code>, <code>git commit</code>, <code>git push</code>, <code>git pull</code>, <code>git status</code>. Master these before learning advanced features.
+            <strong>🆘 Stuck?</strong> If Git feels overwhelming, focus on these 5 commands first: <code>git add</code>,
+            <code>git commit</code>, <code>git push</code>, <code>git pull</code>, <code>git status</code>. Master these
+            before learning advanced features.
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase3"><i class="devicon-linux-plain tech-icon-lg icon-linux"></i> Phase 3: Linux Administration & Networking</h2>
+        <h2 id="phase3"><i class="devicon-linux-plain tech-icon-lg icon-linux"></i> Phase 3: Linux Administration &
+            Networking</h2>
         <h3>📅 Timeline: Phase 3 - Linux Basics (Weeks 3-4)</h3>
 
         <h4>Learning Objectives</h4>
-        <p>Master the operating system that powers most production environments and understand networking fundamentals.</p>
+        <p>Master the operating system that powers most production environments and understand networking fundamentals.
+        </p>
 
         <h4>Core Concepts</h4>
         <ul>
@@ -1338,10 +1484,14 @@
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=sWbUDq4S6Y8" target="_blank">freeCodeCamp – Linux Crash Course</a></li>
-            <li><strong>Course:</strong> <a href="https://www.edx.org/learn/linux" target="_blank">Linux Foundation edX Course</a> <em>(Comprehensive)</em></li>
-            <li><strong>Paid:</strong> <a href="https://app.amigoscode.com/p/linux" target="_blank">Amigoscode – Linux Admin Full Course</a> <em>(Detailed)</em></li>
-            <li><strong>Networking:</strong> <a href="https://www.youtube.com/watch?v=3QhU9jd03a0" target="_blank">CrashCourse – Computer Networks</a></li>
+            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=sWbUDq4S6Y8"
+                    target="_blank">freeCodeCamp – Linux Crash Course</a></li>
+            <li><strong>Course:</strong> <a href="https://www.edx.org/learn/linux" target="_blank">Linux Foundation edX
+                    Course</a> <em>(Comprehensive)</em></li>
+            <li><strong>Paid:</strong> <a href="https://app.amigoscode.com/p/linux" target="_blank">Amigoscode – Linux
+                    Admin Full Course</a> <em>(Detailed)</em></li>
+            <li><strong>Networking:</strong> <a href="https://www.youtube.com/watch?v=3QhU9jd03a0"
+                    target="_blank">CrashCourse – Computer Networks</a></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation</h4>
@@ -1357,7 +1507,8 @@
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Configured and secured Ubuntu production servers on AWS with Nginx reverse proxy, PostgreSQL database, and hardened SSH access for CloudTask staging environment."</em>
+            <em>"Configured and secured Ubuntu production servers on AWS with Nginx reverse proxy, PostgreSQL database,
+                and hardened SSH access for CloudTask staging environment."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -1371,32 +1522,44 @@
             <tr>
                 <td><strong>Out of Disk Space</strong></td>
                 <td><code>No space left on device</code> errors</td>
-                <td>1. <code>df -h</code> to check usage<br>2. <code>du -sh /*</code> to find large dirs<br>3. Clean Docker: <code>docker system prune -a</code><br>4. Clear logs: <code>sudo journalctl --vacuum-time=3d</code><br><strong>Prevention:</strong> Configure log rotation, monitor disk usage</td>
+                <td>1. <code>df -h</code> to check usage<br>2. <code>du -sh /*</code> to find large dirs<br>3. Clean
+                    Docker: <code>docker system prune -a</code><br>4. Clear logs:
+                    <code>sudo journalctl --vacuum-time=3d</code><br><strong>Prevention:</strong> Configure log
+                    rotation, monitor disk usage</td>
             </tr>
             <tr>
                 <td><strong>Permission Errors</strong></td>
                 <td><code>Permission denied</code> when accessing files/dirs</td>
-                <td>1. Check ownership: <code>ls -la</code><br>2. Fix ownership: <code>sudo chown -R user:group /path</code><br>3. Fix permissions: <code>chmod 755 /path</code><br><strong>Prevention:</strong> Understand Unix permissions (owner/group/others)</td>
+                <td>1. Check ownership: <code>ls -la</code><br>2. Fix ownership:
+                    <code>sudo chown -R user:group /path</code><br>3. Fix permissions:
+                    <code>chmod 755 /path</code><br><strong>Prevention:</strong> Understand Unix permissions
+                    (owner/group/others)</td>
             </tr>
             <tr>
                 <td><strong>Service Won't Start</strong></td>
                 <td>systemd service fails to start</td>
-                <td>1. Check status: <code>sudo systemctl status service-name</code><br>2. View logs: <code>sudo journalctl -u service-name -n 50</code><br>3. Check config syntax<br>4. Verify dependencies are running<br><strong>Prevention:</strong> Test configs before applying</td>
+                <td>1. Check status: <code>sudo systemctl status service-name</code><br>2. View logs:
+                    <code>sudo journalctl -u service-name -n 50</code><br>3. Check config syntax<br>4. Verify
+                    dependencies are running<br><strong>Prevention:</strong> Test configs before applying</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> Linux administration is hands-on. If something breaks, use <code>journalctl</code> and <code>/var/log/</code> to investigate. Every error message is a learning opportunity!
+            <strong>🆘 Stuck?</strong> Linux administration is hands-on. If something breaks, use
+            <code>journalctl</code> and <code>/var/log/</code> to investigate. Every error message is a learning
+            opportunity!
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase4"><i class="devicon-amazonwebservices-original tech-icon-lg icon-aws"></i> Phase 4: Cloud Infrastructure (AWS)</h2>
+        <h2 id="phase4"><i class="devicon-amazonwebservices-original tech-icon-lg icon-aws"></i> Phase 4: Cloud
+            Infrastructure (AWS)</h2>
         <h3>📅 Timeline: Phase 4 - AWS & Networking (Weeks 5-10)</h3>
         <p><em>Duration: 5 weeks (Industry standard: 5-6 weeks for 50-60 hours of learning)</em></p>
 
         <h4>Learning Objectives</h4>
-        <p>Design and implement <strong>secure, scalable, cost-optimized</strong> AWS infrastructure for production workloads.</p>
+        <p>Design and implement <strong>secure, scalable, cost-optimized</strong> AWS infrastructure for production
+            workloads.</p>
 
         <h4>Core Concepts</h4>
         <ul>
@@ -1411,15 +1574,20 @@
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Cost Management:</strong> <a href="https://aws.amazon.com/aws-cost-management/" target="_blank">AWS Cost Management Guide</a></li>
-            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=ulprqHHWlng" target="_blank">freeCodeCamp – AWS for Beginners</a></li>
-            <li><strong>Certification Prep:</strong> <a href="https://skillbuilder.aws/" target="_blank">AWS Cloud Practitioner Essentials</a> <em>(Free)</em></li>
-            <li><strong>Best Practices:</strong> <a href="https://aws.amazon.com/architecture/well-architected/" target="_blank">AWS Well-Architected Framework</a></li>
+            <li><strong>Cost Management:</strong> <a href="https://aws.amazon.com/aws-cost-management/"
+                    target="_blank">AWS Cost Management Guide</a></li>
+            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=ulprqHHWlng"
+                    target="_blank">freeCodeCamp – AWS for Beginners</a></li>
+            <li><strong>Certification Prep:</strong> <a href="https://skillbuilder.aws/" target="_blank">AWS Cloud
+                    Practitioner Essentials</a> <em>(Free)</em></li>
+            <li><strong>Best Practices:</strong> <a href="https://aws.amazon.com/architecture/well-architected/"
+                    target="_blank">AWS Well-Architected Framework</a></li>
         </ul>
 
         <h4>🎓 Certification Path & Practice</h4>
         <ul>
-            <li><strong>AWS Certifications:</strong> Cloud Practitioner → Solutions Architect Associate → DevOps Engineer</li>
+            <li><strong>AWS Certifications:</strong> Cloud Practitioner → Solutions Architect Associate → DevOps
+                Engineer</li>
             <li><strong>Practice Platforms:</strong> AWS Free Tier, AWS Educate, A Cloud Guru Labs</li>
             <li><strong>Additional Reading:</strong> "Site Reliability Engineering" by Google - SRE best practices</li>
         </ul>
@@ -1437,7 +1605,8 @@
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Architected high-availability AWS infrastructure for CloudTask with RDS, ALB, Auto Scaling, and proactive cost monitoring."</em>
+            <em>"Architected high-availability AWS infrastructure for CloudTask with RDS, ALB, Auto Scaling, and
+                proactive cost monitoring."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -1451,32 +1620,40 @@
             <tr>
                 <td><strong>SSH Connection Refused</strong></td>
                 <td>Cannot connect to EC2 instance</td>
-                <td>1. Check Security Group allows port 22 from your IP<br>2. Verify instance is running<br>3. Use correct keypair: <code>ssh -i key.pem ec2-user@ip</code><br>4. Check NACL rules if Security Group is correct</td>
+                <td>1. Check Security Group allows port 22 from your IP<br>2. Verify instance is running<br>3. Use
+                    correct keypair: <code>ssh -i key.pem ec2-user@ip</code><br>4. Check NACL rules if Security Group is
+                    correct</td>
             </tr>
             <tr>
                 <td><strong>Permission Denied (publickey)</strong></td>
                 <td>SSH authentication fails</td>
-                <td>1. <code>chmod 400 keypair.pem</code><br>2. Verify correct username (ubuntu, ec2-user, admin)<br>3. Check keypair matches instance</td>
+                <td>1. <code>chmod 400 keypair.pem</code><br>2. Verify correct username (ubuntu, ec2-user, admin)<br>3.
+                    Check keypair matches instance</td>
             </tr>
             <tr>
                 <td><strong>Unexpected AWS Charges</strong></td>
                 <td>Bill higher than expected</td>
-                <td>1. Check Cost Explorer for breakdown<br>2. Common culprits: NAT Gateway ($32/mo), RDS Multi-AZ, forgotten EC2 instances<br>3. Delete unused resources<br>4. Set up billing alerts<br><strong>Prevention:</strong> Tag all resources, use AWS Budget alerts</td>
+                <td>1. Check Cost Explorer for breakdown<br>2. Common culprits: NAT Gateway ($32/mo), RDS Multi-AZ,
+                    forgotten EC2 instances<br>3. Delete unused resources<br>4. Set up billing
+                    alerts<br><strong>Prevention:</strong> Tag all resources, use AWS Budget alerts</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> AWS can be expensive! Always monitor your billing dashboard daily during learning. Enable billing alerts and set a $50/month budget to avoid surprises.
+            <strong>🆘 Stuck?</strong> AWS can be expensive! Always monitor your billing dashboard daily during
+            learning. Enable billing alerts and set a $50/month budget to avoid surprises.
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase5"><i class="devicon-terraform-plain tech-icon-lg icon-terraform"></i> Phase 5: Infrastructure as Code (Terraform)</h2>
+        <h2 id="phase5"><i class="devicon-terraform-plain tech-icon-lg icon-terraform"></i> Phase 5: Infrastructure as
+            Code (Terraform)</h2>
         <h3>📅 Timeline: Phase 5 - Terraform IaC (Weeks 11-12)</h3>
         <p><em>Duration: 2 weeks (Adequate for basics; 3 months for mastery)</em></p>
 
         <h4>Learning Objectives</h4>
-        <p>Automate AWS infrastructure provisioning with Terraform — achieve repeatable, version-controlled infrastructure deployments.</p>
+        <p>Automate AWS infrastructure provisioning with Terraform — achieve repeatable, version-controlled
+            infrastructure deployments.</p>
 
         <h4>Core Concepts</h4>
         <ul>
@@ -1486,35 +1663,18 @@
             <li><strong>Environment Management:</strong> Separate configurations for dev/staging/production</li>
         </ul>
 
-        <div class="mermaid" data-chart-id="terraform-flow">
-    H --> I[Update State File]
-    I --> J{Success?}
-    J -->|Yes| K[Infrastructure Ready]
-    J -->|No| L[terraform destroy]
-    L --> M[Troubleshoot]
-    M --> D
-    
-    subgraph "State Management"
-        I --> N[(Remote State<br/>S3 + DynamoDB)]
-    end
-    
-    subgraph "Modules"
-        D --> O[VPC Module]
-        D --> P[RDS Module]
-        D --> Q[EKS Module]
-    end
-    
-    style F fill:#4caf50,color:#fff
-    style L fill:#f44336,color:#fff
-    style N fill:#2196f3,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="terraform-flow"></div>
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Quick Start:</strong> <a href="https://www.youtube.com/watch?v=l5k1ai_GBDE" target="_blank">TechWorld with Nana – Terraform in 15 Min</a></li>
-            <li><strong>Comprehensive:</strong> <a href="https://www.youtube.com/watch?v=SLB_c_ayRMo" target="_blank">freeCodeCamp – Terraform Crash Course</a></li>
-            <li><strong>Official Docs:</strong> <a href="https://developer.hashicorp.com/terraform/intro" target="_blank">Terraform Documentation</a></li>
-            <li><strong>Best Practices:</strong> <a href="https://www.terraform-best-practices.com/" target="_blank">Terraform Best Practices Guide</a></li>
+            <li><strong>Quick Start:</strong> <a href="https://www.youtube.com/watch?v=l5k1ai_GBDE"
+                    target="_blank">TechWorld with Nana – Terraform in 15 Min</a></li>
+            <li><strong>Comprehensive:</strong> <a href="https://www.youtube.com/watch?v=SLB_c_ayRMo"
+                    target="_blank">freeCodeCamp – Terraform Crash Course</a></li>
+            <li><strong>Official Docs:</strong> <a href="https://developer.hashicorp.com/terraform/intro"
+                    target="_blank">Terraform Documentation</a></li>
+            <li><strong>Best Practices:</strong> <a href="https://www.terraform-best-practices.com/"
+                    target="_blank">Terraform Best Practices Guide</a></li>
         </ul>
 
         <h4>🎓 Certification & Additional Resources</h4>
@@ -1536,7 +1696,8 @@
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Implemented IaC using Terraform, automating AWS provisioning across 3 environments with reusable modules and remote state management."</em>
+            <em>"Implemented IaC using Terraform, automating AWS provisioning across 3 environments with reusable
+                modules and remote state management."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -1550,27 +1711,35 @@
             <tr>
                 <td><strong>Terraform State Lock</strong></td>
                 <td><code>Error acquiring the state lock</code></td>
-                <td>1. Wait for other operation to complete<br>2. If stuck: <code>terraform force-unlock &lt;lock-id&gt;</code><br>3. Check DynamoDB for lock table<br><strong>Prevention:</strong> Don't run concurrent applies, use workspaces</td>
+                <td>1. Wait for other operation to complete<br>2. If stuck:
+                    <code>terraform force-unlock &lt;lock-id&gt;</code><br>3. Check DynamoDB for lock
+                    table<br><strong>Prevention:</strong> Don't run concurrent applies, use workspaces</td>
             </tr>
             <tr>
                 <td><strong>Resource Already Exists</strong></td>
                 <td>Terraform can't create resource that exists</td>
-                <td>1. Import existing: <code>terraform import aws_instance.app i-1234567890</code><br>2. Or delete resource manually first<br><strong>Prevention:</strong> Always check existing infrastructure before apply</td>
+                <td>1. Import existing: <code>terraform import aws_instance.app i-1234567890</code><br>2. Or delete
+                    resource manually first<br><strong>Prevention:</strong> Always check existing infrastructure before
+                    apply</td>
             </tr>
             <tr>
                 <td><strong>State Drift</strong></td>
                 <td>Manual changes not reflected in state</td>
-                <td>1. Run <code>terraform refresh</code> to sync state<br>2. Use <code>terraform plan</code> to see drift<br>3. Apply changes to fix<br><strong>Prevention:</strong> Never modify resources manually outside Terraform</td>
+                <td>1. Run <code>terraform refresh</code> to sync state<br>2. Use <code>terraform plan</code> to see
+                    drift<br>3. Apply changes to fix<br><strong>Prevention:</strong> Never modify resources manually
+                    outside Terraform</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> Always run <code>terraform plan</code> before <code>terraform apply</code>! Review the execution plan carefully to avoid destroying critical resources accidentally.
+            <strong>🆘 Stuck?</strong> Always run <code>terraform plan</code> before <code>terraform apply</code>!
+            Review the execution plan carefully to avoid destroying critical resources accidentally.
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase6"><i class="devicon-ansible-plain tech-icon-lg icon-ansible"></i> Phase 6: Configuration Management (Ansible)</h2>
+        <h2 id="phase6"><i class="devicon-ansible-plain tech-icon-lg icon-ansible"></i> Phase 6: Configuration
+            Management (Ansible)</h2>
         <h3>📅 Timeline: Phase 6 - Ansible Configuration Management (Weeks 13-14)</h3>
 
         <h4>Learning Objectives</h4>
@@ -1586,9 +1755,12 @@
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=9Ua2b06oAr4" target="_blank">freeCodeCamp – Ansible Crash Course</a></li>
-            <li><strong>Documentation:</strong> <a href="https://docs.ansible.com/" target="_blank">Ansible Documentation</a> <em>(Official)</em></li>
-            <li><strong>Guide:</strong> <a href="https://www.redhat.com/en/ansible-collaborative/how-ansible-works" target="_blank">Red Hat – How Ansible Works</a></li>
+            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=9Ua2b06oAr4"
+                    target="_blank">freeCodeCamp – Ansible Crash Course</a></li>
+            <li><strong>Documentation:</strong> <a href="https://docs.ansible.com/" target="_blank">Ansible
+                    Documentation</a> <em>(Official)</em></li>
+            <li><strong>Guide:</strong> <a href="https://www.redhat.com/en/ansible-collaborative/how-ansible-works"
+                    target="_blank">Red Hat – How Ansible Works</a></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation</h4>
@@ -1603,7 +1775,8 @@
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Automated CloudTask deployments via Ansible, achieving repeatable zero-downtime rollouts across multiple environments."</em>
+            <em>"Automated CloudTask deployments via Ansible, achieving repeatable zero-downtime rollouts across
+                multiple environments."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -1617,32 +1790,41 @@
             <tr>
                 <td><strong>Ansible Host Unreachable</strong></td>
                 <td><code>UNREACHABLE! => {"changed": false, "unreachable": true}</code></td>
-                <td>1. Test SSH manually: <code>ssh user@host</code><br>2. Check inventory file syntax<br>3. Verify <code>ansible_ssh_private_key_file</code> path<br>4. Test connection: <code>ansible all -m ping</code></td>
+                <td>1. Test SSH manually: <code>ssh user@host</code><br>2. Check inventory file syntax<br>3. Verify
+                    <code>ansible_ssh_private_key_file</code> path<br>4. Test connection:
+                    <code>ansible all -m ping</code></td>
             </tr>
             <tr>
                 <td><strong>Idempotency Issues</strong></td>
                 <td>Ansible shows changes on every run</td>
-                <td>1. Use proper modules (avoid <code>shell</code>/<code>command</code> when possible)<br>2. Add <code>creates</code> parameter to shell tasks<br>3. Use <code>--check</code> mode to test<br><strong>Prevention:</strong> Test playbooks thoroughly, use <code>changed_when</code></td>
+                <td>1. Use proper modules (avoid <code>shell</code>/<code>command</code> when possible)<br>2. Add
+                    <code>creates</code> parameter to shell tasks<br>3. Use <code>--check</code> mode to
+                    test<br><strong>Prevention:</strong> Test playbooks thoroughly, use <code>changed_when</code></td>
             </tr>
             <tr>
                 <td><strong>Variable Not Found</strong></td>
                 <td><code>The task includes an option with an undefined variable</code></td>
-                <td>1. Check variable name spelling<br>2. Verify variable is defined in correct scope (inventory, group_vars, host_vars)<br>3. Use <code>default()</code> filter for optional vars<br><strong>Prevention:</strong> Use <code>ansible-playbook --syntax-check</code></td>
+                <td>1. Check variable name spelling<br>2. Verify variable is defined in correct scope (inventory,
+                    group_vars, host_vars)<br>3. Use <code>default()</code> filter for optional
+                    vars<br><strong>Prevention:</strong> Use <code>ansible-playbook --syntax-check</code></td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> Ansible errors are usually descriptive. Read the full error message! Use <code>-vvv</code> flag for verbose output to debug connection or module issues.
+            <strong>🆘 Stuck?</strong> Ansible errors are usually descriptive. Read the full error message! Use
+            <code>-vvv</code> flag for verbose output to debug connection or module issues.
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase7"><i class="devicon-docker-plain tech-icon-lg icon-docker"></i> Phase 7: Containerization (Docker)</h2>
+        <h2 id="phase7"><i class="devicon-docker-plain tech-icon-lg icon-docker"></i> Phase 7: Containerization (Docker)
+        </h2>
         <h3>📅 Timeline: Phase 7 - Docker Containerization (Weeks 15-16)</h3>
         <p><em>Duration: 2 weeks (Adequate - ranges from a few days to a few weeks)</em></p>
 
         <h4>Learning Objectives</h4>
-        <p>Package CloudTask services as <strong>portable containers</strong> for consistent deployment across environments.</p>
+        <p>Package CloudTask services as <strong>portable containers</strong> for consistent deployment across
+            environments.</p>
 
         <h4>Core Concepts</h4>
         <ul>
@@ -1652,25 +1834,20 @@
             <li><strong>Registry Management:</strong> Image storage and distribution</li>
         </ul>
 
-        <div class="mermaid" data-chart-id="docker-pipeline">
-
-    end
-    
-    style BUILD fill:#2496ed,color:#fff
-    style IMG fill:#2496ed,color:#fff
-    style ECR fill:#ff9900,color:#fff
-    style CONTAINER fill:#4caf50,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="docker-pipeline"></div>
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Comprehensive:</strong> <a href="https://www.youtube.com/watch?v=3c-iBn73dDE" target="_blank">TechWorld with Nana – Docker Full Course</a></li>
-            <li><strong>Documentation:</strong> <a href="https://docs.docker.com/get-started/" target="_blank">Docker Docs – Get Started</a> <em>(Official)</em></li>
+            <li><strong>Comprehensive:</strong> <a href="https://www.youtube.com/watch?v=3c-iBn73dDE"
+                    target="_blank">TechWorld with Nana – Docker Full Course</a></li>
+            <li><strong>Documentation:</strong> <a href="https://docs.docker.com/get-started/" target="_blank">Docker
+                    Docs – Get Started</a> <em>(Official)</em></li>
         </ul>
 
         <h4>🎓 Practice Platforms</h4>
         <ul>
-            <li><strong>Interactive Labs:</strong> Play with Docker (<a href="https://labs.play-with-docker.com/" target="_blank">labs.play-with-docker.com</a>)</li>
+            <li><strong>Interactive Labs:</strong> Play with Docker (<a href="https://labs.play-with-docker.com/"
+                    target="_blank">labs.play-with-docker.com</a>)</li>
             <li><strong>Hands-on Practice:</strong> Docker Hub for image experimentation</li>
             <li><strong>Local Setup:</strong> Docker Desktop for Windows/Mac development</li>
         </ul>
@@ -1699,7 +1876,7 @@
                 <li>Implement health checks in Dockerfile</li>
                 <li>Create docker-compose.yml for full local development environment</li>
             </ol>
-            <strong>Success Criteria:</strong> 
+            <strong>Success Criteria:</strong>
             <ul>
                 <li>Image size reduced by >50%</li>
                 <li>Build time improved by >30%</li>
@@ -1712,7 +1889,8 @@
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Containerized CloudTask microservices using multi-stage Docker builds, reducing build time and image size by 60%."</em>
+            <em>"Containerized CloudTask microservices using multi-stage Docker builds, reducing build time and image
+                size by 60%."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -1726,27 +1904,35 @@
             <tr>
                 <td><strong>Docker Build Fails in CI</strong></td>
                 <td>Works locally but fails in pipeline</td>
-                <td>1. Check for missing <code>.dockerignore</code><br>2. Verify all dependencies in Dockerfile<br>3. Platform differences: add <code>--platform linux/amd64</code><br>4. Check file permissions</td>
+                <td>1. Check for missing <code>.dockerignore</code><br>2. Verify all dependencies in Dockerfile<br>3.
+                    Platform differences: add <code>--platform linux/amd64</code><br>4. Check file permissions</td>
             </tr>
             <tr>
                 <td><strong>Container Immediately Exits</strong></td>
                 <td>Container stops right after start</td>
-                <td>1. Check logs: <code>docker logs container-id</code><br>2. Verify CMD/ENTRYPOINT is correct<br>3. Ensure process runs in foreground (not daemon mode)<br>4. Check for missing environment variables<br><strong>Prevention:</strong> Test locally first</td>
+                <td>1. Check logs: <code>docker logs container-id</code><br>2. Verify CMD/ENTRYPOINT is correct<br>3.
+                    Ensure process runs in foreground (not daemon mode)<br>4. Check for missing environment
+                    variables<br><strong>Prevention:</strong> Test locally first</td>
             </tr>
             <tr>
                 <td><strong>Large Image Sizes</strong></td>
                 <td>Images over 1GB</td>
-                <td>1. Use multi-stage builds<br>2. Switch to Alpine base images<br>3. Add <code>.dockerignore</code><br>4. Clean up in same layer: <code>RUN apt-get update && apt-get install -y pkg && rm -rf /var/lib/apt/lists/*</code><br><strong>Prevention:</strong> Monitor image size during builds</td>
+                <td>1. Use multi-stage builds<br>2. Switch to Alpine base images<br>3. Add
+                    <code>.dockerignore</code><br>4. Clean up in same layer:
+                    <code>RUN apt-get update && apt-get install -y pkg && rm -rf /var/lib/apt/lists/*</code><br><strong>Prevention:</strong>
+                    Monitor image size during builds</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> Docker issues are easier to debug when you understand layers. Use <code>docker history image-name</code> to see how your image was built and identify bloat.
+            <strong>🆘 Stuck?</strong> Docker issues are easier to debug when you understand layers. Use
+            <code>docker history image-name</code> to see how your image was built and identify bloat.
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase8"><i class="devicon-kubernetes-plain tech-icon-lg icon-kubernetes"></i> Phase 8: Kubernetes & Orchestration (EKS)</h2>
+        <h2 id="phase8"><i class="devicon-kubernetes-plain tech-icon-lg icon-kubernetes"></i> Phase 8: Kubernetes &
+            Orchestration (EKS)</h2>
         <h3>📅 Timeline: Phase 8 - Kubernetes & EKS (Weeks 17-20)</h3>
         <p><em>Duration: 4 weeks (Industry standard: 4-5 weeks for 40-50 hours - slightly tight but manageable)</em></p>
 
@@ -1761,77 +1947,21 @@
             <li><strong>Networking:</strong> Ingress controllers and service mesh basics</li>
         </ul>
 
-        <div class="mermaid" data-chart-id="k8s-architecture">
-            
-            subgraph "Pods"
-                POD1[Frontend Pod]
-                POD2[Backend Pod]
-            end
-        end
-
-        subgraph "Worker Node 2"
-            KUBELET2[Kubelet]
-            PROXY2[kube-proxy]
-            
-            subgraph "Pods "
-                POD3[Frontend Pod]
-                POD4[Backend Pod]
-            end
-        end
-
-        subgraph "Ingress & Services"
-            ING[Ingress Controller]
-            SVC[Service Layer]
-        end
-    end
-    
-    USER((Users)) --> ING
-    ING --> SVC
-    
-    API --> SCHED
-    API --> CM
-    API --> ETCD
-    
-    SCHED --> KUBELET1
-    SCHED --> KUBELET2
-    
-    KUBELET1 --> POD1
-    KUBELET1 --> POD2
-    KUBELET2 --> POD3
-    KUBELET2 --> POD4
-    
-    SVC --> PROXY1
-    SVC --> PROXY2
-    PROXY1 --> POD1
-    PROXY1 --> POD2
-    PROXY2 --> POD3
-    PROXY2 --> POD4
-    
-    subgraph "Storage"
-        PV[(Persistent Volumes)]
-    end
-    
-    POD2 --> PV
-    POD4 --> PV
-    
-    style API fill:#326ce5,color:#fff
-    style ETCD fill:#326ce5,color:#fff
-    style POD1 fill:#4caf50,color:#fff
-    style POD2 fill:#2196f3,color:#fff
-    style POD3 fill:#4caf50,color:#fff
-    style POD4 fill:#2196f3,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="k8s-architecture"></div>
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Comprehensive:</strong> <a href="https://www.youtube.com/watch?v=X48VuDVv0do" target="_blank">TechWorld with Nana – Kubernetes Full Course</a></li>
-            <li><strong>Documentation:</strong> <a href="https://kubernetes.io/docs/concepts/overview/" target="_blank">Kubernetes Official Documentation</a> <em>(Official)</em></li>
+            <li><strong>Comprehensive:</strong> <a href="https://www.youtube.com/watch?v=X48VuDVv0do"
+                    target="_blank">TechWorld with Nana – Kubernetes Full Course</a></li>
+            <li><strong>Documentation:</strong> <a href="https://kubernetes.io/docs/concepts/overview/"
+                    target="_blank">Kubernetes Official Documentation</a> <em>(Official)</em></li>
         </ul>
 
         <h4>🎓 Certification Path & Practice</h4>
         <ul>
             <li><strong>Certifications:</strong> CKA (Administrator) → CKAD (Developer) → CKS (Security)</li>
-            <li><strong>Practice:</strong> Play with Kubernetes (<a href="https://labs.play-with-k8s.com/" target="_blank">labs.play-with-k8s.com</a>)</li>
+            <li><strong>Practice:</strong> Play with Kubernetes (<a href="https://labs.play-with-k8s.com/"
+                    target="_blank">labs.play-with-k8s.com</a>)</li>
             <li><strong>Labs:</strong> KodeKloud Kubernetes Labs, Katacoda Interactive Scenarios</li>
         </ul>
 
@@ -1862,7 +1992,8 @@
                 <li><strong>Resource Exhaustion:</strong>
                     <ul>
                         <li>Set low resource limits (128Mi memory)</li>
-                        <li>Generate load with <code>kubectl run -it --rm load-generator --image=busybox -- /bin/sh</code></li>
+                        <li>Generate load with
+                            <code>kubectl run -it --rm load-generator --image=busybox -- /bin/sh</code></li>
                         <li>Observe: Pod OOMKilled, HPA scales up</li>
                         <li>Fix: Adjust resource requests/limits appropriately</li>
                     </ul>
@@ -1890,7 +2021,7 @@
                     </ul>
                 </li>
             </ol>
-            <strong>Success Criteria:</strong> 
+            <strong>Success Criteria:</strong>
             <ul>
                 <li>Application recovers automatically from all failure scenarios</li>
                 <li>Zero downtime during rolling updates</li>
@@ -1916,37 +2047,52 @@
             <tr>
                 <td><strong>ImagePullBackOff</strong></td>
                 <td>Pods stuck in error state</td>
-                <td>1. Check image name/tag: <code>kubectl describe pod &lt;name&gt;</code><br>2. Verify ECR authentication: <code>aws ecr get-login-password</code><br>3. Check imagePullSecrets in deployment<br>4. Ensure image exists in registry</td>
+                <td>1. Check image name/tag: <code>kubectl describe pod &lt;name&gt;</code><br>2. Verify ECR
+                    authentication: <code>aws ecr get-login-password</code><br>3. Check imagePullSecrets in
+                    deployment<br>4. Ensure image exists in registry</td>
             </tr>
             <tr>
                 <td><strong>CrashLoopBackOff</strong></td>
                 <td>Pod continuously restarts</td>
-                <td>1. Check logs: <code>kubectl logs &lt;pod&gt;</code><br>2. Common causes: missing env vars, DB connection failures, OOM kills<br>3. Check resource limits<br>4. Verify liveness/readiness probes<br><strong>Debug:</strong> <code>kubectl exec -it &lt;pod&gt; -- /bin/sh</code></td>
+                <td>1. Check logs: <code>kubectl logs &lt;pod&gt;</code><br>2. Common causes: missing env vars, DB
+                    connection failures, OOM kills<br>3. Check resource limits<br>4. Verify liveness/readiness
+                    probes<br><strong>Debug:</strong> <code>kubectl exec -it &lt;pod&gt; -- /bin/sh</code></td>
             </tr>
             <tr>
                 <td><strong>Service Not Accessible</strong></td>
                 <td>Cannot reach application via service</td>
-                <td>1. Check service endpoints: <code>kubectl get endpoints</code><br>2. Verify selector matches pod labels<br>3. Test from within cluster: <code>kubectl run test --image=busybox -it -- wget &lt;service&gt;</code><br>4. Check NetworkPolicies</td>
+                <td>1. Check service endpoints: <code>kubectl get endpoints</code><br>2. Verify selector matches pod
+                    labels<br>3. Test from within cluster:
+                    <code>kubectl run test --image=busybox -it -- wget &lt;service&gt;</code><br>4. Check
+                    NetworkPolicies</td>
             </tr>
             <tr>
                 <td><strong>Persistent Volume Claims Pending</strong></td>
                 <td>PVC stuck in Pending state</td>
-                <td>1. Check events: <code>kubectl describe pvc &lt;name&gt;</code><br>2. Verify StorageClass exists: <code>kubectl get sc</code><br>3. Check EBS CSI driver is installed (EKS)<br>4. Ensure sufficient resources in AWS account</td>
+                <td>1. Check events: <code>kubectl describe pvc &lt;name&gt;</code><br>2. Verify StorageClass exists:
+                    <code>kubectl get sc</code><br>3. Check EBS CSI driver is installed (EKS)<br>4. Ensure sufficient
+                    resources in AWS account</td>
             </tr>
             <tr>
                 <td><strong>Out of Memory Killed (OOMKilled)</strong></td>
                 <td>Pod terminated due to memory</td>
-                <td>1. Increase memory limits in deployment<br>2. Check for memory leaks in application<br>3. Monitor with: <code>kubectl top pod</code><br><strong>Prevention:</strong> Set appropriate requests/limits, use HPA</td>
+                <td>1. Increase memory limits in deployment<br>2. Check for memory leaks in application<br>3. Monitor
+                    with: <code>kubectl top pod</code><br><strong>Prevention:</strong> Set appropriate requests/limits,
+                    use HPA</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> Kubernetes debugging is all about understanding pod lifecycle. Master these commands: <code>kubectl describe</code>, <code>kubectl logs</code>, <code>kubectl get events</code>, and <code>kubectl exec</code>.
+            <strong>🆘 Stuck?</strong> Kubernetes debugging is all about understanding pod lifecycle. Master these
+            commands: <code>kubectl describe</code>, <code>kubectl logs</code>, <code>kubectl get events</code>, and
+            <code>kubectl exec</code>.
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase9"><i class="devicon-github-original tech-icon-lg icon-github"></i><i class="devicon-jenkins-plain tech-icon-lg icon-jenkins"></i> Phase 9: CI/CD Automation (GitHub Actions / Jenkins)</h2>
+        <h2 id="phase9"><i class="devicon-github-original tech-icon-lg icon-github"></i><i
+                class="devicon-jenkins-plain tech-icon-lg icon-jenkins"></i> Phase 9: CI/CD Automation (GitHub Actions /
+            Jenkins)</h2>
         <h3>📅 Timeline: Phase 9 - CI/CD Pipelines (Weeks 21-23)</h3>
         <p><em>Duration: 3 weeks (Varies widely depending on tools selected)</em></p>
 
@@ -1961,16 +2107,20 @@
             <li><strong>Advanced Deployment Strategies:</strong> Canary deployments and rollback mechanisms</li>
         </ul>
 
-        <div class="mermaid" data-chart-id="cicd-pipeline">
-        </div>
+        <div class="mermaid" data-chart-id="cicd-pipeline"></div>
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>GitHub Actions:</strong> <a href="https://www.youtube.com/watch?v=R8_veQiYBjI" target="_blank">MarkTech – GitHub Actions Full Course</a></li>
-            <li><strong>Jenkins:</strong> <a href="https://www.youtube.com/watch?v=7KCS70sCoK0" target="_blank">freeCodeCamp – Jenkins Full Course</a></li>
-            <li><strong>AWS:</strong> <a href="https://catalog.workshops.aws/cicd/" target="_blank">AWS Workshops – CI/CD</a> <em>(Hands-on)</em></li>
-            <li><strong>Policy-as-Code:</strong> <a href="https://www.openpolicyagent.org/docs/latest/" target="_blank">Open Policy Agent Documentation</a></li>
-            <li><strong>Security Scanning:</strong> <a href="https://www.checkov.io/1.Welcome/Quick%20Start.html" target="_blank">Checkov Quick Start Guide</a></li>
+            <li><strong>GitHub Actions:</strong> <a href="https://www.youtube.com/watch?v=R8_veQiYBjI"
+                    target="_blank">MarkTech – GitHub Actions Full Course</a></li>
+            <li><strong>Jenkins:</strong> <a href="https://www.youtube.com/watch?v=7KCS70sCoK0"
+                    target="_blank">freeCodeCamp – Jenkins Full Course</a></li>
+            <li><strong>AWS:</strong> <a href="https://catalog.workshops.aws/cicd/" target="_blank">AWS Workshops –
+                    CI/CD</a> <em>(Hands-on)</em></li>
+            <li><strong>Policy-as-Code:</strong> <a href="https://www.openpolicyagent.org/docs/latest/"
+                    target="_blank">Open Policy Agent Documentation</a></li>
+            <li><strong>Security Scanning:</strong> <a href="https://www.checkov.io/1.Welcome/Quick%20Start.html"
+                    target="_blank">Checkov Quick Start Guide</a></li>
         </ul>
 
         <h4>🔄 Jenkins vs GitHub Actions: Choosing Your CI/CD Platform</h4>
@@ -2051,56 +2201,25 @@
         </table>
 
         <blockquote>
-            <strong>💡 Recommendation for CloudTask:</strong> Start with <strong>GitHub Actions</strong> for rapid development and learning. It's free, requires no infrastructure, and integrates seamlessly with your GitHub repository. Once you've mastered CI/CD concepts, experiment with Jenkins in a self-hosted environment to understand enterprise-grade pipelines.
+            <strong>💡 Recommendation for CloudTask:</strong> Start with <strong>GitHub Actions</strong> for rapid
+            development and learning. It's free, requires no infrastructure, and integrates seamlessly with your GitHub
+            repository. Once you've mastered CI/CD concepts, experiment with Jenkins in a self-hosted environment to
+            understand enterprise-grade pipelines.
         </blockquote>
 
         <h4>🚀 Multi-Stage Deployment Workflows</h4>
 
-        <p>Real-world deployments involve multiple environments with different configurations, approval gates, and rollback strategies. Here's how to implement multi-stage deployments:</p>
+        <p>Real-world deployments involve multiple environments with different configurations, approval gates, and
+            rollback strategies. Here's how to implement multi-stage deployments:</p>
 
         <h5>1. GitHub Actions Multi-Stage Deployment Example</h5>
 
-        <div class="mermaid" data-chart-id="multi-stage-deploy">
-        STAGING[Deploy to Staging]
-        SMOKE[Smoke Tests]
-    end
-    
-    subgraph "Production Release"
-        TAG[Git Tag/Release]
-        APPROVAL[Manual Approval]
-        CANARY[Canary Deployment<br/>10% traffic]
-        MONITOR[Monitor Metrics<br/>5 minutes]
-        DECISION{Healthy?}
-        FULL[Full Deployment<br/>100% traffic]
-        ROLLBACK[Auto Rollback]
-    end
-    
-    CODE --> CI
-    CI --> DEV
-    DEV --> PR
-    PR --> REVIEW
-    REVIEW --> TESTS
-    TESTS --> MERGE
-    MERGE --> STAGING
-    STAGING --> SMOKE
-    SMOKE --> TAG
-    TAG --> APPROVAL
-    APPROVAL --> CANARY
-    CANARY --> MONITOR
-    MONITOR --> DECISION
-    DECISION -->|Yes| FULL
-    DECISION -->|No| ROLLBACK
-    
-    style DEV fill:#4caf50,color:#fff
-    style STAGING fill:#ff9800,color:#fff
-    style CANARY fill:#2196f3,color:#fff
-    style FULL fill:#4caf50,color:#fff
-    style ROLLBACK fill:#f44336,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="multi-stage-deploy"></div>
 
         <h4>📦 Artifact Management & Versioning</h4>
 
-        <p>Proper artifact management ensures you can trace, rollback, and audit every deployment. Here's how to implement it:</p>
+        <p>Proper artifact management ensures you can trace, rollback, and audit every deployment. Here's how to
+            implement it:</p>
 
         <h5>1. Artifact Types in CI/CD</h5>
         <table>
@@ -2168,7 +2287,8 @@
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Integrated CI/CD with GitHub Actions, adding automated builds, container scans, and gated deployments."</em>
+            <em>"Integrated CI/CD with GitHub Actions, adding automated builds, container scans, and gated
+                deployments."</em>
         </div>
 
         <div class="page-break"></div>
@@ -2187,51 +2307,20 @@
             <li><strong>Code Coverage:</strong> Measure and maintain minimum coverage thresholds</li>
         </ul>
 
-        <div class="mermaid">
-graph TB
-    subgraph "Testing Pyramid"
-        E2E[End-to-End Tests<br/>10% - Slow, Expensive<br/>Selenium, Cypress]
-        INT[Integration Tests<br/>20% - Medium Speed<br/>API Tests, Database Tests]
-        UNIT[Unit Tests<br/>70% - Fast, Cheap<br/>pytest, Jest, JUnit]
-
-        E2E --> INT
-        INT --> UNIT
-    end
-    
-    subgraph "Test Types in CI/CD"
-        LINT[Linting & Formatting<br/>ESLint, Pylint, Black]
-        STATIC[Static Analysis<br/>SonarQube, CodeQL]
-        SEC[Security Scanning<br/>Trivy, Snyk, OWASP]
-        PERF[Performance Tests<br/>k6, JMeter]
-        SMOKE[Smoke Tests<br/>Basic Health Checks]
-    end
-    
-    subgraph "CI Pipeline Flow"
-        COMMIT[Git Commit] --> LINT
-        LINT --> UNIT
-        UNIT --> STATIC
-        STATIC --> INT
-        INT --> SEC
-        SEC --> BUILD[Build Docker Image]
-        BUILD --> SMOKE
-        SMOKE --> E2E
-        E2E --> DEPLOY[Deploy to Staging]
-        DEPLOY --> PERF
-    end
-    
-    style UNIT fill:#4caf50,color:#fff
-    style INT fill:#ff9800,color:#fff
-    style E2E fill:#f44336,color:#fff
-    style BUILD fill:#2196f3,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="testing-pyramid"></div>
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Python Testing:</strong> <a href="https://realpython.com/pytest-python-testing/" target="_blank">Real Python - Pytest Tutorial</a></li>
-            <li><strong>JavaScript Testing:</strong> <a href="https://jestjs.io/docs/getting-started" target="_blank">Jest Documentation</a></li>
-            <li><strong>Integration Testing:</strong> <a href="https://testdriven.io/blog/testing-python/" target="_blank">Testing in Python</a></li>
-            <li><strong>E2E Testing:</strong> <a href="https://www.cypress.io/blog/2020/02/12/introduction-to-cypress/" target="_blank">Cypress Beginner Guide</a></li>
-            <li><strong>TDD:</strong> <a href="https://www.youtube.com/watch?v=B1j6k2j2eJg" target="_blank">Test-Driven Development Course</a></li>
+            <li><strong>Python Testing:</strong> <a href="https://realpython.com/pytest-python-testing/"
+                    target="_blank">Real Python - Pytest Tutorial</a></li>
+            <li><strong>JavaScript Testing:</strong> <a href="https://jestjs.io/docs/getting-started"
+                    target="_blank">Jest Documentation</a></li>
+            <li><strong>Integration Testing:</strong> <a href="https://testdriven.io/blog/testing-python/"
+                    target="_blank">Testing in Python</a></li>
+            <li><strong>E2E Testing:</strong> <a href="https://www.cypress.io/blog/2020/02/12/introduction-to-cypress/"
+                    target="_blank">Cypress Beginner Guide</a></li>
+            <li><strong>TDD:</strong> <a href="https://www.youtube.com/watch?v=B1j6k2j2eJg" target="_blank">Test-Driven
+                    Development Course</a></li>
         </ul>
 
         <h4>🧩 CloudTask Testing Implementation</h4>
@@ -2381,56 +2470,66 @@ graph TB
             <tr>
                 <td><strong>SonarQube</strong></td>
                 <td>Static code analysis & quality gate</td>
-                <td>• Code smells detection<br>• Security vulnerability scanning<br>• Code duplication analysis<br>• Quality gates for PR approval</td>
+                <td>• Code smells detection<br>• Security vulnerability scanning<br>• Code duplication analysis<br>•
+                    Quality gates for PR approval</td>
                 <td>GitHub Actions, Jenkins, GitLab CI</td>
             </tr>
             <tr>
                 <td><strong>Codecov / Coveralls</strong></td>
                 <td>Code coverage tracking & reporting</td>
-                <td>• Coverage visualization<br>• PR comments with coverage diff<br>• Coverage trends over time<br>• Branch/PR coverage comparison</td>
+                <td>• Coverage visualization<br>• PR comments with coverage diff<br>• Coverage trends over time<br>•
+                    Branch/PR coverage comparison</td>
                 <td>GitHub Actions, Travis CI, CircleCI</td>
             </tr>
             <tr>
                 <td><strong>Selenium Grid</strong></td>
                 <td>Distributed E2E testing</td>
-                <td>• Parallel test execution<br>• Multi-browser testing<br>• Scalable infrastructure<br>• Cross-platform support</td>
+                <td>• Parallel test execution<br>• Multi-browser testing<br>• Scalable infrastructure<br>•
+                    Cross-platform support</td>
                 <td>Docker, Kubernetes, cloud providers</td>
             </tr>
             <tr>
                 <td><strong>Robot Framework</strong></td>
                 <td>Keyword-driven test automation</td>
-                <td>• Human-readable test syntax<br>• Extensive library ecosystem<br>• API, UI, database testing<br>• Detailed HTML reports</td>
+                <td>• Human-readable test syntax<br>• Extensive library ecosystem<br>• API, UI, database testing<br>•
+                    Detailed HTML reports</td>
                 <td>Jenkins, GitHub Actions</td>
             </tr>
             <tr>
                 <td><strong>Postman/Newman</strong></td>
                 <td>API testing automation</td>
-                <td>• Collection-based testing<br>• Environment variables<br>• Pre/post-request scripts<br>• CLI runner (Newman) for CI/CD</td>
+                <td>• Collection-based testing<br>• Environment variables<br>• Pre/post-request scripts<br>• CLI runner
+                    (Newman) for CI/CD</td>
                 <td>All CI/CD platforms</td>
             </tr>
             <tr>
                 <td><strong>k6</strong></td>
                 <td>Performance & load testing</td>
-                <td>• JavaScript-based scripting<br>• Cloud and local execution<br>• Real-time metrics<br>• Threshold-based pass/fail</td>
+                <td>• JavaScript-based scripting<br>• Cloud and local execution<br>• Real-time metrics<br>•
+                    Threshold-based pass/fail</td>
                 <td>GitHub Actions, GitLab CI, Jenkins</td>
             </tr>
             <tr>
                 <td><strong>Allure</strong></td>
                 <td>Test reporting framework</td>
-                <td>• Beautiful test reports<br>• Historical trends<br>• Test categorization<br>• Screenshots & attachments</td>
+                <td>• Beautiful test reports<br>• Historical trends<br>• Test categorization<br>• Screenshots &
+                    attachments</td>
                 <td>pytest, JUnit, TestNG, Cucumber</td>
             </tr>
             <tr>
                 <td><strong>Testcontainers</strong></td>
                 <td>Containerized integration testing</td>
-                <td>• Disposable test environments<br>• Database, Redis, Kafka containers<br>• Automatic cleanup<br>• Language-specific libraries</td>
+                <td>• Disposable test environments<br>• Database, Redis, Kafka containers<br>• Automatic cleanup<br>•
+                    Language-specific libraries</td>
                 <td>JUnit, pytest, Go testing</td>
             </tr>
         </table>
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Implemented comprehensive testing strategy with 85% code coverage, including unit, integration, and E2E tests. Reduced production bugs by 70% through TDD practices and automated quality gates in CI/CD pipeline."</em>
+            <em>"Implemented comprehensive testing strategy with 85% code coverage, including unit, integration, and E2E
+                tests. Reduced production bugs by 70% through TDD practices and automated quality gates in CI/CD
+                pipeline."</em>
         </div>
 
         <div class="page-break"></div>
@@ -2439,82 +2538,19 @@ graph TB
         <h3>📅 Timeline: Phase 9B - Policy as Code (Week 24)</h3>
 
         <h4>Learning Objectives</h4>
-        <p>Implement <strong>GitOps</strong> principles where Git becomes the single source of truth for infrastructure and application deployments.</p>
+        <p>Implement <strong>GitOps</strong> principles where Git becomes the single source of truth for infrastructure
+            and application deployments.</p>
 
         <h4>Core Concepts</h4>
         <ul>
             <li><strong>Git as Source of Truth:</strong> All infrastructure and application configs stored in Git</li>
             <li><strong>Declarative Configuration:</strong> Kubernetes manifests define desired state</li>
-            <li><strong>Automated Synchronization:</strong> GitOps operators continuously reconcile actual vs. desired state</li>
+            <li><strong>Automated Synchronization:</strong> GitOps operators continuously reconcile actual vs. desired
+                state</li>
             <li><strong>Pull-Based Deployments:</strong> Cluster pulls changes rather than external push</li>
         </ul>
 
-        <div class="mermaid">
-flowchart TB
-    subgraph "Developer Workflow"
-        DEV[Developer]
-        CODE[Code Changes]
-        MANIFEST[K8s Manifests/Helm Charts]
-    end
-    
-    subgraph "Git Repository"
-        APP_REPO[Application Repo]
-        CONFIG_REPO[Config/GitOps Repo]
-    end
-    
-    subgraph "CI Pipeline"
-        CI[GitHub Actions]
-        BUILD[Build & Test]
-        IMAGE[Docker Image]
-        ECR[AWS ECR]
-    end
-    
-    subgraph "GitOps Operator"
-        ARGO[ArgoCD / Flux CD]
-        SYNC[Sync Controller]
-        HEALTH[Health Monitor]
-    end
-    
-    subgraph "Kubernetes Cluster"
-        K8S[EKS Cluster]
-        PODS[Application Pods]
-        SVC[Services]
-    end
-    
-    subgraph "Monitoring"
-        PROM[Prometheus]
-        SLACK[Slack Notifications]
-    end
-    
-    DEV --> CODE
-    DEV --> MANIFEST
-    CODE --> APP_REPO
-    MANIFEST --> CONFIG_REPO
-    
-    APP_REPO --> CI
-    CI --> BUILD
-    BUILD --> IMAGE
-    IMAGE --> ECR
-    
-    CONFIG_REPO --> ARGO
-    ARGO --> SYNC
-    SYNC --> K8S
-    SYNC --> HEALTH
-    
-    K8S --> PODS
-    K8S --> SVC
-    
-    HEALTH --> PROM
-    ARGO --> SLACK
-    
-    SYNC -.->|Pull Changes| CONFIG_REPO
-    SYNC -.->|Watch for Updates| ECR
-    
-    style ARGO fill:#ff6b35,color:#fff
-    style CONFIG_REPO fill:#4caf50,color:#fff
-    style SYNC fill:#2196f3,color:#fff
-    style K8S fill:#326ce5,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="gitops-workflow"></div>
 
         <h4>ArgoCD vs Flux CD: Choosing Your GitOps Tool</h4>
 
@@ -2558,10 +2594,14 @@ flowchart TB
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>ArgoCD:</strong> <a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank">ArgoCD Official Documentation</a> <em>(Comprehensive)</em></li>
-            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=MeU5_k9ssrs" target="_blank">TechWorld with Nana – ArgoCD Tutorial</a></li>
-            <li><strong>Flux:</strong> <a href="https://fluxcd.io/flux/get-started/" target="_blank">Flux CD Get Started Guide</a> <em>(Official)</em></li>
-            <li><strong>Comparison:</strong> <a href="https://www.cncf.io/blog/2021/12/21/flux-vs-argo-cd/" target="_blank">CNCF – GitOps Tools Comparison</a></li>
+            <li><strong>ArgoCD:</strong> <a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank">ArgoCD
+                    Official Documentation</a> <em>(Comprehensive)</em></li>
+            <li><strong>Video:</strong> <a href="https://www.youtube.com/watch?v=MeU5_k9ssrs" target="_blank">TechWorld
+                    with Nana – ArgoCD Tutorial</a></li>
+            <li><strong>Flux:</strong> <a href="https://fluxcd.io/flux/get-started/" target="_blank">Flux CD Get Started
+                    Guide</a> <em>(Official)</em></li>
+            <li><strong>Comparison:</strong> <a href="https://www.cncf.io/blog/2021/12/21/flux-vs-argo-cd/"
+                    target="_blank">CNCF – GitOps Tools Comparison</a></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation (ArgoCD Recommended)</h4>
@@ -2577,9 +2617,12 @@ flowchart TB
             <li><strong>Install ArgoCD:</strong> Deploy to EKS cluster
                 <ul>
                     <li><code>kubectl create namespace argocd</code></li>
-                    <li><code>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml</code></li>
+                    <li><code>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml</code>
+                    </li>
                     <li>Access UI: <code>kubectl port-forward svc/argocd-server -n argocd 8080:443</code></li>
-                    <li>Get admin password: <code>kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d</code></li>
+                    <li>Get admin password:
+                        <code>kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d</code>
+                    </li>
                 </ul>
             </li>
             <li><strong>Create Applications:</strong> Define ArgoCD Application resources
@@ -2598,7 +2641,8 @@ flowchart TB
             </li>
             <li><strong>Image Updater:</strong> Install ArgoCD Image Updater
                 <ul>
-                    <li><code>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/manifests/install.yaml</code></li>
+                    <li><code>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/manifests/install.yaml</code>
+                    </li>
                     <li>Configure ECR authentication in ConfigMap</li>
                     <li>Add annotations to Application for automatic image updates</li>
                 </ul>
@@ -2629,10 +2673,12 @@ flowchart TB
 
         <h4>🎯 GitOps Best Practices</h4>
         <ul>
-            <li><strong>Separate Repos:</strong> Keep application code and deployment configs in different repositories</li>
+            <li><strong>Separate Repos:</strong> Keep application code and deployment configs in different repositories
+            </li>
             <li><strong>Environment Branching:</strong> Use branches or directories for dev/staging/prod</li>
             <li><strong>Helm Charts:</strong> Use Helm for templating complex applications</li>
-            <li><strong>Secrets Management:</strong> Never commit secrets; use Sealed Secrets or External Secrets Operator</li>
+            <li><strong>Secrets Management:</strong> Never commit secrets; use Sealed Secrets or External Secrets
+                Operator</li>
             <li><strong>PR Workflows:</strong> Require pull requests for all deployment changes</li>
             <li><strong>Testing:</strong> Validate manifests with tools like kubeval or kustomize</li>
         </ul>
@@ -2649,13 +2695,15 @@ flowchart TB
                 <li>Intentionally break a deployment and practice rollback</li>
                 <li>Set up Slack notifications for deployment events</li>
             </ol>
-            <strong>Success Criteria:</strong> Zero-touch deployments triggered only by Git commits, with automatic rollback on failures<br>
+            <strong>Success Criteria:</strong> Zero-touch deployments triggered only by Git commits, with automatic
+            rollback on failures<br>
             <strong>Time Estimate:</strong> 4-6 hours
         </blockquote>
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Implemented GitOps workflow using ArgoCD, achieving fully automated, Git-based deployments with automated rollbacks and compliance audit trails."</em>
+            <em>"Implemented GitOps workflow using ArgoCD, achieving fully automated, Git-based deployments with
+                automated rollbacks and compliance audit trails."</em>
         </div>
 
         <div class="page-break"></div>
@@ -2664,7 +2712,8 @@ flowchart TB
         <h3>📅 Timeline: Phase 9 - CI/CD Additional Topics (Weeks 21-23)</h3>
 
         <h4>Learning Objectives</h4>
-        <p>Implement <strong>Policy-as-Code</strong> to enforce security, compliance, and operational standards automatically across infrastructure and applications.</p>
+        <p>Implement <strong>Policy-as-Code</strong> to enforce security, compliance, and operational standards
+            automatically across infrastructure and applications.</p>
 
         <h4>Core Concepts</h4>
         <ul>
@@ -2674,42 +2723,7 @@ flowchart TB
             <li><strong>Continuous Compliance:</strong> Monitor and remediate policy violations in production</li>
         </ul>
 
-        <div class="mermaid" data-chart-id="policy-as-code">
-    end
-    
-    DEV --> LOCAL
-    LOCAL --> PR
-    PR --> CHECKOV
-    PR --> OPA
-    PR --> TFSEC
-    PR --> KUBE
-    
-    CHECKOV --> GATE
-    OPA --> GATE
-    TFSEC --> GATE
-    KUBE --> GATE
-    
-    GATE -->|Yes| APPROVE
-    GATE -->|No| BLOCK
-    BLOCK --> DEV
-    
-    APPROVE --> DEPLOY
-    DEPLOY --> ADMISSION
-    ADMISSION --> RUNTIME
-    RUNTIME -->|Yes| ALLOW
-    RUNTIME -->|No| DENY
-    
-    ALLOW --> AUDIT
-    DENY --> AUDIT
-    AUDIT --> REPORT
-    AUDIT --> ALERT
-    
-    style GATE fill:#ff9800,color:#fff
-    style APPROVE fill:#4caf50,color:#fff
-    style BLOCK fill:#f44336,color:#fff
-    style ALLOW fill:#4caf50,color:#fff
-    style DENY fill:#f44336,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="policy-as-code"></div>
 
         <h4>🛡️ Policy-as-Code Tools Comparison</h4>
 
@@ -2725,28 +2739,32 @@ flowchart TB
                 <td><strong>OPA (Open Policy Agent)</strong></td>
                 <td>General-purpose policy engine</td>
                 <td>Rego (declarative)</td>
-                <td>• Kubernetes admission control<br>• Terraform validation<br>• API authorization<br>• Flexible, extensible</td>
+                <td>• Kubernetes admission control<br>• Terraform validation<br>• API authorization<br>• Flexible,
+                    extensible</td>
                 <td>Enterprise-wide policy enforcement</td>
             </tr>
             <tr>
                 <td><strong>Checkov</strong></td>
                 <td>IaC security scanning</td>
                 <td>Python (policies in YAML/Python)</td>
-                <td>• 1000+ built-in policies<br>• Terraform, K8s, Docker, CloudFormation<br>• Easy to use<br>• Custom policies support</td>
+                <td>• 1000+ built-in policies<br>• Terraform, K8s, Docker, CloudFormation<br>• Easy to use<br>• Custom
+                    policies support</td>
                 <td>Quick IaC security scanning in CI/CD</td>
             </tr>
             <tr>
                 <td><strong>tfsec</strong></td>
                 <td>Terraform-specific security</td>
                 <td>Go (built-in checks)</td>
-                <td>• Fast static analysis<br>• 100+ AWS/Azure/GCP checks<br>• Low false positives<br>• CI/CD friendly</td>
+                <td>• Fast static analysis<br>• 100+ AWS/Azure/GCP checks<br>• Low false positives<br>• CI/CD friendly
+                </td>
                 <td>Terraform-only projects</td>
             </tr>
             <tr>
                 <td><strong>Kyverno</strong></td>
                 <td>Kubernetes policy management</td>
                 <td>YAML (K8s native)</td>
-                <td>• No new language (uses YAML)<br>• Validate, mutate, generate resources<br>• Easy for K8s users<br>• CNCF project</td>
+                <td>• No new language (uses YAML)<br>• Validate, mutate, generate resources<br>• Easy for K8s users<br>•
+                    CNCF project</td>
                 <td>Kubernetes-native environments</td>
             </tr>
             <tr>
@@ -2760,11 +2778,16 @@ flowchart TB
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>OPA:</strong> <a href="https://www.openpolicyagent.org/docs/latest/" target="_blank">OPA Official Documentation</a> <em>(Comprehensive)</em></li>
-            <li><strong>OPA Tutorial:</strong> <a href="https://www.youtube.com/watch?v=Yup1FUc2Qn0" target="_blank">TechWorld with Nana – OPA Tutorial</a></li>
-            <li><strong>Checkov:</strong> <a href="https://www.checkov.io/1.Welcome/Quick%20Start.html" target="_blank">Checkov Quick Start Guide</a></li>
-            <li><strong>Rego Playground:</strong> <a href="https://play.openpolicyagent.org/" target="_blank">Interactive Rego Learning</a> <em>(Hands-on)</em></li>
-            <li><strong>Kyverno:</strong> <a href="https://kyverno.io/docs/introduction/" target="_blank">Kyverno Documentation</a></li>
+            <li><strong>OPA:</strong> <a href="https://www.openpolicyagent.org/docs/latest/" target="_blank">OPA
+                    Official Documentation</a> <em>(Comprehensive)</em></li>
+            <li><strong>OPA Tutorial:</strong> <a href="https://www.youtube.com/watch?v=Yup1FUc2Qn0"
+                    target="_blank">TechWorld with Nana – OPA Tutorial</a></li>
+            <li><strong>Checkov:</strong> <a href="https://www.checkov.io/1.Welcome/Quick%20Start.html"
+                    target="_blank">Checkov Quick Start Guide</a></li>
+            <li><strong>Rego Playground:</strong> <a href="https://play.openpolicyagent.org/"
+                    target="_blank">Interactive Rego Learning</a> <em>(Hands-on)</em></li>
+            <li><strong>Kyverno:</strong> <a href="https://kyverno.io/docs/introduction/" target="_blank">Kyverno
+                    Documentation</a></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation: Policy-as-Code</h4>
@@ -2854,13 +2877,15 @@ flowchart TB
                     </ul>
                 </li>
             </ol>
-            <strong>Success Criteria:</strong> All policy checks automated in CI/CD, runtime enforcement in Kubernetes, zero non-compliant resources in production<br>
+            <strong>Success Criteria:</strong> All policy checks automated in CI/CD, runtime enforcement in Kubernetes,
+            zero non-compliant resources in production<br>
             <strong>Time Estimate:</strong> 4-6 hours
         </blockquote>
 
         <h4>📊 Compliance & Audit Benefits</h4>
         <ul>
-            <li><strong>Automated Compliance:</strong> Continuously enforce security standards (CIS, PCI-DSS, HIPAA)</li>
+            <li><strong>Automated Compliance:</strong> Continuously enforce security standards (CIS, PCI-DSS, HIPAA)
+            </li>
             <li><strong>Audit Trail:</strong> Git history provides complete record of policy changes and approvals</li>
             <li><strong>Prevention > Detection:</strong> Block violations before they reach production</li>
             <li><strong>Developer Enablement:</strong> Fast feedback loop helps developers fix issues early</li>
@@ -2870,7 +2895,9 @@ flowchart TB
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Implemented comprehensive Policy-as-Code framework using OPA and Checkov, achieving 100% compliance with security standards and blocking 95% of misconfigurations before deployment. Reduced security vulnerabilities by 80% through automated policy enforcement."</em>
+            <em>"Implemented comprehensive Policy-as-Code framework using OPA and Checkov, achieving 100% compliance
+                with security standards and blocking 95% of misconfigurations before deployment. Reduced security
+                vulnerabilities by 80% through automated policy enforcement."</em>
         </div>
 
         <div class="page-break"></div>
@@ -2886,36 +2913,47 @@ flowchart TB
             <tr>
                 <td><strong>GitHub Actions Timeout</strong></td>
                 <td>Workflow exceeds 6-hour limit</td>
-                <td>1. Split into multiple jobs<br>2. Use matrix strategy for parallel execution<br>3. Cache dependencies<br>4. Optimize Docker builds with layer caching</td>
+                <td>1. Split into multiple jobs<br>2. Use matrix strategy for parallel execution<br>3. Cache
+                    dependencies<br>4. Optimize Docker builds with layer caching</td>
             </tr>
             <tr>
                 <td><strong>Secrets Not Available</strong></td>
                 <td>Workflow can't access secrets</td>
-                <td>1. Verify secret name matches exactly (case-sensitive)<br>2. Check repository/organization secrets scope<br>3. Ensure workflow has correct permissions<br>4. Use: <code>${{ secrets.SECRET_NAME }}</code> syntax</td>
+                <td>1. Verify secret name matches exactly (case-sensitive)<br>2. Check repository/organization secrets
+                    scope<br>3. Ensure workflow has correct permissions<br>4. Use:
+                    <code>${{ secrets.SECRET_NAME }}</code> syntax</td>
             </tr>
             <tr>
                 <td><strong>Pipeline Fails on PR but Works on Main</strong></td>
                 <td>Tests pass locally and on main, fail on PR</td>
-                <td>1. Check for environment differences<br>2. Verify PR has access to required secrets<br>3. Look for race conditions in tests<br>4. Check branch protection rules<br><strong>Prevention:</strong> Use identical configs across branches</td>
+                <td>1. Check for environment differences<br>2. Verify PR has access to required secrets<br>3. Look for
+                    race conditions in tests<br>4. Check branch protection rules<br><strong>Prevention:</strong> Use
+                    identical configs across branches</td>
             </tr>
             <tr>
                 <td><strong>Deployment Stuck in Progress</strong></td>
                 <td>CI shows success but app not updated</td>
-                <td>1. Check ArgoCD sync status<br>2. Verify image tag was updated in Git<br>3. Look for failed health checks<br>4. Check ArgoCD application logs<br><strong>Prevention:</strong> Add deployment verification step in CI</td>
+                <td>1. Check ArgoCD sync status<br>2. Verify image tag was updated in Git<br>3. Look for failed health
+                    checks<br>4. Check ArgoCD application logs<br><strong>Prevention:</strong> Add deployment
+                    verification step in CI</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> CI/CD pipelines fail often during setup. Don't get discouraged! Start simple (just build and test), then gradually add complexity (security scans, deployments, notifications).
+            <strong>🆘 Stuck?</strong> CI/CD pipelines fail often during setup. Don't get discouraged! Start simple
+            (just build and test), then gradually add complexity (security scans, deployments, notifications).
         </blockquote>
 
         <div class="page-break"></div>
 
-        <h2 id="phase10"><i class="devicon-prometheus-original tech-icon-lg icon-prometheus"></i><i class="devicon-grafana-original tech-icon-lg icon-grafana"></i> Phase 10: Monitoring, Logging & Observability</h2>
+        <h2 id="phase10"><i class="devicon-prometheus-original tech-icon-lg icon-prometheus"></i><i
+                class="devicon-grafana-original tech-icon-lg icon-grafana"></i> Phase 10: Monitoring, Logging &
+            Observability</h2>
         <h3>📅 Timeline: Phase 10 - Monitoring & Observability (Weeks 25-27)</h3>
 
         <h4>Learning Objectives</h4>
-        <p>Complete the <strong>three pillars of observability</strong> — metrics, logs, and traces for comprehensive system visibility.</p>
+        <p>Complete the <strong>three pillars of observability</strong> — metrics, logs, and traces for comprehensive
+            system visibility.</p>
 
         <h4>Core Concepts</h4>
         <ul>
@@ -2925,73 +2963,15 @@ flowchart TB
             <li><strong>Alerting & SLOs:</strong> Proactive monitoring with Service Level Objectives</li>
         </ul>
 
-        <div class="mermaid">
-graph TB
-    subgraph "Application Layer"
-        APP[CloudTask Application]
-        K8S[Kubernetes Cluster]
-    end
-    
-    subgraph "Three Pillars of Observability"
-        subgraph "Metrics"
-            PROM[Prometheus]
-            PROM_EXP[Node Exporter<br/>App Metrics]
-            APP --> PROM_EXP
-            K8S --> PROM_EXP
-            PROM_EXP --> PROM
-        end
-
-        subgraph "Logs"
-            LOKI[Grafana Loki]
-            FLUENT[Fluentd/Fluent Bit]
-            APP --> FLUENT
-            K8S --> FLUENT
-            FLUENT --> LOKI
-        end
-
-        subgraph "Traces"
-            JAEGER[Jaeger/X-Ray]
-            OTEL[OpenTelemetry]
-            APP --> OTEL
-            OTEL --> JAEGER
-        end
-    end
-    
-    subgraph "Visualization & Alerting"
-        GRAF[Grafana Dashboards]
-        ALERT[Alert Manager]
-
-        PROM --> GRAF
-        LOKI --> GRAF
-        JAEGER --> GRAF
-
-        PROM --> ALERT
-    end
-    
-    subgraph "Incident Response"
-        ALERT --> SLACK[Slack Notifications]
-        ALERT --> PAGE[PagerDuty]
-        ALERT --> EMAIL[Email Alerts]
-    end
-    
-    subgraph "AWS Native"
-        CW[CloudWatch]
-        APP --> CW
-        K8S --> CW
-        CW --> GRAF
-    end
-    
-    style PROM fill:#e6522c,color:#fff
-    style LOKI fill:#f46800,color:#fff
-    style JAEGER fill:#60d0e4,color:#000
-    style GRAF fill:#f46800,color:#fff
-    style ALERT fill:#ff6b6b,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="observability-stack"></div>
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Monitoring:</strong> <a href="https://www.youtube.com/watch?v=h4Sl21AKiDg" target="_blank">TechWorld with Nana – Prometheus & Grafana</a></li>
-            <li><strong>AWS:</strong> <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html" target="_blank">AWS CloudWatch Documentation</a> <em>(Official)</em></li>
+            <li><strong>Monitoring:</strong> <a href="https://www.youtube.com/watch?v=h4Sl21AKiDg"
+                    target="_blank">TechWorld with Nana – Prometheus & Grafana</a></li>
+            <li><strong>AWS:</strong> <a
+                    href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+                    target="_blank">AWS CloudWatch Documentation</a> <em>(Official)</em></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation</h4>
@@ -3006,7 +2986,8 @@ graph TB
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Implemented complete observability stack using Prometheus, Grafana Loki, and Jaeger for metrics, logs, and traces."</em>
+            <em>"Implemented complete observability stack using Prometheus, Grafana Loki, and Jaeger for metrics, logs,
+                and traces."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -3020,27 +3001,34 @@ graph TB
             <tr>
                 <td><strong>Prometheus High Memory Usage</strong></td>
                 <td>Prometheus pod OOMKilled frequently</td>
-                <td>1. Reduce retention period: <code>--storage.tsdb.retention.time=15d</code><br>2. Decrease scrape frequency<br>3. Use recording rules for complex queries<br>4. Increase memory limits<br><strong>Prevention:</strong> Filter metrics, use remote storage</td>
+                <td>1. Reduce retention period: <code>--storage.tsdb.retention.time=15d</code><br>2. Decrease scrape
+                    frequency<br>3. Use recording rules for complex queries<br>4. Increase memory
+                    limits<br><strong>Prevention:</strong> Filter metrics, use remote storage</td>
             </tr>
             <tr>
                 <td><strong>Grafana Dashboard Empty</strong></td>
                 <td>No data showing in graphs</td>
-                <td>1. Verify Prometheus data source connection<br>2. Check time range selector<br>3. Test queries in Prometheus UI first<br>4. Verify metric names and labels</td>
+                <td>1. Verify Prometheus data source connection<br>2. Check time range selector<br>3. Test queries in
+                    Prometheus UI first<br>4. Verify metric names and labels</td>
             </tr>
             <tr>
                 <td><strong>Alert Fatigue</strong></td>
                 <td>Too many alerts, team ignores them</td>
-                <td>1. Increase alert thresholds<br>2. Use alert grouping<br>3. Implement severity levels<br>4. Add inhibition rules<br><strong>Prevention:</strong> Alert on symptoms, not causes; use SLOs</td>
+                <td>1. Increase alert thresholds<br>2. Use alert grouping<br>3. Implement severity levels<br>4. Add
+                    inhibition rules<br><strong>Prevention:</strong> Alert on symptoms, not causes; use SLOs</td>
             </tr>
             <tr>
                 <td><strong>Missing Logs in Loki</strong></td>
                 <td>Logs not appearing in Grafana</td>
-                <td>1. Check Promtail daemonset is running<br>2. Verify log paths in Promtail config<br>3. Test Loki API: <code>curl http://loki:3100/ready</code><br>4. Check for label mismatches<br><strong>Prevention:</strong> Test log pipeline incrementally</td>
+                <td>1. Check Promtail daemonset is running<br>2. Verify log paths in Promtail config<br>3. Test Loki
+                    API: <code>curl http://loki:3100/ready</code><br>4. Check for label
+                    mismatches<br><strong>Prevention:</strong> Test log pipeline incrementally</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> Observability tools can be resource-intensive. Start with basic metrics and gradually add more. Monitor your monitoring stack itself to avoid resource exhaustion!
+            <strong>🆘 Stuck?</strong> Observability tools can be resource-intensive. Start with basic metrics and
+            gradually add more. Monitor your monitoring stack itself to avoid resource exhaustion!
         </blockquote>
 
         <div class="page-break"></div>
@@ -3049,11 +3037,13 @@ graph TB
         <h3>📅 Timeline: Phase 11 - Security & Compliance (Weeks 28-30)</h3>
 
         <h4>Learning Objectives</h4>
-        <p>Implement comprehensive security practices, compliance frameworks, and automated security monitoring throughout the infrastructure.</p>
+        <p>Implement comprehensive security practices, compliance frameworks, and automated security monitoring
+            throughout the infrastructure.</p>
 
         <h4>Core Concepts</h4>
         <ul>
-            <li><strong>Identity & Access Management:</strong> Least-privilege access controls and zero-trust principles</li>
+            <li><strong>Identity & Access Management:</strong> Least-privilege access controls and zero-trust principles
+            </li>
             <li><strong>Secrets Management:</strong> Secure storage, rotation, and audit trails for sensitive data</li>
             <li><strong>Vulnerability Scanning:</strong> Automated container, code, and infrastructure scanning</li>
             <li><strong>Compliance Frameworks:</strong> SOC 2, HIPAA, PCI-DSS, and GDPR basics</li>
@@ -3062,7 +3052,8 @@ graph TB
 
         <h4>🛡️ Security Integration Across All Phases (Shift-Left Security)</h4>
         <blockquote>
-            <strong>⚠️ Critical Mindset:</strong> Security is NOT a single phase—it must be integrated into every stage of your DevOps journey. Below are retroactive security measures to implement in earlier phases.
+            <strong>⚠️ Critical Mindset:</strong> Security is NOT a single phase—it must be integrated into every stage
+            of your DevOps journey. Below are retroactive security measures to implement in earlier phases.
         </blockquote>
 
         <table>
@@ -3074,42 +3065,57 @@ graph TB
             <tr>
                 <td><strong>Phase 2: Git</strong></td>
                 <td>Prevent secrets in code</td>
-                <td>• Install <strong>git-secrets</strong> or <strong>gitleaks</strong><br>• Add pre-commit hooks: <code>pre-commit install</code><br>• Scan history: <code>gitleaks detect --source .</code><br>• Use <code>.env</code> files with <code>.gitignore</code></td>
+                <td>• Install <strong>git-secrets</strong> or <strong>gitleaks</strong><br>• Add pre-commit hooks:
+                    <code>pre-commit install</code><br>• Scan history: <code>gitleaks detect --source .</code><br>• Use
+                    <code>.env</code> files with <code>.gitignore</code></td>
             </tr>
             <tr>
                 <td><strong>Phase 3: Linux</strong></td>
                 <td>Server hardening</td>
-                <td>• Disable root login: Edit <code>/etc/ssh/sshd_config</code><br>• Configure UFW firewall: <code>ufw allow 22,80,443/tcp</code><br>• Install fail2ban: <code>apt install fail2ban</code><br>• Enable automatic security updates<br>• Use SSH keys only (disable password auth)</td>
+                <td>• Disable root login: Edit <code>/etc/ssh/sshd_config</code><br>• Configure UFW firewall:
+                    <code>ufw allow 22,80,443/tcp</code><br>• Install fail2ban: <code>apt install fail2ban</code><br>•
+                    Enable automatic security updates<br>• Use SSH keys only (disable password auth)</td>
             </tr>
             <tr>
                 <td><strong>Phase 4: AWS</strong></td>
                 <td>Cloud security posture</td>
-                <td>• Enable CloudTrail logging in all regions<br>• Configure AWS Config for compliance<br>• Use Security Groups with least privilege<br>• Enable VPC Flow Logs<br>• Implement MFA for root account<br>• Use IAM roles, never access keys</td>
+                <td>• Enable CloudTrail logging in all regions<br>• Configure AWS Config for compliance<br>• Use
+                    Security Groups with least privilege<br>• Enable VPC Flow Logs<br>• Implement MFA for root
+                    account<br>• Use IAM roles, never access keys</td>
             </tr>
             <tr>
                 <td><strong>Phase 5: Terraform</strong></td>
                 <td>Infrastructure security scanning</td>
-                <td>• Scan IaC: <code>tfsec .</code> or <code>checkov -d .</code><br>• Validate: <code>terraform validate</code><br>• Use remote state with encryption<br>• Store state in S3 with versioning enabled<br>• Never hardcode secrets in .tf files</td>
+                <td>• Scan IaC: <code>tfsec .</code> or <code>checkov -d .</code><br>• Validate:
+                    <code>terraform validate</code><br>• Use remote state with encryption<br>• Store state in S3 with
+                    versioning enabled<br>• Never hardcode secrets in .tf files</td>
             </tr>
             <tr>
                 <td><strong>Phase 6: Ansible</strong></td>
                 <td>Configuration security</td>
-                <td>• Use Ansible Vault for secrets: <code>ansible-vault encrypt</code><br>• Run security playbooks (patching, hardening)<br>• Validate with ansible-lint<br>• Use SSH keys with passphrase</td>
+                <td>• Use Ansible Vault for secrets: <code>ansible-vault encrypt</code><br>• Run security playbooks
+                    (patching, hardening)<br>• Validate with ansible-lint<br>• Use SSH keys with passphrase</td>
             </tr>
             <tr>
                 <td><strong>Phase 7: Docker</strong></td>
                 <td>Container security</td>
-                <td>• Scan images: <code>trivy image cloudtask:latest</code><br>• Use official base images (alpine, distroless)<br>• Run as non-root user<br>• Multi-stage builds to reduce attack surface<br>• Sign images with Docker Content Trust</td>
+                <td>• Scan images: <code>trivy image cloudtask:latest</code><br>• Use official base images (alpine,
+                    distroless)<br>• Run as non-root user<br>• Multi-stage builds to reduce attack surface<br>• Sign
+                    images with Docker Content Trust</td>
             </tr>
             <tr>
                 <td><strong>Phase 8: Kubernetes</strong></td>
                 <td>Cluster security</td>
-                <td>• Enable RBAC, remove default service account<br>• Use NetworkPolicies to restrict traffic<br>• Scan with kube-bench: <code>kube-bench run</code><br>• Pod Security Standards (restricted)<br>• Use secrets, not ConfigMaps for sensitive data<br>• Enable audit logging</td>
+                <td>• Enable RBAC, remove default service account<br>• Use NetworkPolicies to restrict traffic<br>• Scan
+                    with kube-bench: <code>kube-bench run</code><br>• Pod Security Standards (restricted)<br>• Use
+                    secrets, not ConfigMaps for sensitive data<br>• Enable audit logging</td>
             </tr>
             <tr>
                 <td><strong>Phase 9: CI/CD</strong></td>
                 <td>Pipeline security</td>
-                <td>• Scan code: SonarQube, CodeQL<br>• Scan dependencies: Snyk, Dependabot<br>• Scan containers: Trivy in pipeline<br>• Use GitHub Secrets, not hardcoded values<br>• Implement approval gates for production<br>• Sign commits: <code>git config commit.gpgsign true</code></td>
+                <td>• Scan code: SonarQube, CodeQL<br>• Scan dependencies: Snyk, Dependabot<br>• Scan containers: Trivy
+                    in pipeline<br>• Use GitHub Secrets, not hardcoded values<br>• Implement approval gates for
+                    production<br>• Sign commits: <code>git config commit.gpgsign true</code></td>
             </tr>
         </table>
 
@@ -3126,89 +3132,12 @@ graph TB
                 <li>Implement automated security scanning in CI/CD pipeline</li>
                 <li>Document all findings and remediation steps</li>
             </ol>
-            <strong>Success Criteria:</strong> Zero HIGH/CRITICAL vulnerabilities, all AWS Security Hub checks passing<br>
+            <strong>Success Criteria:</strong> Zero HIGH/CRITICAL vulnerabilities, all AWS Security Hub checks
+            passing<br>
             <strong>Time Estimate:</strong> 6-8 hours
         </blockquote>
 
-        <div class="mermaid">
-graph TB
-    subgraph "Identity & Access Management"
-        IAM[AWS IAM]
-        ROLES[IAM Roles]
-        POLICIES[Least Privilege Policies]
-        MFA[Multi-Factor Auth]
-
-        IAM --> ROLES
-        IAM --> POLICIES
-        IAM --> MFA
-    end
-    
-    subgraph "Secrets Management"
-        SM[AWS Secrets Manager]
-        VAULT[HashiCorp Vault]
-        K8S_SEC[Kubernetes Secrets]
-        ROTATE[Auto Rotation]
-
-        SM --> ROTATE
-        VAULT --> K8S_SEC
-    end
-    
-    subgraph "Application Security"
-        APP[CloudTask App]
-        APP --> SM
-        APP --> K8S_SEC
-        POLICIES --> APP
-    end
-    
-    subgraph "Container Security"
-        SCAN[Trivy Scanner]
-        ECR[AWS ECR]
-        IMG[Docker Images]
-
-        IMG --> SCAN
-        SCAN --> ECR
-        SCAN --> REPORT[Vulnerability Report]
-    end
-    
-    subgraph "Network Security"
-        SG[Security Groups]
-        NACL[Network ACLs]
-        WAF[AWS WAF]
-
-        WAF --> SG
-        SG --> NACL
-    end
-    
-    subgraph "Monitoring & Compliance"
-        GD[GuardDuty]
-        SH[Security Hub]
-        CONFIG[AWS Config]
-
-        APP --> GD
-        ECR --> SH
-        IAM --> CONFIG
-
-        GD --> ALERT[Security Alerts]
-        SH --> ALERT
-        CONFIG --> ALERT
-    end
-    
-    subgraph "Encryption"
-        KMS[AWS KMS]
-        TLS[TLS/SSL Certificates]
-
-        SM --> KMS
-        APP --> TLS
-    end
-    
-    ALERT --> INCIDENT[Incident Response]
-    
-    style IAM fill:#ff9900,color:#fff
-    style SM fill:#c925d1,color:#fff
-    style SCAN fill:#4caf50,color:#fff
-    style GD fill:#f44336,color:#fff
-    style KMS fill:#ff9900,color:#fff
-        </div>
+        <div class="mermaid" data-chart-id="compliance-frameworks"></div>
 
         <h4>🏛️ Compliance Frameworks Overview</h4>
 
@@ -3257,7 +3186,8 @@ graph TB
         <ul>
             <li>✅ <strong>Encryption at Rest:</strong> Enable RDS encryption, EBS encryption, S3 default encryption</li>
             <li>✅ <strong>Encryption in Transit:</strong> Enforce TLS 1.2+ for all communications</li>
-            <li>✅ <strong>Data Classification:</strong> Tag resources by sensitivity level (public, internal, confidential, PHI)</li>
+            <li>✅ <strong>Data Classification:</strong> Tag resources by sensitivity level (public, internal,
+                confidential, PHI)</li>
             <li>✅ <strong>Data Residency:</strong> Configure AWS regions for data sovereignty requirements</li>
             <li>✅ <strong>Backup & Recovery:</strong> Automated backups with encryption, tested recovery procedures</li>
         </ul>
@@ -3275,7 +3205,8 @@ graph TB
         <ul>
             <li>✅ <strong>CloudTrail:</strong> Enable in all regions with log file validation</li>
             <li>✅ <strong>VPC Flow Logs:</strong> Capture network traffic for forensics</li>
-            <li>✅ <strong>Application Logs:</strong> Centralized logging with retention policies (7 years for HIPAA)</li>
+            <li>✅ <strong>Application Logs:</strong> Centralized logging with retention policies (7 years for HIPAA)
+            </li>
             <li>✅ <strong>Log Integrity:</strong> Immutable logs with S3 Object Lock</li>
             <li>✅ <strong>SIEM Integration:</strong> Real-time security event monitoring</li>
         </ul>
@@ -3291,18 +3222,26 @@ graph TB
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>IAM:</strong> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank">AWS IAM Best Practices</a> <em>(Official)</em></li>
-            <li><strong>Secrets:</strong> <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html" target="_blank">AWS Secrets Manager Documentation</a> <em>(Official)</em></li>
-            <li><strong>Vault:</strong> <a href="https://developer.hashicorp.com/vault/docs" target="_blank">HashiCorp Vault Documentation</a> <em>(Official)</em></li>
-            <li><strong>SOC 2:</strong> <a href="https://aws.amazon.com/compliance/soc-2/" target="_blank">AWS SOC 2 Compliance</a> <em>(Overview)</em></li>
-            <li><strong>HIPAA:</strong> <a href="https://aws.amazon.com/compliance/hipaa-compliance/" target="_blank">AWS HIPAA Compliance Guide</a> <em>(Official)</em></li>
-            <li><strong>Course:</strong> <a href="https://www.youtube.com/watch?v=ORjHvz8960c" target="_blank">Security Best Practices on AWS</a></li>
+            <li><strong>IAM:</strong> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+                    target="_blank">AWS IAM Best Practices</a> <em>(Official)</em></li>
+            <li><strong>Secrets:</strong> <a
+                    href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html" target="_blank">AWS
+                    Secrets Manager Documentation</a> <em>(Official)</em></li>
+            <li><strong>Vault:</strong> <a href="https://developer.hashicorp.com/vault/docs" target="_blank">HashiCorp
+                    Vault Documentation</a> <em>(Official)</em></li>
+            <li><strong>SOC 2:</strong> <a href="https://aws.amazon.com/compliance/soc-2/" target="_blank">AWS SOC 2
+                    Compliance</a> <em>(Overview)</em></li>
+            <li><strong>HIPAA:</strong> <a href="https://aws.amazon.com/compliance/hipaa-compliance/"
+                    target="_blank">AWS HIPAA Compliance Guide</a> <em>(Official)</em></li>
+            <li><strong>Course:</strong> <a href="https://www.youtube.com/watch?v=ORjHvz8960c" target="_blank">Security
+                    Best Practices on AWS</a></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation</h4>
         <ol>
             <li><strong>IAM Hardening:</strong> Implement least-privilege roles with service-specific policies</li>
-            <li><strong>Secrets Management:</strong> Migrate all credentials to AWS Secrets Manager with auto-rotation</li>
+            <li><strong>Secrets Management:</strong> Migrate all credentials to AWS Secrets Manager with auto-rotation
+            </li>
             <li><strong>Encryption:</strong> Enable KMS encryption for RDS, EBS, S3; enforce TLS 1.3</li>
             <li><strong>Compliance Controls:</strong> Implement SOC 2 controls (if SaaS) or HIPAA (if healthcare data)
                 <ul>
@@ -3316,7 +3255,8 @@ graph TB
             <li><strong>Access Logging:</strong> Centralize all logs in CloudWatch with 7-year retention</li>
             <li><strong>Network Security:</strong> Implement network segmentation, WAF rules, DDoS protection</li>
             <li><strong>Incident Response:</strong> Create runbooks for security incidents and data breaches</li>
-            <li><strong>Compliance Reporting:</strong> Automate compliance reports with AWS Artifact and Security Hub</li>
+            <li><strong>Compliance Reporting:</strong> Automate compliance reports with AWS Artifact and Security Hub
+            </li>
         </ol>
 
         <h4>🔍 Security Scanning Tools Comparison</h4>
@@ -3362,7 +3302,9 @@ graph TB
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Implemented SOC 2 Type II compliance controls including automated vulnerability scanning, encrypted data at rest/transit, comprehensive audit logging, and continuous security monitoring with GuardDuty and Security Hub."</em>
+            <em>"Implemented SOC 2 Type II compliance controls including automated vulnerability scanning, encrypted
+                data at rest/transit, comprehensive audit logging, and continuous security monitoring with GuardDuty and
+                Security Hub."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -3376,27 +3318,36 @@ graph TB
             <tr>
                 <td><strong>IAM Permission Denied</strong></td>
                 <td><code>AccessDenied</code> errors in AWS</td>
-                <td>1. Check IAM policy allows required actions<br>2. Verify resource ARN in policy<br>3. Check for explicit Deny statements<br>4. Use IAM Policy Simulator to test<br><strong>Prevention:</strong> Follow principle of least privilege, document all permissions</td>
+                <td>1. Check IAM policy allows required actions<br>2. Verify resource ARN in policy<br>3. Check for
+                    explicit Deny statements<br>4. Use IAM Policy Simulator to test<br><strong>Prevention:</strong>
+                    Follow principle of least privilege, document all permissions</td>
             </tr>
             <tr>
                 <td><strong>Secrets Exposed in Logs</strong></td>
                 <td>Credentials visible in application logs</td>
-                <td>1. Rotate exposed secrets immediately<br>2. Configure log masking/redaction<br>3. Use structured logging with secret filtering<br>4. Audit CloudWatch log groups<br><strong>Prevention:</strong> Use AWS Secrets Manager, never log sensitive data</td>
+                <td>1. Rotate exposed secrets immediately<br>2. Configure log masking/redaction<br>3. Use structured
+                    logging with secret filtering<br>4. Audit CloudWatch log groups<br><strong>Prevention:</strong> Use
+                    AWS Secrets Manager, never log sensitive data</td>
             </tr>
             <tr>
                 <td><strong>Security Scan Failures Block Deployment</strong></td>
                 <td>CI pipeline fails on vulnerability findings</td>
-                <td>1. Review severity levels (allow LOW/MEDIUM, block HIGH/CRITICAL)<br>2. Update vulnerable dependencies<br>3. Use vulnerability exceptions for false positives<br>4. Set up vulnerability tracking<br><strong>Prevention:</strong> Scan regularly, don't wait for deployment</td>
+                <td>1. Review severity levels (allow LOW/MEDIUM, block HIGH/CRITICAL)<br>2. Update vulnerable
+                    dependencies<br>3. Use vulnerability exceptions for false positives<br>4. Set up vulnerability
+                    tracking<br><strong>Prevention:</strong> Scan regularly, don't wait for deployment</td>
             </tr>
             <tr>
                 <td><strong>Compliance Drift</strong></td>
                 <td>Resources modified outside policy</td>
-                <td>1. Enable AWS Config for continuous monitoring<br>2. Use AWS Config Rules for compliance<br>3. Set up automated remediation<br>4. Review CloudTrail for unauthorized changes<br><strong>Prevention:</strong> Use SCPs, enforce IaC-only changes</td>
+                <td>1. Enable AWS Config for continuous monitoring<br>2. Use AWS Config Rules for compliance<br>3. Set
+                    up automated remediation<br>4. Review CloudTrail for unauthorized
+                    changes<br><strong>Prevention:</strong> Use SCPs, enforce IaC-only changes</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> Security can feel overwhelming! Focus on quick wins first: enable MFA, rotate credentials, scan containers, encrypt data at rest. Build security incrementally, one layer at a time.
+            <strong>🆘 Stuck?</strong> Security can feel overwhelming! Focus on quick wins first: enable MFA, rotate
+            credentials, scan containers, encrypt data at rest. Build security incrementally, one layer at a time.
         </blockquote>
 
         <div class="page-break"></div>
@@ -3419,9 +3370,13 @@ graph TB
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>API Gateway:</strong> <a href="https://docs.aws.amazon.com/apigateway/" target="_blank">AWS API Gateway Documentation</a> <em>(Official)</em></li>
-            <li><strong>DynamoDB:</strong> <a href="https://docs.aws.amazon.com/dynamodb/" target="_blank">AWS DynamoDB Documentation</a> <em>(Official)</em></li>
-            <li><strong>Lambda:</strong> <a href="https://www.youtube.com/results?search_query=aws+lambda+tutorial+for+beginners" target="_blank">AWS Lambda Tutorials</a> <em>(Various)</em></li>
+            <li><strong>API Gateway:</strong> <a href="https://docs.aws.amazon.com/apigateway/" target="_blank">AWS API
+                    Gateway Documentation</a> <em>(Official)</em></li>
+            <li><strong>DynamoDB:</strong> <a href="https://docs.aws.amazon.com/dynamodb/" target="_blank">AWS DynamoDB
+                    Documentation</a> <em>(Official)</em></li>
+            <li><strong>Lambda:</strong> <a
+                    href="https://www.youtube.com/results?search_query=aws+lambda+tutorial+for+beginners"
+                    target="_blank">AWS Lambda Tutorials</a> <em>(Various)</em></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation</h4>
@@ -3435,7 +3390,8 @@ graph TB
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Extended CloudTask with AWS Lambda + DynamoDB microservice, enabling event-driven notifications and analytics."</em>
+            <em>"Extended CloudTask with AWS Lambda + DynamoDB microservice, enabling event-driven notifications and
+                analytics."</em>
         </div>
 
         <h4>🛠️ Common Pitfalls & Troubleshooting</h4>
@@ -3449,27 +3405,37 @@ graph TB
             <tr>
                 <td><strong>Lambda Cold Starts</strong></td>
                 <td>First invocation slow (3-5+ seconds)</td>
-                <td>1. Use provisioned concurrency for critical functions<br>2. Optimize package size (remove unused dependencies)<br>3. Use compiled languages (Go, Rust) for faster cold starts<br>4. Keep functions warm with scheduled pings<br><strong>Prevention:</strong> Design for eventual consistency, don't expect instant response</td>
+                <td>1. Use provisioned concurrency for critical functions<br>2. Optimize package size (remove unused
+                    dependencies)<br>3. Use compiled languages (Go, Rust) for faster cold starts<br>4. Keep functions
+                    warm with scheduled pings<br><strong>Prevention:</strong> Design for eventual consistency, don't
+                    expect instant response</td>
             </tr>
             <tr>
                 <td><strong>Lambda Timeout</strong></td>
                 <td>Function exceeds max execution time</td>
-                <td>1. Increase timeout limit (max 15 min)<br>2. Break into smaller functions<br>3. Use Step Functions for orchestration<br>4. Process in batches with SQS<br><strong>Prevention:</strong> Design for short-lived operations</td>
+                <td>1. Increase timeout limit (max 15 min)<br>2. Break into smaller functions<br>3. Use Step Functions
+                    for orchestration<br>4. Process in batches with SQS<br><strong>Prevention:</strong> Design for
+                    short-lived operations</td>
             </tr>
             <tr>
                 <td><strong>DynamoDB Throttling</strong></td>
                 <td><code>ProvisionedThroughputExceededException</code></td>
-                <td>1. Enable auto-scaling on table<br>2. Use exponential backoff retry<br>3. Batch write operations<br>4. Consider on-demand pricing<br><strong>Prevention:</strong> Monitor capacity metrics, load test before production</td>
+                <td>1. Enable auto-scaling on table<br>2. Use exponential backoff retry<br>3. Batch write
+                    operations<br>4. Consider on-demand pricing<br><strong>Prevention:</strong> Monitor capacity
+                    metrics, load test before production</td>
             </tr>
             <tr>
                 <td><strong>Event Loss in Event-Driven Systems</strong></td>
                 <td>Missing data or processing</td>
-                <td>1. Enable DLQ (Dead Letter Queue) for all event sources<br>2. Add retry logic with exponential backoff<br>3. Monitor DLQ depth<br>4. Implement idempotency keys<br><strong>Prevention:</strong> Design for at-least-once delivery, make functions idempotent</td>
+                <td>1. Enable DLQ (Dead Letter Queue) for all event sources<br>2. Add retry logic with exponential
+                    backoff<br>3. Monitor DLQ depth<br>4. Implement idempotency keys<br><strong>Prevention:</strong>
+                    Design for at-least-once delivery, make functions idempotent</td>
             </tr>
         </table>
 
         <blockquote>
-            <strong>🆘 Stuck?</strong> Serverless debugging can be tricky without local state. Use AWS X-Ray for distributed tracing, enable detailed CloudWatch logs, and test with SAM Local before deploying.
+            <strong>🆘 Stuck?</strong> Serverless debugging can be tricky without local state. Use AWS X-Ray for
+            distributed tracing, enable detailed CloudWatch logs, and test with SAM Local before deploying.
         </blockquote>
 
         <div class="page-break"></div>
@@ -3478,28 +3444,39 @@ graph TB
         <h3>📅 Timeline: Final Review (Week 34)</h3>
 
         <h4>Learning Objectives</h4>
-        <p>DevOps success requires strong communication, collaboration, and process management skills alongside technical expertise.</p>
+        <p>DevOps success requires strong communication, collaboration, and process management skills alongside
+            technical expertise.</p>
 
         <h4>Core Concepts</h4>
         <ul>
             <li><strong>Agile Methodologies:</strong> Scrum, Kanban, and lean development practices</li>
-            <li><strong>Documentation Culture:</strong> Runbooks, READMEs, architecture docs, and postmortem analysis</li>
-            <li><strong>Cross-functional Collaboration:</strong> Working effectively with development, QA, and business teams</li>
-            <li><strong>Incident Management:</strong> On-call procedures, escalation paths, and blameless postmortems</li>
+            <li><strong>Documentation Culture:</strong> Runbooks, READMEs, architecture docs, and postmortem analysis
+            </li>
+            <li><strong>Cross-functional Collaboration:</strong> Working effectively with development, QA, and business
+                teams</li>
+            <li><strong>Incident Management:</strong> On-call procedures, escalation paths, and blameless postmortems
+            </li>
         </ul>
 
         <h4>📚 Learning Resources</h4>
         <ul>
-            <li><strong>Guide:</strong> <a href="https://scrumguides.org/" target="_blank">Scrum Guide</a> <em>(Official framework)</em></li>
-            <li><strong>Course:</strong> <a href="https://www.atlassian.com/agile" target="_blank">Atlassian Agile Coach</a> <em>(Free)</em></li>
-            <li><strong>Documentation:</strong> <a href="https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/" target="_blank">Write the Docs Guide</a></li>
-            <li><strong>Culture:</strong> <a href="https://sre.google/sre-book/table-of-contents/" target="_blank">Google SRE Book</a> <em>(Free online)</em></li>
+            <li><strong>Guide:</strong> <a href="https://scrumguides.org/" target="_blank">Scrum Guide</a> <em>(Official
+                    framework)</em></li>
+            <li><strong>Course:</strong> <a href="https://www.atlassian.com/agile" target="_blank">Atlassian Agile
+                    Coach</a> <em>(Free)</em></li>
+            <li><strong>Documentation:</strong> <a
+                    href="https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/" target="_blank">Write the
+                    Docs Guide</a></li>
+            <li><strong>Culture:</strong> <a href="https://sre.google/sre-book/table-of-contents/"
+                    target="_blank">Google SRE Book</a> <em>(Free online)</em></li>
         </ul>
 
         <h4>🧩 CloudTask Implementation</h4>
         <ol>
-            <li><strong>Agile Planning:</strong> Implement sprint planning with user stories and acceptance criteria</li>
-            <li><strong>Documentation:</strong> Create comprehensive runbooks, API documentation, and architecture diagrams</li>
+            <li><strong>Agile Planning:</strong> Implement sprint planning with user stories and acceptance criteria
+            </li>
+            <li><strong>Documentation:</strong> Create comprehensive runbooks, API documentation, and architecture
+                diagrams</li>
             <li><strong>Incident Response:</strong> Develop incident response procedures and postmortem templates</li>
             <li><strong>Knowledge Sharing:</strong> Conduct technical presentations and create learning materials</li>
             <li><strong>Portfolio Creation:</strong> Write blog posts or case studies about your CloudTask journey</li>
@@ -3509,7 +3486,8 @@ graph TB
 
         <div class="achievement">
             ✅ <strong>Achievement:</strong><br>
-            <em>"Led agile development practices, created comprehensive technical documentation, and established incident response procedures improving team efficiency by 40%."</em>
+            <em>"Led agile development practices, created comprehensive technical documentation, and established
+                incident response procedures improving team efficiency by 40%."</em>
         </div>
 
         <div class="page-break"></div>
@@ -3522,7 +3500,8 @@ graph TB
             <li><strong>Portfolio Optimization:</strong> Ensure all CloudTask components are production-ready</li>
             <li><strong>Documentation Excellence:</strong> Create compelling case studies and technical blog posts</li>
             <li><strong>Career Preparation:</strong> Resume updates, interview preparation, and networking</li>
-            <li><strong>Advanced Features:</strong> Chaos engineering, stress testing, and observability enhancements</li>
+            <li><strong>Advanced Features:</strong> Chaos engineering, stress testing, and observability enhancements
+            </li>
         </ul>
 
         <h4>Key Deliverables</h4>
@@ -3530,7 +3509,8 @@ graph TB
             <li><strong>Technical Blog/Case Study:</strong> Document your complete DevOps journey</li>
             <li><strong>Demo Video:</strong> Create professional presentation of CloudTask architecture</li>
             <li><strong>Resume Update:</strong> Incorporate all new skills and achievements</li>
-            <li><strong>Interview Preparation:</strong> Practice explaining technical decisions and troubleshooting scenarios</li>
+            <li><strong>Interview Preparation:</strong> Practice explaining technical decisions and troubleshooting
+                scenarios</li>
         </ul>
 
         <h4>Optional Advanced Topics (Month 9)</h4>
@@ -3541,7 +3521,8 @@ graph TB
             <li><strong>Edge Cases:</strong> Address real-world scenarios and production challenges</li>
         </ul>
 
-        <p><strong>Note:</strong> This buffer period is crucial for ensuring your CloudTask project demonstrates true production-readiness and professional polish.</p>
+        <p><strong>Note:</strong> This buffer period is crucial for ensuring your CloudTask project demonstrates true
+            production-readiness and professional polish.</p>
 
         <div class="page-break"></div>
 
@@ -3553,7 +3534,9 @@ graph TB
         <ol>
             <li><strong>Professional Summary (3-4 lines):</strong>
                 <ul>
-                    <li>Example: <em>"DevOps Engineer with expertise in AWS, Kubernetes, and CI/CD automation. Designed and deployed production-grade infrastructure serving 1000+ users with 99.9% uptime. Reduced deployment time by 90% through automated pipelines and GitOps workflows."</em></li>
+                    <li>Example: <em>"DevOps Engineer with expertise in AWS, Kubernetes, and CI/CD automation. Designed
+                            and deployed production-grade infrastructure serving 1000+ users with 99.9% uptime. Reduced
+                            deployment time by 90% through automated pipelines and GitOps workflows."</em></li>
                 </ul>
             </li>
             <li><strong>Technical Skills Section:</strong>
@@ -3570,15 +3553,21 @@ graph TB
             </li>
             <li><strong>Projects Section (Most Important!):</strong>
                 <ul>
-                    <li><strong>CloudTask - Production SaaS Platform</strong> | <a href="#">GitHub</a> | <a href="#">Live Demo</a>
+                    <li><strong>CloudTask - Production SaaS Platform</strong> | <a href="#">GitHub</a> | <a
+                            href="#">Live Demo</a>
                         <ul>
-                            <li>Architected scalable AWS infrastructure using Terraform (VPC, EKS, RDS, ALB) serving 1000+ users</li>
+                            <li>Architected scalable AWS infrastructure using Terraform (VPC, EKS, RDS, ALB) serving
+                                1000+ users</li>
                             <li>Implemented GitOps workflow with ArgoCD for automated Kubernetes deployments</li>
-                            <li>Built CI/CD pipeline with GitHub Actions including automated testing, security scanning, and canary deployments</li>
-                            <li>Achieved 99.9% uptime through Prometheus/Grafana monitoring with custom SLOs and alerting</li>
+                            <li>Built CI/CD pipeline with GitHub Actions including automated testing, security scanning,
+                                and canary deployments</li>
+                            <li>Achieved 99.9% uptime through Prometheus/Grafana monitoring with custom SLOs and
+                                alerting</li>
                             <li>Reduced deployment time from 2 hours to 10 minutes (90% improvement)</li>
-                            <li>Implemented comprehensive security: container scanning, IAM least-privilege, encrypted data at rest/transit</li>
-                            <li><strong>Tech Stack:</strong> AWS EKS, Terraform, Docker, Kubernetes, ArgoCD, GitHub Actions, Prometheus, Grafana</li>
+                            <li>Implemented comprehensive security: container scanning, IAM least-privilege, encrypted
+                                data at rest/transit</li>
+                            <li><strong>Tech Stack:</strong> AWS EKS, Terraform, Docker, Kubernetes, ArgoCD, GitHub
+                                Actions, Prometheus, Grafana</li>
                         </ul>
                     </li>
                 </ul>
@@ -3586,7 +3575,8 @@ graph TB
             <li><strong>Professional Experience (if applicable):</strong>
                 <ul>
                     <li>Use STAR method: Situation, Task, Action, Result</li>
-                    <li>Quantify achievements: "Reduced costs by 40%", "Improved deployment frequency from weekly to daily"</li>
+                    <li>Quantify achievements: "Reduced costs by 40%", "Improved deployment frequency from weekly to
+                        daily"</li>
                 </ul>
             </li>
             <li><strong>Certifications:</strong>
@@ -3609,22 +3599,28 @@ graph TB
             </tr>
             <tr>
                 <td><strong>Resume Creation</strong></td>
-                <td>• Write 3 versions: Junior, Mid-level, Senior-focused<br>• Get feedback from 5+ DevOps professionals<br>• Use ATS-friendly format (no fancy graphics)</td>
+                <td>• Write 3 versions: Junior, Mid-level, Senior-focused<br>• Get feedback from 5+ DevOps
+                    professionals<br>• Use ATS-friendly format (no fancy graphics)</td>
                 <td>10 hours</td>
             </tr>
             <tr>
                 <td><strong>LinkedIn Optimization</strong></td>
-                <td>• Professional headshot<br>• Compelling headline: "DevOps Engineer | AWS | Kubernetes | CI/CD"<br>• Detailed experience section matching resume<br>• Add CloudTask project with visuals<br>• Request recommendations from colleagues/mentors</td>
+                <td>• Professional headshot<br>• Compelling headline: "DevOps Engineer | AWS | Kubernetes | CI/CD"<br>•
+                    Detailed experience section matching resume<br>• Add CloudTask project with visuals<br>• Request
+                    recommendations from colleagues/mentors</td>
                 <td>5 hours</td>
             </tr>
             <tr>
                 <td><strong>Portfolio Finalization</strong></td>
-                <td>• Clean up GitHub repos (remove test code)<br>• Write comprehensive READMEs with architecture diagrams<br>• Record 5-minute demo video of CloudTask<br>• Create portfolio website (GitHub Pages)</td>
+                <td>• Clean up GitHub repos (remove test code)<br>• Write comprehensive READMEs with architecture
+                    diagrams<br>• Record 5-minute demo video of CloudTask<br>• Create portfolio website (GitHub Pages)
+                </td>
                 <td>15 hours</td>
             </tr>
             <tr>
                 <td><strong>Interview Prep</strong></td>
-                <td>• Prepare 20 common DevOps questions<br>• Practice whiteboard architecture design<br>• Rehearse CloudTask walkthrough (5 minutes, 15 minutes, 30 minutes versions)</td>
+                <td>• Prepare 20 common DevOps questions<br>• Practice whiteboard architecture design<br>• Rehearse
+                    CloudTask walkthrough (5 minutes, 15 minutes, 30 minutes versions)</td>
                 <td>10 hours</td>
             </tr>
         </table>
@@ -3685,8 +3681,10 @@ graph TB
         <blockquote>
             <strong>Subject:</strong> DevOps Engineer seeking advice about [Company Name]<br><br>
             Hi [Name],<br><br>
-            I noticed you're a DevOps Engineer at [Company]. I'm currently transitioning into DevOps and recently completed a production-grade project (CloudTask) involving AWS, Kubernetes, and CI/CD automation.<br><br>
-            I'd love to learn about your experience at [Company] and any advice for someone applying to DevOps roles. Would you be open to a brief 15-minute call?<br><br>
+            I noticed you're a DevOps Engineer at [Company]. I'm currently transitioning into DevOps and recently
+            completed a production-grade project (CloudTask) involving AWS, Kubernetes, and CI/CD automation.<br><br>
+            I'd love to learn about your experience at [Company] and any advice for someone applying to DevOps roles.
+            Would you be open to a brief 15-minute call?<br><br>
             Here's my project: [GitHub link]<br><br>
             Thanks for considering!<br>
             [Your Name]
@@ -3752,15 +3750,23 @@ graph TB
             </tr>
             <tr>
                 <td>"Tell me about a time you faced a major production outage."</td>
-                <td><strong>S:</strong> Database connection failures in CloudTask<br><strong>T:</strong> Restore service within 30 minutes<br><strong>A:</strong> Checked logs, increased connection pool, added health checks<br><strong>R:</strong> Restored in 15 minutes, implemented monitoring to prevent recurrence</td>
+                <td><strong>S:</strong> Database connection failures in CloudTask<br><strong>T:</strong> Restore service
+                    within 30 minutes<br><strong>A:</strong> Checked logs, increased connection pool, added health
+                    checks<br><strong>R:</strong> Restored in 15 minutes, implemented monitoring to prevent recurrence
+                </td>
             </tr>
             <tr>
                 <td>"Describe a time you disagreed with a team member."</td>
-                <td><strong>S:</strong> Debate over monolith vs microservices for CloudTask<br><strong>T:</strong> Make architecture decision<br><strong>A:</strong> Researched trade-offs, created comparison doc, discussed pros/cons<br><strong>R:</strong> Agreed on hybrid approach, documented decision rationale</td>
+                <td><strong>S:</strong> Debate over monolith vs microservices for CloudTask<br><strong>T:</strong> Make
+                    architecture decision<br><strong>A:</strong> Researched trade-offs, created comparison doc,
+                    discussed pros/cons<br><strong>R:</strong> Agreed on hybrid approach, documented decision rationale
+                </td>
             </tr>
             <tr>
                 <td>"How do you handle learning new technologies?"</td>
-                <td><strong>S:</strong> Never used Kubernetes before CloudTask project<br><strong>T:</strong> Deploy production application to EKS<br><strong>A:</strong> Followed roadmap, built labs, asked community questions<br><strong>R:</strong> Successfully deployed to production in 4 weeks</td>
+                <td><strong>S:</strong> Never used Kubernetes before CloudTask project<br><strong>T:</strong> Deploy
+                    production application to EKS<br><strong>A:</strong> Followed roadmap, built labs, asked community
+                    questions<br><strong>R:</strong> Successfully deployed to production in 4 weeks</td>
             </tr>
         </table>
 
@@ -3806,11 +3812,15 @@ graph TB
         <h4>Negotiation Script</h4>
         <blockquote>
             <strong>When Asked About Salary Expectations:</strong><br>
-            "I'm looking for a competitive offer that reflects my skills and the value I'll bring. Based on my research and the scope of this role, I'm targeting [X-Y range]. However, I'm flexible and would love to hear what you have budgeted for this position."<br><br>
-            
+            "I'm looking for a competitive offer that reflects my skills and the value I'll bring. Based on my research
+            and the scope of this role, I'm targeting [X-Y range]. However, I'm flexible and would love to hear what you
+            have budgeted for this position."<br><br>
+
             <strong>When Receiving an Offer:</strong><br>
-            "Thank you for the offer! I'm excited about the opportunity. I'd like to take a day to review the details. Based on my research and comparable roles, I was expecting something closer to [Higher Number]. Is there flexibility on salary?"<br><br>
-            
+            "Thank you for the offer! I'm excited about the opportunity. I'd like to take a day to review the details.
+            Based on my research and comparable roles, I was expecting something closer to [Higher Number]. Is there
+            flexibility on salary?"<br><br>
+
             <strong>Counter-Offer Tips:</strong><br>
             • Always negotiate (most candidates don't!)<br>
             • Ask for 10-20% more than initial offer<br>
@@ -3875,14 +3885,17 @@ graph TB
         </ol>
 
         <blockquote>
-            <strong>🎯 Success Metric:</strong> If you apply to 50 jobs with a strong portfolio, you should get 10-15 interviews and 2-3 offers. If not, revisit your resume and networking strategy.
+            <strong>🎯 Success Metric:</strong> If you apply to 50 jobs with a strong portfolio, you should get 10-15
+            interviews and 2-3 offers. If not, revisit your resume and networking strategy.
         </blockquote>
 
         <div class="page-break"></div>
 
         <h2 id="final-thoughts">🎯 Final Thoughts & Next Steps</h2>
 
-        <p>Congratulations on completing this comprehensive DevOps learning roadmap! You've built <strong>CloudTask</strong> from the ground up, mastering everything from infrastructure automation to production monitoring. This journey has equipped you with:</p>
+        <p>Congratulations on completing this comprehensive DevOps learning roadmap! You've built
+            <strong>CloudTask</strong> from the ground up, mastering everything from infrastructure automation to
+            production monitoring. This journey has equipped you with:</p>
 
         <h3>Technical Mastery</h3>
         <ul>
@@ -3909,7 +3922,9 @@ graph TB
             <li>✅ Community engagement and networking</li>
         </ul>
 
-        <p><strong>Your CloudTask project is now a powerful demonstration of enterprise-level DevOps capabilities. Use it as the foundation for your career advancement, whether you're seeking your first DevOps role or advancing to senior positions.</strong></p>
+        <p><strong>Your CloudTask project is now a powerful demonstration of enterprise-level DevOps capabilities. Use
+                it as the foundation for your career advancement, whether you're seeking your first DevOps role or
+                advancing to senior positions.</strong></p>
 
         <h3>Recommended Next Steps:</h3>
         <ol>
@@ -3920,11 +3935,13 @@ graph TB
             <li><strong>Stay Current:</strong> Keep learning new tools and industry trends</li>
         </ol>
 
-        <p><strong>Remember:</strong> DevOps is a journey of continuous improvement. Keep building, learning, and sharing your knowledge with the community!</p>
+        <p><strong>Remember:</strong> DevOps is a journey of continuous improvement. Keep building, learning, and
+            sharing your knowledge with the community!</p>
 
         <hr style="margin: 40px 0;">
 
         <p style="text-align: center; font-size: 1.5em;"><em>Happy DevOps-ing! </em></p>
     </div>
 </body>
+
 </html>
