@@ -663,16 +663,53 @@ function debounce(func, wait) {
 // Function to make mermaid diagrams responsive
 function makeMermaidResponsive() {
   const diagrams = document.querySelectorAll('.mermaid');
+  const isMobile = window.innerWidth <= 768;
+  const isSmallMobile = window.innerWidth <= 480;
+  
   diagrams.forEach(diagram => {
-    // Ensure diagram has proper overflow handling
+    // Always ensure diagram has proper overflow handling
     diagram.style.overflow = 'auto';
-    diagram.style.maxWidth = '100%';
+    diagram.style.overflowY = 'hidden'; // Prevent vertical scrollbars
+    diagram.style.webkitOverflowScrolling = 'touch'; // Smooth scrolling on iOS
+    
+    // Mobile-specific styles
+    if (isMobile) {
+      // For very small screens
+      if (isSmallMobile) {
+        // Container styles - make it full width but with proper overflow
+        diagram.style.width = '100%';
+        diagram.style.maxWidth = '100%';
+        diagram.style.margin = '20px 0';
+        diagram.style.position = 'relative';
+        diagram.style.left = '0';
+        diagram.style.transform = 'none';
+      } else {
+        diagram.style.width = '100%';
+        diagram.style.maxWidth = '100%';
+        diagram.style.margin = '20px 0';
+        diagram.style.padding = '0';
+      }
+    } else {
+      diagram.style.maxWidth = '100%';
+    }
     
     // Find SVG within the diagram
     const svg = diagram.querySelector('svg');
     if (svg) {
-      svg.style.maxWidth = '100%';
+      // Reset min-width that might cause overflow issues
+      svg.style.minWidth = '0';
       svg.style.height = 'auto';
+      
+      // Ensure SVG is properly sized
+      if (isSmallMobile) {
+        // Don't restrict width on small mobile to allow scrolling horizontally if needed
+        svg.style.maxWidth = 'none';
+        svg.style.margin = '0';
+        svg.style.display = 'block';
+      } else {
+        // On larger screens, constrain to container
+        svg.style.maxWidth = '100%';
+      }
       
       // Make sure viewBox is set for proper scaling
       if (!svg.getAttribute('viewBox') && svg.getAttribute('width') && svg.getAttribute('height')) {
@@ -1174,7 +1211,7 @@ window.addEventListener('resize', debounce(() => {
 }, 250));
 
 // Wrap all tables in responsive wrapper for mobile scrolling
-document.addEventListener('DOMContentLoaded', function () {
+function wrapTablesForResponsiveness() {
   const tables = document.querySelectorAll('table');
   tables.forEach(table => {
     // Check if table is not already wrapped
@@ -1185,6 +1222,14 @@ document.addEventListener('DOMContentLoaded', function () {
       wrapper.appendChild(table);
     }
   });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Initial wrap of tables
+  wrapTablesForResponsiveness();
+  
+  // Re-check for tables after any content updates (like after diagrams load)
+  setTimeout(wrapTablesForResponsiveness, 2000);
 });
 
 // Reading Progress Bar with weighted phases

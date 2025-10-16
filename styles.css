@@ -331,14 +331,14 @@ pre code {
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
 	margin: 24px 0;
+	position: relative;
 }
 
 table {
 	width: 100%;
-	min-width: 600px;
 	border-collapse: separate;
 	border-spacing: 0;
-	margin: 20px 0;
+	margin: 0; /* Changed from 20px to avoid double margins with wrapper */
 	background: #000000;
 	border-radius: 8px;
 	overflow: hidden;
@@ -1141,8 +1141,8 @@ hr::before {
 	
 	/* Improved sidebar for mobile */
 	.sidebar {
-		width: 85%;
-		max-width: 320px;
+		width: 280px;
+		max-width: 85%;
 		left: -100%;
 		z-index: 1000;
 		transform: translateX(0);
@@ -1201,12 +1201,17 @@ hr::before {
 	.table-wrapper {
 		margin: 20px -16px;
 		border-radius: 0;
+		width: calc(100% + 32px);
+		position: relative;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
 	}
 
 	table {
 		font-size: 0.8em;
-		min-width: 100%;
+		min-width: 600px; /* Keep min-width to ensure horizontal scroll works */
 		border-radius: 0;
+		margin: 0; /* Remove margins */
 	}
 
 	th {
@@ -1440,12 +1445,13 @@ hr::before {
 	}
 
 	.sidebar {
-		width: 90vw;
-		left: -90vw;
+		width: 280px;
+		max-width: 85%;
+		left: -100%;
 	}
 
 	.sidebar.closed {
-		left: -90vw;
+		left: -100%;
 	}
 
 	.modal-content {
@@ -1457,14 +1463,19 @@ hr::before {
 		margin: 20px -12px;
 		padding: 8px;
 		font-size: 10px !important;
+		overflow-x: auto;
+		width: 100%;
 	}
 
 	.mermaid svg {
-		min-width: 500px;
+		min-width: 0;
+		max-width: 100%;
 	}
 
 	.table-wrapper {
 		margin: 20px -12px;
+		overflow-x: auto;
+		width: 100%;
 	}
 }
 

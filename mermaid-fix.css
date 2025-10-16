@@ -3,10 +3,12 @@
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     margin: 30px 0;
     padding-bottom: 10px;
     display: block;
     position: relative;
+    box-sizing: border-box; /* Ensure padding doesn't add to width */
 }
 
 .mermaid svg {
@@ -27,6 +29,19 @@
 @media (max-width: 768px) {
     .mermaid {
         font-size: 14px;
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        width: calc(100% + 32px);
+        max-width: none;
+        position: relative;
+    }
+    
+    /* Constrain SVG width */
+    .mermaid svg {
+        max-width: calc(100% - 32px); /* Prevent overflow by accounting for padding */
+        transform: translateX(16px); /* Center the diagram */
     }
     
     /* Additional support for clusters and other mermaid elements */
@@ -42,9 +57,19 @@
 @media (max-width: 480px) {
     .mermaid {
         font-size: 12px;
-        margin: 20px -16px;
-        padding: 0 16px;
-        width: calc(100% + 32px);
+        margin: 20px 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        position: relative;
+    }
+    
+    .mermaid svg {
+        max-width: none; /* Allow diagram to be its natural width */
+        min-width: 0; /* Override min-width from other styles */
+        margin: 0 auto; /* Center the diagram */
+        transform: none; /* Reset transform from larger screens */
     }
     
     /* Ensure tables are also responsive */
@@ -52,8 +77,11 @@
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         margin: 15px -16px;
-        padding: 0 16px;
-        width: calc(100% + 32px);
+        padding: 0;
+        width: 100vw;
+        left: 50%;
+        transform: translateX(-50%);
+        position: relative;
     }
     
     /* Enhance readability of progress indicators on very small devices */
