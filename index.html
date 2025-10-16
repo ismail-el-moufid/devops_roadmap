@@ -178,46 +178,6 @@
                     </li>
                 </ol>
 
-                <h3>💸 "AWS Costs Are Too High"</h3>
-                <h4>Problem: Your monthly bill is exceeding budget</h4>
-                <ol>
-                    <li><strong>Immediate Actions:</strong>
-                        <ul>
-                            <li><strong>Stop Everything:</strong> Go to EC2, RDS, and STOP all running instances</li>
-                            <li><strong>Check Cost Explorer:</strong> AWS Console → Billing → Cost Explorer to see
-                                what's expensive</li>
-                            <li><strong>Set Budget Alert:</strong> AWS Budgets → Create alert at $10, $25, $50</li>
-                        </ul>
-                    </li>
-                    <li><strong>Common Cost Culprits:</strong>
-                        <ul>
-                            <li><strong>NAT Gateway:</strong> $32/month per gateway → Use single NAT or VPN instead</li>
-                            <li><strong>Forgotten EC2:</strong> Running instances 24/7 → Use
-                                <code>terraform destroy</code> daily</li>
-                            <li><strong>RDS Multi-AZ:</strong> Doubles cost → Use single-AZ for learning</li>
-                            <li><strong>Data Transfer:</strong> Downloading large amounts → Stay within same region</li>
-                            <li><strong>EBS Snapshots:</strong> Old snapshots pile up → Delete unused snapshots</li>
-                        </ul>
-                    </li>
-                    <li><strong>Free/Cheap Alternatives:</strong>
-                        <ul>
-                            <li><strong>Can't afford EKS ($75/month)?</strong> → Use Minikube locally or k3s on single
-                                EC2</li>
-                            <li><strong>RDS too expensive?</strong> → PostgreSQL in Docker on EC2</li>
-                            <li><strong>Need persistent lab?</strong> → Use LocalStack for AWS simulation</li>
-                            <li><strong>Alternative cloud:</strong> Google Cloud ($300 free credits for 90 days)</li>
-                        </ul>
-                    </li>
-                    <li><strong>Cost-Saving Habits:</strong>
-                        <ul>
-                            <li>Tag everything: <code>Environment:Learning</code></li>
-                            <li>Create/destroy daily with Terraform</li>
-                            <li>Use spot instances for non-critical workloads (70% cheaper)</li>
-                            <li>Always check AWS Free Tier limits</li>
-                        </ul>
-                    </li>
-                </ol>
-
                 <h3>😫 "I'm Overwhelmed by Too Many Tools"</h3>
                 <h4>Problem: Feeling lost in the DevOps ecosystem</h4>
                 <ol>

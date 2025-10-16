@@ -1154,9 +1154,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function hideLoadingScreen() {
   const loadingScreen = document.getElementById('loading-screen');
   if (loadingScreen) {
+    // Add fade-out class to trigger CSS transition
     loadingScreen.classList.add('fade-out');
+    // Ensure it's removed from DOM after transition
     setTimeout(() => {
       loadingScreen.style.display = 'none';
+      document.body.classList.remove('loading');
     }, 500);
   }
 }
@@ -1185,11 +1188,13 @@ function checkAndHideLoader() {
   // Wait a bit for Mermaid to complete
   setTimeout(() => {
     const mermaidDiagrams = document.querySelectorAll('.mermaid');
+    // Consider diagrams rendered if they have SVG or if device is mobile (for better mobile UX)
+    const isMobile = window.innerWidth <= 768;
     const allRendered = Array.from(mermaidDiagrams).every(diagram => {
-      return diagram.querySelector('svg') !== null;
+      return diagram.querySelector('svg') !== null || isMobile;
     });
 
-    if (allRendered || mermaidDiagrams.length === 0) {
+    if (allRendered || mermaidDiagrams.length === 0 || isMobile) {
       hideLoadingScreen();
     } else {
       // Check again in 500ms
@@ -1198,10 +1203,12 @@ function checkAndHideLoader() {
   }, 500);
 }
 
-// Fallback: Hide loading screen after max 10 seconds
+// Fallback: Hide loading screen after max time (shorter on mobile)
 setTimeout(() => {
+  const isMobile = window.innerWidth <= 768;
+  // Use shorter timeout on mobile for better UX
   hideLoadingScreen();
-}, 10000);
+}, window.innerWidth <= 768 ? 5000 : 10000);
 
 // Also hide on window load as final fallback
 window.addEventListener('load', () => {
@@ -1210,12 +1217,24 @@ window.addEventListener('load', () => {
   makeMermaidResponsive();
   fixProgressIndicatorsForMobile();
   
-  // Then delayed execution to ensure everything is properly handled
-  setTimeout(() => {
-    hideLoadingScreen();
-    makeMermaidResponsive();
-    wrapTablesForResponsiveness();
-  }, 1000);
+  // Handle loading screen differently on mobile vs desktop
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // On mobile, hide loading screen quickly for better UX
+    setTimeout(() => {
+      hideLoadingScreen();
+      makeMermaidResponsive();
+      wrapTablesForResponsiveness();
+    }, 500);
+  } else {
+    // On desktop, give more time for diagrams to render
+    setTimeout(() => {
+      hideLoadingScreen();
+      makeMermaidResponsive();
+      wrapTablesForResponsiveness();
+    }, 1000);
+  }
 });
 
 // Fix progress indicators and responsiveness on resize
