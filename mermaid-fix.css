@@ -84,6 +84,20 @@
         display: block;
     }
     
+    /* Fix for all tables */
+    table {
+        width: 100%;
+        min-width: 0 !important;
+        table-layout: fixed;
+        font-size: 0.75em;
+    }
+    
+    table th, table td {
+        word-break: break-word;
+        word-wrap: break-word;
+        padding: 4px;
+    }
+    
     /* Enhance readability of progress indicators on very small devices */
     #reading-progress-bar {
         height: 3px !important;

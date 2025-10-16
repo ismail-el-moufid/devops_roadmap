@@ -1226,7 +1226,7 @@ window.addEventListener('load', () => {
       hideLoadingScreen();
       makeMermaidResponsive();
       wrapTablesForResponsiveness();
-      fixAssessmentTable();
+      fixAllTablesForMobile();
     }, 500);
   } else {
     // On desktop, give more time for diagrams to render
@@ -1234,7 +1234,7 @@ window.addEventListener('load', () => {
       hideLoadingScreen();
       makeMermaidResponsive();
       wrapTablesForResponsiveness();
-      fixAssessmentTable();
+      fixAllTablesForMobile();
     }, 1000);
   }
 });
@@ -1244,12 +1244,14 @@ window.addEventListener('resize', debounce(() => {
   fixProgressIndicatorsForMobile();
   wrapTablesForResponsiveness();
   makeMermaidResponsive();
-  fixAssessmentTable();
+  fixAllTablesForMobile();
 }, 250));
 
 // Wrap all tables in responsive wrapper for mobile scrolling
 function wrapTablesForResponsiveness() {
   const tables = document.querySelectorAll('table');
+  const isMobile = window.innerWidth <= 768;
+  
   tables.forEach(table => {
     // Check if table is not already wrapped
     if (!table.parentElement.classList.contains('table-wrapper')) {
@@ -1258,14 +1260,14 @@ function wrapTablesForResponsiveness() {
       table.parentNode.insertBefore(wrapper, table);
       wrapper.appendChild(table);
       
-      // Special handling for assessment table
-      if (table.id === 'assessment-table') {
-        table.style.minWidth = '0';
-        table.style.width = '100%';
+      // Reset any existing inline styles that might interfere
+      table.style.minWidth = '0';
+      table.style.width = '100%';
+      
+      // Mobile specific styles
+      if (isMobile) {
         table.style.tableLayout = 'fixed';
       } else {
-        // For other tables
-        table.style.minWidth = 'auto';
         table.style.tableLayout = 'auto';
       }
       
@@ -1273,47 +1275,69 @@ function wrapTablesForResponsiveness() {
       wrapper.style.overflowX = 'auto';
       wrapper.style.webkitOverflowScrolling = 'touch';
       wrapper.style.width = '100%';
+      wrapper.style.maxWidth = '100%';
       wrapper.style.display = 'block';
     }
   });
 }
 
-function fixAssessmentTable() {
-  const assessmentTable = document.getElementById('assessment-table');
-  if (assessmentTable) {
+function fixAllTablesForMobile() {
+  const allTables = document.querySelectorAll('table');
+  const isMobile = window.innerWidth <= 480;
+  
+  allTables.forEach(table => {
     // Check if already wrapped
-    if (assessmentTable.parentElement.classList.contains('table-wrapper')) {
-      const wrapper = assessmentTable.parentElement;
-      wrapper.id = 'assessment-table-wrapper';
+    if (table.parentElement.classList.contains('table-wrapper')) {
+      const wrapper = table.parentElement;
       
-      // For mobile devices
-      if (window.innerWidth <= 480) {
-        assessmentTable.style.width = '100%';
-        assessmentTable.style.minWidth = '0';
-        assessmentTable.style.tableLayout = 'fixed';
+      // Reset min-width which could cause overflow
+      table.style.minWidth = '0';
+      
+      if (isMobile) {
+        // On mobile devices
+        table.style.width = '100%';
+        table.style.tableLayout = 'fixed';
         
-        // Make all cells smaller
-        const cells = assessmentTable.querySelectorAll('th, td');
+        // Make cells more compact
+        const cells = table.querySelectorAll('th, td');
         cells.forEach(cell => {
           cell.style.padding = '4px';
           cell.style.wordBreak = 'break-word';
-          cell.style.fontSize = '0.7em';
+          cell.style.fontSize = '0.75em';
+          cell.style.maxWidth = '100%';
         });
+        
+        // Handle specific tables that might need different handling
+        if (table.id === 'assessment-table') {
+          const cells = table.querySelectorAll('th, td');
+          cells.forEach(cell => {
+            cell.style.fontSize = '0.7em';
+          });
+        }
       }
     }
-  }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   // Initial wrap of tables
   wrapTablesForResponsiveness();
+  fixAllTablesForMobile();
   
   // Re-check for tables multiple times as content loads
-  setTimeout(wrapTablesForResponsiveness, 1000);
-  setTimeout(wrapTablesForResponsiveness, 2000);
   setTimeout(() => {
     wrapTablesForResponsiveness();
-    fixAssessmentTable();
+    fixAllTablesForMobile();
+  }, 1000);
+  
+  setTimeout(() => {
+    wrapTablesForResponsiveness();
+    fixAllTablesForMobile();
+  }, 2000);
+  
+  setTimeout(() => {
+    wrapTablesForResponsiveness();
+    fixAllTablesForMobile();
   }, 3000);
 });
 
