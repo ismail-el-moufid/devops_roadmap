@@ -1201,17 +1201,24 @@ setTimeout(() => {
 
 // Also hide on window load as final fallback
 window.addEventListener('load', () => {
+  // First immediate execution
+  wrapTablesForResponsiveness();
+  makeMermaidResponsive();
+  fixProgressIndicatorsForMobile();
+  
+  // Then delayed execution to ensure everything is properly handled
   setTimeout(() => {
     hideLoadingScreen();
     makeMermaidResponsive();
     wrapTablesForResponsiveness();
   }, 1000);
-  fixProgressIndicatorsForMobile();
 });
 
-// Fix progress indicators on resize
+// Fix progress indicators and responsiveness on resize
 window.addEventListener('resize', debounce(() => {
   fixProgressIndicatorsForMobile();
+  wrapTablesForResponsiveness();
+  makeMermaidResponsive();
 }, 250));
 
 // Wrap all tables in responsive wrapper for mobile scrolling
@@ -1224,6 +1231,18 @@ function wrapTablesForResponsiveness() {
       wrapper.className = 'table-wrapper';
       table.parentNode.insertBefore(wrapper, table);
       wrapper.appendChild(table);
+      
+      // Make sure min-width is removed
+      table.style.minWidth = 'auto';
+      
+      // Set table-layout to auto to allow cell resizing
+      table.style.tableLayout = 'auto';
+      
+      // Add proper overflow handling to wrapper
+      wrapper.style.overflowX = 'auto';
+      wrapper.style.webkitOverflowScrolling = 'touch';
+      wrapper.style.width = '100%';
+      wrapper.style.display = 'block';
     }
   });
 }
@@ -1232,8 +1251,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initial wrap of tables
   wrapTablesForResponsiveness();
   
-  // Re-check for tables after any content updates (like after diagrams load)
+  // Re-check for tables multiple times as content loads
+  setTimeout(wrapTablesForResponsiveness, 1000);
   setTimeout(wrapTablesForResponsiveness, 2000);
+  setTimeout(wrapTablesForResponsiveness, 5000);
 });
 
 // Reading Progress Bar with weighted phases

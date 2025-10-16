@@ -76,12 +76,11 @@
     .table-wrapper {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        margin: 15px -16px;
+        margin: 15px 0;
         padding: 0;
-        width: 100vw;
-        left: 50%;
-        transform: translateX(-50%);
+        width: 100%;
         position: relative;
+        display: block;
     }
     
     /* Enhance readability of progress indicators on very small devices */

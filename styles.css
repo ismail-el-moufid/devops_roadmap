@@ -332,6 +332,7 @@ pre code {
 	-webkit-overflow-scrolling: touch;
 	margin: 24px 0;
 	position: relative;
+	display: block;
 }
 
 table {
@@ -344,6 +345,7 @@ table {
 	overflow: hidden;
 	box-shadow: none;
 	border: 1px solid #2A2A2A;
+	table-layout: auto;
 }
 
 th {
@@ -1141,23 +1143,22 @@ hr::before {
 	
 	/* Improved sidebar for mobile */
 	.sidebar {
-		width: 280px;
-		max-width: 85%;
-		left: -100%;
+		width: 260px;
+		max-width: 80%;
+		left: -260px;
 		z-index: 1000;
-		transform: translateX(0);
-		transition: transform 0.3s ease;
+		transform: none;
+		transition: left 0.3s ease;
 		box-shadow: none;
 	}
 	
 	.sidebar.closed {
-		left: -100%;
-		transform: translateX(0);
+		left: -260px;
 	}
 	
 	/* Show sidebar properly on mobile */
 	body:not(.sidebar-closed) .sidebar {
-		transform: translateX(100%);
+		left: 0;
 		box-shadow: 0 0 20px rgba(0,0,0,0.5);
 	}
     
@@ -1445,13 +1446,13 @@ hr::before {
 	}
 
 	.sidebar {
-		width: 280px;
-		max-width: 85%;
-		left: -100%;
+		width: 260px;
+		max-width: 80%;
+		left: -260px;
 	}
 
 	.sidebar.closed {
-		left: -100%;
+		left: -260px;
 	}
 
 	.modal-content {
