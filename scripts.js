@@ -1226,6 +1226,7 @@ window.addEventListener('load', () => {
       hideLoadingScreen();
       makeMermaidResponsive();
       wrapTablesForResponsiveness();
+      fixAssessmentTable();
     }, 500);
   } else {
     // On desktop, give more time for diagrams to render
@@ -1233,6 +1234,7 @@ window.addEventListener('load', () => {
       hideLoadingScreen();
       makeMermaidResponsive();
       wrapTablesForResponsiveness();
+      fixAssessmentTable();
     }, 1000);
   }
 });
@@ -1242,6 +1244,7 @@ window.addEventListener('resize', debounce(() => {
   fixProgressIndicatorsForMobile();
   wrapTablesForResponsiveness();
   makeMermaidResponsive();
+  fixAssessmentTable();
 }, 250));
 
 // Wrap all tables in responsive wrapper for mobile scrolling
@@ -1255,11 +1258,16 @@ function wrapTablesForResponsiveness() {
       table.parentNode.insertBefore(wrapper, table);
       wrapper.appendChild(table);
       
-      // Make sure min-width is removed
-      table.style.minWidth = 'auto';
-      
-      // Set table-layout to auto to allow cell resizing
-      table.style.tableLayout = 'auto';
+      // Special handling for assessment table
+      if (table.id === 'assessment-table') {
+        table.style.minWidth = '0';
+        table.style.width = '100%';
+        table.style.tableLayout = 'fixed';
+      } else {
+        // For other tables
+        table.style.minWidth = 'auto';
+        table.style.tableLayout = 'auto';
+      }
       
       // Add proper overflow handling to wrapper
       wrapper.style.overflowX = 'auto';
@@ -1270,6 +1278,32 @@ function wrapTablesForResponsiveness() {
   });
 }
 
+function fixAssessmentTable() {
+  const assessmentTable = document.getElementById('assessment-table');
+  if (assessmentTable) {
+    // Check if already wrapped
+    if (assessmentTable.parentElement.classList.contains('table-wrapper')) {
+      const wrapper = assessmentTable.parentElement;
+      wrapper.id = 'assessment-table-wrapper';
+      
+      // For mobile devices
+      if (window.innerWidth <= 480) {
+        assessmentTable.style.width = '100%';
+        assessmentTable.style.minWidth = '0';
+        assessmentTable.style.tableLayout = 'fixed';
+        
+        // Make all cells smaller
+        const cells = assessmentTable.querySelectorAll('th, td');
+        cells.forEach(cell => {
+          cell.style.padding = '4px';
+          cell.style.wordBreak = 'break-word';
+          cell.style.fontSize = '0.7em';
+        });
+      }
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   // Initial wrap of tables
   wrapTablesForResponsiveness();
@@ -1277,7 +1311,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Re-check for tables multiple times as content loads
   setTimeout(wrapTablesForResponsiveness, 1000);
   setTimeout(wrapTablesForResponsiveness, 2000);
-  setTimeout(wrapTablesForResponsiveness, 5000);
+  setTimeout(() => {
+    wrapTablesForResponsiveness();
+    fixAssessmentTable();
+  }, 3000);
 });
 
 // Reading Progress Bar with weighted phases

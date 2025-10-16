@@ -521,7 +521,7 @@
                             NAT Gateway</td>
                         <td><strong>$120 - $180</strong><br>(HIGHEST COST)</td>
                         <td>• <strong>EKS control plane:</strong> $72/mo (unavoidable)<br>• Use t3.small workers instead
-                            (-$30/mo)<br>• Alternative: Use Minikube/k3s locally, deploy to EKS only for demos<br>•
+                            (-$30/mo)<br>• Alternative: Use Minikube/k3s locally or LocalStack for testing<br>• Deploy to EKS only for final portfolio demo<br>•
                             Delete cluster daily: <code>eksctl delete cluster</code><br>• Use Spot Instances for nodes
                             (-60%)</td>
                     </tr>
@@ -570,6 +570,7 @@
                 <h4>1. Aggressive Cost Cutting (Budget: $20-30/month)</h4>
                 <ul>
                     <li>✅ Use <strong>Minikube/k3s locally</strong> instead of EKS (saves $150/mo)</li>
+                    <li>✅ Use <strong>LocalStack</strong> for local AWS service testing (saves $50-100/mo)</li>
                     <li>✅ Deploy to EKS only for final portfolio demo (1 week = $40)</li>
                     <li>✅ Use <strong>Terraform destroy</strong> after each learning session</li>
                     <li>✅ Use AWS educate credits if you're a student (free credits)</li>
@@ -636,7 +637,7 @@
                 <h3>💳 Alternative: Cloud Provider Credits</h3>
                 <ul>
                     <li><strong>AWS Educate:</strong> $100-200 credits for students</li>
-                    <li><strong>GitHub Student Pack:</strong> Includes AWS credits + free services</li>
+                    <li><strong>GitHub Student Pack:</strong> Includes AWS credits + LocalStack Pro + free services</li>
                     <li><strong>AWS Activate:</strong> Up to $5,000 for startups</li>
                     <li><strong>Azure for Students:</strong> $100 credit + free services</li>
                     <li><strong>Google Cloud:</strong> $300 free credit for 90 days</li>
@@ -644,8 +645,7 @@
 
                 <blockquote>
                     <strong>⚠️ Important:</strong> The single biggest cost is <strong>EKS cluster control plane
-                        ($72/month)</strong>. Consider learning Kubernetes with Minikube locally and only spinning up
-                    EKS for your final portfolio demonstration.
+                        ($72/month)</strong>. Consider learning Kubernetes with Minikube locally and using LocalStack for AWS service testing. Only spin up EKS for your final portfolio demonstration.
                 </blockquote>
             </div>
         </div>
@@ -838,6 +838,7 @@
 
         <h3>💰 Financial Readiness Check</h3>
         <ul>
+            <li>Are you a student? GitHub Student Pack includes LocalStack Pro to minimize AWS costs</li>
             <li>Can you budget <strong>$50-100/month</strong> for AWS costs during intensive learning phases?</li>
             <li>Do you have <strong>$200-500</strong> available for optional certifications (AWS, Kubernetes)?</li>
             <li>Can you allocate <strong>10-15 hours/week</strong> consistently for 6-9 months?</li>

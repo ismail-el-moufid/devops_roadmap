@@ -335,6 +335,11 @@ pre code {
 	display: block;
 }
 
+/* Special wrapper for assessment table */
+#assessment-table-wrapper.table-wrapper {
+	overflow-x: visible;
+}
+
 table {
 	width: 100%;
 	border-collapse: separate;
@@ -409,6 +414,11 @@ tbody tr:hover td {
 
 #assessment-table td {
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#assessment-table {
+	width: 100%;
+	table-layout: fixed;
 }
 
 .toc {
@@ -1445,15 +1455,27 @@ hr::before {
 	th, td {
 		padding: 6px;
 	}
+	
+	#assessment-table {
+		width: 100%;
+		table-layout: fixed;
+		font-size: 0.7em;
+	}
+	
+	#assessment-table th,
+	#assessment-table td {
+		padding: 4px;
+		word-wrap: break-word;
+	}
 
 	.sidebar {
-		width: 260px;
-		max-width: 85%;
-		left: -100%;
+		width: 300px;
+		max-width: 90%;
+		left: -300px;
 	}
 
 	.sidebar.closed {
-		left: -100%;
+		left: -300px;
 	}
 
 	.modal-content {
@@ -1464,22 +1486,32 @@ hr::before {
 	/* Improved loading screen for mobile */
 	#loading-screen {
 		padding: 16px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
 	}
 	
 	.loader {
 		width: 32px;
 		height: 32px;
+		margin: 0 auto;
 	}
 	
 	.loading-text {
 		font-size: 0.95em;
 		margin-top: 16px;
+		width: 100%;
+		text-align: center;
 	}
 	
 	.loading-subtext {
 		font-size: 0.8em;
 		margin-top: 6px;
 		padding: 0 10px;
+		width: 100%;
+		text-align: center;
 	}
 
 	.mermaid {
