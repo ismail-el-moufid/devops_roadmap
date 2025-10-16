@@ -163,7 +163,7 @@ async function loadCharts() {
         },
         {
           "id": "timeline",
-          "definition": "flowchart LR\n    subgraph \"DevOps Learning Timeline (10-15 hrs/week)\"\n        direction TB\n        \n        subgraph \"Fundamentals\"\n            p1[\"Phase 1: Fundamentals & Prerequisites<br/>(1 week)\"] -.-> p2[\"Phase 2: Git & Version Control<br/>(1 week)\"] \n        end\n        \n        subgraph \"Infrastructure\"\n            p3[\"Phase 3: Linux Basics<br/>(1 week)\"] -.-> p4[\"Phase 4: AWS & Networking<br/>(9 weeks)\"]  \n        end\n        \n        subgraph \"Automation\"\n            p5[\"Phase 5: Terraform (IaC)<br/>(2 weeks)\"] -.-> p6[\"Phase 6: Ansible (Config Mgmt)<br/>(2 weeks)\"] \n        end\n        \n        subgraph \"Containers\"\n            p7[\"Phase 7: Docker (Containerization)<br/>(2 weeks)\"] -.-> p8[\"Phase 8: Kubernetes & EKS<br/>(6 weeks)\"] \n        end\n        \n        subgraph \"CI/CD & Quality\"\n            p9[\"Phase 9: CI/CD Pipelines<br/>(3 weeks)\"] \n            p9a[\"Phase 9A: Testing & QA<br/>(1 week)\"] \n            p9b[\"Phase 9B: GitOps<br/>(1 week)\"] \n            p9c[\"Phase 9C: Policy as Code<br/>(1 week)\"] \n        end\n        \n        subgraph \"Operations\"\n            p10[\"Phase 10: Monitoring & Observability<br/>(3 weeks)\"] -.-> p11[\"Phase 11: Security & Compliance<br/>(3 weeks)\"] \n        end\n        \n        subgraph \"Advanced\"\n            p12[\"Phase 12: Production Hardening<br/>(3 weeks)\"]\n        end\n    \n        p2 --> p3\n        p4 --> p5\n        p6 --> p7\n        p8 --> p9\n        p9 --> p9a\n        p9a --> p9b\n        p9b --> p9c\n        p9c --> p10\n        p11 --> p12\n        \n        classDef done fill:#4caf50,color:#fff,stroke:#2e7d32,stroke-width:2px\n        classDef active fill:#ff9800,color:#fff,stroke:#ef6c00,stroke-width:2px\n        classDef todo fill:#1e293b,color:#fff,stroke:#8B5CF6,stroke-width:1px\n        \n        class p1,p2 done\n        class p3 active\n        class p4,p5,p6,p7,p8,p9,p9a,p9b,p9c,p10,p11,p12 todo\n    end"
+          "definition": "flowchart LR\n    subgraph \"DevOps Learning Timeline (10-15 hrs/week)\"\n        direction TB\n        \n        subgraph \"Fundamentals\"\n            p1[\"Phase 1: Fundamentals & Prerequisites<br/>(1 week)\"] -.-> p2[\"Phase 2: Git & Version Control<br/>(1 week)\"] \n        end\n        \n        subgraph \"Infrastructure\"\n            p3[\"Phase 3: Linux Basics<br/>(1 week)\"] -.-> p4[\"Phase 4: AWS & Networking<br/>(9 weeks)\"]  \n        end\n        \n        subgraph \"Automation\"\n            p5[\"Phase 5: Terraform (IaC)<br/>(4 weeks)\"] -.-> p6[\"Phase 6: Ansible (Config Mgmt)<br/>(3 weeks)\"] \n        end\n        \n        subgraph \"Containers\"\n            p7[\"Phase 7: Docker (Containerization)<br/>(2 weeks)\"] -.-> p8[\"Phase 8: Kubernetes & EKS<br/>(7 weeks)\"] \n        end\n        \n        subgraph \"CI/CD & Quality\"\n            p9[\"Phase 9: CI/CD Pipelines<br/>(6 weeks)\"] \n            p9a[\"Phase 9A: Testing & QA<br/>(2 weeks)\"] \n            p9b[\"Phase 9B: GitOps<br/>(2 weeks)\"] \n            p9c[\"Phase 9C: Policy as Code<br/>(1 week)\"] \n        end\n        \n        subgraph \"Operations\"\n            p10[\"Phase 10: Monitoring & Observability<br/>(3 weeks)\"] -.-> p11[\"Phase 11: Security & Compliance<br/>(4 weeks)\"] \n        end\n        \n        subgraph \"Advanced\"\n            p12[\"Phase 12: Production Hardening<br/>(3 weeks)\"]\n        end\n    \n        p2 --> p3\n        p4 --> p5\n        p6 --> p7\n        p8 --> p9\n        p9 --> p9a\n        p9a --> p9b\n        p9b --> p9c\n        p9c --> p10\n        p11 --> p12\n        \n        classDef done fill:#4caf50,color:#fff,stroke:#2e7d32,stroke-width:2px\n        classDef active fill:#ff9800,color:#fff,stroke:#ef6c00,stroke-width:2px\n        classDef todo fill:#1e293b,color:#fff,stroke:#8B5CF6,stroke-width:1px\n        \n        class p1,p2 done\n        class p3 active\n        class p4,p5,p6,p7,p8,p9,p9a,p9b,p9c,p10,p11,p12 todo\n    end"
         },
         {
           "id": "three-ways",
@@ -1375,15 +1375,17 @@ const phaseWeights = {
   'phase2': { weeks: 2, name: 'Phase 2: Version Control' },
   'phase3': { weeks: 4, name: 'Phase 3: Linux & Networking' },
   'phase4': { weeks: 5, name: 'Phase 4: Cloud Infrastructure' },
-  'phase5': { weeks: 2, name: 'Phase 5: Terraform IaC' },
-  'phase6': { weeks: 4, name: 'Phase 6: Ansible' },
+  'phase5': { weeks: 4, name: 'Phase 5: Terraform IaC' },
+  'phase6': { weeks: 3, name: 'Phase 6: Ansible' },
   'phase7': { weeks: 2, name: 'Phase 7: Docker' },
-  'phase8': { weeks: 4, name: 'Phase 8: Kubernetes' },
-  'phase9': { weeks: 3, name: 'Phase 9: CI/CD' },
+  'phase8': { weeks: 7, name: 'Phase 8: Kubernetes' },
+  'phase9': { weeks: 6, name: 'Phase 9: CI/CD' },
+  'phase9a': { weeks: 2, name: 'Phase 9A: Testing & QA' },
   'phase9b': { weeks: 2, name: 'Phase 9B: GitOps' },
-  'phase10': { weeks: 4, name: 'Phase 10: Monitoring' },
-  'phase11': { weeks: 2, name: 'Phase 11: Security' },
-  'phase12': { weeks: 4, name: 'Phase 12: Serverless' },
+  'phase9c': { weeks: 1, name: 'Phase 9C: Policy as Code' },
+  'phase10': { weeks: 3, name: 'Phase 10: Monitoring' },
+  'phase11': { weeks: 4, name: 'Phase 11: Security' },
+  'phase12': { weeks: 3, name: 'Phase 12: Serverless' },
   'soft-skills': { weeks: 1, name: 'Soft Skills' },
   'cost-breakdown': { weeks: 0, name: 'Cost Breakdown' },
   'final-polish': { weeks: 8, name: 'Final Polish & Portfolio' },
