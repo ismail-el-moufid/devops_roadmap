@@ -677,12 +677,14 @@ function makeMermaidResponsive() {
       // For very small screens
       if (isSmallMobile) {
         // Container styles - make it full width but with proper overflow
-        diagram.style.width = '100%';
-        diagram.style.maxWidth = '100%';
-        diagram.style.margin = '20px 0';
+        diagram.style.width = 'calc(100% - 20px)';
+        diagram.style.maxWidth = 'calc(100% - 20px)';
+        diagram.style.margin = '20px auto';
         diagram.style.position = 'relative';
         diagram.style.left = '0';
         diagram.style.transform = 'none';
+        diagram.style.padding = '0 10px';
+        diagram.style.boxSizing = 'border-box';
       } else {
         diagram.style.width = '100%';
         diagram.style.maxWidth = '100%';
@@ -702,9 +704,9 @@ function makeMermaidResponsive() {
       
       // Ensure SVG is properly sized
       if (isSmallMobile) {
-        // Don't restrict width on small mobile to allow scrolling horizontally if needed
-        svg.style.maxWidth = 'none';
-        svg.style.margin = '0';
+        // For small mobile, ensure the diagram fits but allows scrolling if needed
+        svg.style.maxWidth = '100%';
+        svg.style.margin = '0 auto';
         svg.style.display = 'block';
       } else {
         // On larger screens, constrain to container
@@ -865,12 +867,14 @@ function toggleSidebar() {
   if (window.innerWidth <= 768) {
     overlay.classList.toggle('show');
     
-    // Apply focus to sidebar for accessibility
+    // Fix sidebar positioning
     if (!sidebar.classList.contains('closed')) {
+      sidebar.style.left = '0';
       sidebar.setAttribute('tabindex', '-1');
       sidebar.focus();
       document.body.style.overflow = 'hidden'; // Prevent body scrolling when sidebar is open
     } else {
+      sidebar.style.left = '-100%';
       document.body.style.overflow = ''; // Restore body scrolling when sidebar is closed
     }
   }

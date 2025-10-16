@@ -29,19 +29,19 @@
 @media (max-width: 768px) {
     .mermaid {
         font-size: 14px;
-        margin-left: -16px;
-        margin-right: -16px;
-        padding-left: 16px;
-        padding-right: 16px;
-        width: calc(100% + 32px);
-        max-width: none;
+        margin: 20px 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
         position: relative;
+        overflow-x: auto;
     }
     
     /* Constrain SVG width */
     .mermaid svg {
-        max-width: calc(100% - 32px); /* Prevent overflow by accounting for padding */
-        transform: translateX(16px); /* Center the diagram */
+        max-width: 100%; /* Allow content to determine width */
+        margin: 0 auto; /* Center the diagram */
+        transform: none;
     }
     
     /* Additional support for clusters and other mermaid elements */
@@ -57,16 +57,17 @@
 @media (max-width: 480px) {
     .mermaid {
         font-size: 12px;
-        margin: 20px 0;
-        padding: 0;
-        width: 100%;
+        margin: 20px auto;
+        padding: 0 10px;
+        width: calc(100% - 20px);
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         position: relative;
+        box-sizing: border-box;
     }
     
     .mermaid svg {
-        max-width: none; /* Allow diagram to be its natural width */
+        max-width: 100%; /* Fit to container width */
         min-width: 0; /* Override min-width from other styles */
         margin: 0 auto; /* Center the diagram */
         transform: none; /* Reset transform from larger screens */

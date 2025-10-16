@@ -1145,15 +1145,16 @@ hr::before {
 	.sidebar {
 		width: 260px;
 		max-width: 80%;
-		left: -260px;
+		left: -100%;
 		z-index: 1000;
 		transform: none;
 		transition: left 0.3s ease;
 		box-shadow: none;
+		overflow-x: hidden; /* Prevent horizontal scrollbar */
 	}
 	
 	.sidebar.closed {
-		left: -260px;
+		left: -100%;
 	}
 	
 	/* Show sidebar properly on mobile */
@@ -1447,12 +1448,12 @@ hr::before {
 
 	.sidebar {
 		width: 260px;
-		max-width: 80%;
-		left: -260px;
+		max-width: 85%;
+		left: -100%;
 	}
 
 	.sidebar.closed {
-		left: -260px;
+		left: -100%;
 	}
 
 	.modal-content {
