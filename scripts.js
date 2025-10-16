@@ -1201,7 +1201,11 @@ setTimeout(() => {
 
 // Also hide on window load as final fallback
 window.addEventListener('load', () => {
-  setTimeout(hideLoadingScreen, 1000);
+  setTimeout(() => {
+    hideLoadingScreen();
+    makeMermaidResponsive();
+    wrapTablesForResponsiveness();
+  }, 1000);
   fixProgressIndicatorsForMobile();
 });
 
