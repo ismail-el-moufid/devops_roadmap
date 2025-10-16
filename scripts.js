@@ -660,6 +660,34 @@ function debounce(func, wait) {
   };
 }
 
+// Function to make mermaid diagrams responsive
+function makeMermaidResponsive() {
+  const diagrams = document.querySelectorAll('.mermaid');
+  diagrams.forEach(diagram => {
+    // Ensure diagram has proper overflow handling
+    diagram.style.overflow = 'auto';
+    diagram.style.maxWidth = '100%';
+    
+    // Find SVG within the diagram
+    const svg = diagram.querySelector('svg');
+    if (svg) {
+      svg.style.maxWidth = '100%';
+      svg.style.height = 'auto';
+      
+      // Make sure viewBox is set for proper scaling
+      if (!svg.getAttribute('viewBox') && svg.getAttribute('width') && svg.getAttribute('height')) {
+        const width = parseFloat(svg.getAttribute('width'));
+        const height = parseFloat(svg.getAttribute('height'));
+        if (width && height) {
+          svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+          svg.removeAttribute('width');
+          svg.removeAttribute('height');
+        }
+      }
+    }
+  });
+}
+
 // DOMContentLoaded setup
 document.addEventListener('DOMContentLoaded', () => {
   try {
@@ -773,6 +801,12 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(key, checkbox.checked.toString());
       });
     });
+    
+    // Make mermaid diagrams responsive
+    makeMermaidResponsive();
+    
+    // Handle window resize for mermaid diagrams
+    window.addEventListener('resize', debounce(makeMermaidResponsive, 250));
 
   } catch (e) {
     console.error('Initialization error:', e);
@@ -790,9 +824,18 @@ function toggleSidebar() {
   toggle.classList.toggle('sidebar-closed');
   body.classList.toggle('sidebar-closed');
 
-  // Show overlay only on mobile
+  // Ensure proper z-index and visibility on mobile
   if (window.innerWidth <= 768) {
     overlay.classList.toggle('show');
+    
+    // Apply focus to sidebar for accessibility
+    if (!sidebar.classList.contains('closed')) {
+      sidebar.setAttribute('tabindex', '-1');
+      sidebar.focus();
+      document.body.style.overflow = 'hidden'; // Prevent body scrolling when sidebar is open
+    } else {
+      document.body.style.overflow = ''; // Restore body scrolling when sidebar is closed
+    }
   }
 }
 
@@ -806,6 +849,9 @@ function closeSidebar() {
   toggle.classList.add('sidebar-closed');
   body.classList.add('sidebar-closed');
   overlay.classList.remove('show');
+  
+  // Restore body scrolling
+  document.body.style.overflow = '';
 }
 
 // Close sidebar on mobile when clicking overlay
@@ -1074,6 +1120,25 @@ function hideLoadingScreen() {
   }
 }
 
+// Handle responsive progress indicators
+function fixProgressIndicatorsForMobile() {
+  const progressBar = document.getElementById('reading-progress-bar');
+  const progressPercent = document.getElementById('reading-progress-percent');
+  
+  if (progressBar && progressPercent) {
+    // Check if we're on mobile
+    if (window.innerWidth <= 768) {
+      progressBar.style.height = '4px';
+      progressPercent.style.fontSize = '12px';
+      progressPercent.style.padding = '2px 6px';
+    } else {
+      progressBar.style.height = '6px';
+      progressPercent.style.fontSize = '14px';
+      progressPercent.style.padding = '4px 8px';
+    }
+  }
+}
+
 // Check if everything is loaded and hide loader
 function checkAndHideLoader() {
   // Wait a bit for Mermaid to complete
@@ -1100,11 +1165,17 @@ setTimeout(() => {
 // Also hide on window load as final fallback
 window.addEventListener('load', () => {
   setTimeout(hideLoadingScreen, 1000);
+  fixProgressIndicatorsForMobile();
 });
+
+// Fix progress indicators on resize
+window.addEventListener('resize', debounce(() => {
+  fixProgressIndicatorsForMobile();
+}, 250));
 
 // Wrap all tables in responsive wrapper for mobile scrolling
 document.addEventListener('DOMContentLoaded', function () {
-  const tables = document.querySelectorAll('.container table');
+  const tables = document.querySelectorAll('table');
   tables.forEach(table => {
     // Check if table is not already wrapped
     if (!table.parentElement.classList.contains('table-wrapper')) {

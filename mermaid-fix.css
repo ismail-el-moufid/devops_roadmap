@@ -1,0 +1,70 @@
+/* Additional styles to ensure mermaid diagrams are responsive */
+.mermaid {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 30px 0;
+    padding-bottom: 10px;
+    display: block;
+    position: relative;
+}
+
+.mermaid svg {
+    max-width: 100%;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Fix text visibility and sizing in diagrams */
+.mermaid svg text,
+.mermaid svg .label {
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+}
+
+/* Ensure mermaid diagrams don't break layout on mobile */
+@media (max-width: 768px) {
+    .mermaid {
+        font-size: 14px;
+    }
+    
+    /* Additional support for clusters and other mermaid elements */
+    .mermaid .cluster rect,
+    .mermaid .node rect,
+    .mermaid .node circle,
+    .mermaid .node ellipse,
+    .mermaid .node polygon {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .mermaid {
+        font-size: 12px;
+        margin: 20px -16px;
+        padding: 0 16px;
+        width: calc(100% + 32px);
+    }
+    
+    /* Ensure tables are also responsive */
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 15px -16px;
+        padding: 0 16px;
+        width: calc(100% + 32px);
+    }
+    
+    /* Enhance readability of progress indicators on very small devices */
+    #reading-progress-bar {
+        height: 3px !important;
+    }
+    
+    #reading-progress-percent {
+        font-size: 10px !important;
+        padding: 2px 4px !important;
+        top: 6px !important;
+        right: 6px !important;
+    }
+}
