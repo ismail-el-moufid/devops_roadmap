@@ -163,7 +163,7 @@ async function loadCharts() {
         },
         {
           "id": "timeline",
-          "definition": "flowchart LR\n    subgraph \"Learning Timeline\"\n        direction TB\n        \n        subgraph \"Fundamentals\"\n            p1[\"Phase 1: Fundamentals & Prerequisites<br/>(1 week)\"] -.-> p2[\"Phase 2: Git & Version Control<br/>(1 week)\"] \n        end\n        \n        subgraph \"Infrastructure\"\n            p3[\"Phase 3: Linux Basics<br/>(1 week)\"] -.-> p4[\"Phase 4: AWS & Networking<br/>(9 weeks)\"]  \n        end\n        \n        subgraph \"Automation\"\n            p5[\"Phase 5: Terraform (IaC)<br/>(4 weeks)\"] -.-> p6[\"Phase 6: Ansible (Config Mgmt)<br/>(3 weeks)\"] \n        end\n        \n        subgraph \"Containers\"\n            p7[\"Phase 7: Docker (Containerization)<br/>(2 weeks)\"] -.-> p8[\"Phase 8: Kubernetes & EKS<br/>(7 weeks)\"] \n        end\n        \n        subgraph \"CI/CD & Quality\"\n            p9[\"Phase 9: CI/CD Pipelines<br/>(6 weeks)\"] \n            p9a[\"Phase 9A: Testing & QA<br/>(2 weeks)\"] \n            p9b[\"Phase 9B: GitOps<br/>(2 weeks)\"] \n            p9c[\"Phase 9C: Policy as Code<br/>(1 week)\"] \n        end\n        \n        subgraph \"Operations\"\n            p10[\"Phase 10: Monitoring & Observability<br/>(3 weeks)\"] -.-> p11[\"Phase 11: Security & Compliance<br/>(4 weeks)\"] \n        end\n        \n        subgraph \"Advanced\"\n            p12[\"Phase 12: Production Hardening<br/>(3 weeks)\"]\n        end\n    \n        p2 --> p3\n        p4 --> p5\n        p6 --> p7\n        p8 --> p9\n        p9 --> p9a\n        p9a --> p9b\n        p9b --> p9c\n        p9c --> p10\n        p11 --> p12\n        \n        classDef done fill:#4caf50,color:#fff,stroke:#2e7d32,stroke-width:2px\n        classDef active fill:#ff9800,color:#fff,stroke:#ef6c00,stroke-width:2px\n        classDef todo fill:#1e293b,color:#fff,stroke:#8B5CF6,stroke-width:1px\n        \n        class p1,p2 done\n        class p3 active\n        class p4,p5,p6,p7,p8,p9,p9a,p9b,p9c,p10,p11,p12 todo\n    end"
+          "definition": "flowchart LR\n    subgraph \"Learning Timeline\"\n        direction TB\n        \n        subgraph \"Fundamentals\"\n            p1[\"Phase 1: Fundamentals & Prerequisites<br/>(1 week)\"] -.-> p2[\"Phase 2: Git & Version Control<br/>(1 week)\"] \n        end\n        \n        subgraph \"Infrastructure\"\n            p3[\"Phase 3: Linux Basics<br/>(1 week)\"] -.-> p4[\"Phase 4: AWS & Networking<br/>(9 weeks)\"]  \n        end\n        \n        subgraph \"Automation\"\n            p5[\"Phase 5: Terraform (IaC)<br/>(4 weeks)\"] -.-> p6[\"Phase 6: Ansible (Config Mgmt)<br/>(3 weeks)\"] \n        end\n        \n        subgraph \"Containers\"\n            p7[\"Phase 7: Docker (Containerization)<br/>(2 weeks)\"] -.-> p8[\"Phase 8: Kubernetes & EKS<br/>(7 weeks)\"] \n        end\n        \n        subgraph \"CI/CD & Quality\"\n            p9[\"Phase 9: CI/CD Pipelines<br/>(5 weeks)\"] \n            p9a[\"Phase 9A: Testing & QA<br/>(2 weeks)\"] \n            p9b[\"Phase 9B: GitOps<br/>(2 weeks)\"] \n            p9c[\"Phase 9C: Policy as Code<br/>(1 week)\"] \n        end\n        \n        subgraph \"Operations\"\n            p10[\"Phase 10: Monitoring & Observability<br/>(3 weeks)\"] -.-> p11[\"Phase 11: Security & Compliance<br/>(4 weeks)\"] \n        end\n        \n        subgraph \"Advanced\"\n            p12[\"Phase 12: Production Hardening<br/>(3 weeks)\"]\n        end\n    \n        p2 --> p3\n        p4 --> p5\n        p6 --> p7\n        p8 --> p9\n        p9 --> p9a\n        p9a --> p9b\n        p9b --> p9c\n        p9c --> p10\n        p11 --> p12\n        \n        classDef done fill:#4caf50,color:#fff,stroke:#2e7d32,stroke-width:2px\n        classDef active fill:#ff9800,color:#fff,stroke:#ef6c00,stroke-width:2px\n        classDef todo fill:#1e293b,color:#fff,stroke:#8B5CF6,stroke-width:1px\n        \n        class p1,p2 done\n        class p3 active\n        class p4,p5,p6,p7,p8,p9,p9a,p9b,p9c,p10,p11,p12 todo\n    end"
         },
         {
           "id": "three-ways",
@@ -196,10 +196,6 @@ async function loadCharts() {
         {
           "id": "multi-stage-deploy",
           "definition": "flowchart LR\n    subgraph \"Development Branch\"\n        CODE[Code Push]\n        CI[CI Pipeline]\n        DEV[Deploy to Dev]\n    end\n    \n    subgraph \"Pull Request to Main\"\n        PR[Create PR]\n        REVIEW[Code Review]\n        TESTS[Integration Tests]\n    end\n    \n    subgraph \"Main Branch\"\n        MERGE[Merge to Main]\n        STAGING[Deploy to Staging]\n        SMOKE[Smoke Tests]\n    end\n    \n    subgraph \"Production Release\"\n        TAG[Git Tag/Release]\n        APPROVAL[Manual Approval]\n        CANARY[Canary Deployment<br/>10% traffic]\n        MONITOR[Monitor Metrics<br/>5 minutes]\n        DECISION{Healthy?}\n        FULL[Full Deployment<br/>100% traffic]\n        ROLLBACK[Auto Rollback]\n    end\n    \n    CODE --> CI\n    CI --> DEV\n    DEV --> PR\n    PR --> REVIEW\n    REVIEW --> TESTS\n    TESTS --> MERGE\n    MERGE --> STAGING\n    STAGING --> SMOKE\n    SMOKE --> TAG\n    TAG --> APPROVAL\n    APPROVAL --> CANARY\n    CANARY --> MONITOR\n    MONITOR --> DECISION\n    DECISION -->|Yes| FULL\n    DECISION -->|No| ROLLBACK\n    \n    style DEV fill:#4caf50,color:#fff\n    style STAGING fill:#ff9800,color:#fff\n    style CANARY fill:#2196f3,color:#fff\n    style FULL fill:#4caf50,color:#fff\n    style ROLLBACK fill:#f44336,color:#fff"
-        },
-        {
-          "id": "testing-pyramid",
-          "definition": "graph TB\n    subgraph \"Testing Pyramid\"\n        E2E[End-to-End Tests<br/>10% - Slow, Expensive<br/>Selenium, Cypress]\n        INT[Integration Tests<br/>20% - Medium Speed<br/>API Tests, Database Tests]\n        UNIT[Unit Tests<br/>70% - Fast, Cheap<br/>pytest, Jest, JUnit]\n\n        E2E --> INT\n        INT --> UNIT\n    end\n    \n    subgraph \"Test Types in CI/CD\"\n        LINT[Linting & Formatting<br/>ESLint, Pylint, Black]\n        STATIC[Static Analysis<br/>SonarQube, CodeQL]\n        SEC[Security Scanning<br/>Trivy, Snyk, OWASP]\n        PERF[Performance Tests<br/>k6, JMeter]\n        SMOKE[Smoke Tests<br/>Basic Health Checks]\n    end\n    \n    subgraph \"CI Pipeline Flow\"\n        COMMIT[Git Commit] --> LINT\n        LINT --> UNIT\n        UNIT --> STATIC\n        STATIC --> INT\n        INT --> SEC\n        SEC --> BUILD[Build Docker Image]\n        BUILD --> SMOKE\n        SMOKE --> E2E\n        E2E --> DEPLOY[Deploy to Staging]\n        DEPLOY --> PERF\n    end\n    \n    style UNIT fill:#4caf50,color:#fff\n    style INT fill:#ff9800,color:#fff\n    style E2E fill:#f44336,color:#fff\n    style BUILD fill:#2196f3,color:#fff"
         },
         {
           "id": "gitops-flow",
@@ -500,14 +496,7 @@ function fixLoadingScreenDimensions() {
 window.addEventListener('DOMContentLoaded', fixLoadingScreenDimensions);
 window.addEventListener('resize', fixLoadingScreenDimensions);
 
-function hideLoadingScreen() {
-  const loadingScreen = document.getElementById('loading-screen');
-  if (!loadingScreen) return;
-  loadingScreen.classList.add('fade-out');
-  setTimeout(() => {
-    loadingScreen.style.display = 'none';
-  }, 500);
-}
+// hideLoadingScreen implementation is defined later (single authoritative version)
 
 // Function to get phase positions after charts are fully rendered
 function getPhasePositionsAfterRender() {
@@ -626,18 +615,7 @@ function updatePhaseNavigationLinks(phasePositions) {
 
 // ---------------- UI Logic moved from inline script ----------------
 
-// Sidebar toggle
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const sidebarToggle = document.getElementById('sidebarToggle');
-  const toc = document.getElementById('toc');
-  if (sidebar && toc && sidebarToggle) {
-    sidebar.classList.toggle('closed');
-    toc.classList.toggle('hidden');
-    sidebarToggle.textContent = sidebar.classList.contains('closed') ? '☰' : '×';
-    localStorage.setItem('sidebarClosed', sidebar.classList.contains('closed'));
-  }
-}
+// Sidebar toggle (consolidated to overlay-aware version below)
 
 // Modal helpers
 function openModal(modalId) {
@@ -750,22 +728,43 @@ document.addEventListener('DOMContentLoaded', () => {
   try {
     // Restore sidebar state
     const sidebar = document.getElementById('sidebar');
-    const toc = document.getElementById('toc');
     const sidebarToggle = document.getElementById('sidebarToggle');
     const closed = localStorage.getItem('sidebarClosed') === 'true';
-    if (closed && sidebar && toc && sidebarToggle) {
+    if (closed && sidebar && sidebarToggle) {
       sidebar.classList.add('closed');
-      toc.classList.add('hidden');
-      sidebarToggle.textContent = '☰';
+      sidebarToggle.classList.add('sidebar-closed');
+      document.body.classList.add('sidebar-closed');
     }
 
-    // Replace emoji shortcodes like :sparkles: with Unicode
-    document.body.innerHTML = document.body.innerHTML
-      .replace(/:sparkles:/g, '✨')
-      .replace(/:rocket:/g, '🚀')
-      .replace(/:warning:/g, '⚠️')
-      .replace(/:white_check_mark:/g, '✅')
-      .replace(/:x:/g, '❌');
+    // Replace emoji shortcodes like :sparkles: with Unicode (safe traversal, no innerHTML rewrite)
+    (function replaceShortcodesSafely() {
+      const shortcodeMap = {
+        ':sparkles:': '✨',
+        ':rocket:': '🚀',
+        ':warning:': '⚠️',
+        ':white_check_mark:': '✅',
+        ':x:': '❌'
+      };
+      const shouldSkip = (el) => el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || el.classList?.contains('mermaid');
+
+      function walk(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          let text = node.textContent;
+          let changed = false;
+          for (const [code, emoji] of Object.entries(shortcodeMap)) {
+            if (text.includes(code)) {
+              text = text.split(code).join(emoji);
+              changed = true;
+            }
+          }
+          if (changed) node.textContent = text;
+        } else if (node.nodeType === Node.ELEMENT_NODE && !shouldSkip(node)) {
+          const children = Array.from(node.childNodes);
+          for (const child of children) walk(child);
+        }
+      }
+      walk(document.body);
+    })();
 
     // Add devicon icons for tech badges
     document.querySelectorAll('.tech-icon[data-icon]').forEach(el => {
@@ -781,83 +780,9 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapper.appendChild(table);
     });
 
-    // Reading progress bar with smooth animation and throttled updates
-    const progressBar = document.getElementById('reading-progress-bar');
-    const progressPercent = document.getElementById('reading-progress-percent');
+    // Initialize weighted reading progress bar
+    updateProgressBar();
 
-    if (progressBar || progressPercent) {
-      // Variables for smoothing progress updates
-      let lastProgress = 0;
-      let targetProgress = 0;
-      let animationFrameId = null;
-      let lastScrollTime = 0;
-      const throttleDelay = 100; // ms between progress updates
-
-      // Use requestAnimationFrame for smoother visual updates
-      const updateProgressBar = () => {
-        // Smooth progress with easing - progress moves 20% toward target each frame
-        lastProgress = lastProgress + (targetProgress - lastProgress) * 0.2;
-        const roundedProgress = Math.round(lastProgress);
-
-        if (progressBar) {
-          progressBar.style.width = `${lastProgress}%`;
-        }
-
-        if (progressPercent) {
-          // Only update the text when the rounded value changes
-          if (progressPercent.textContent !== `${roundedProgress}%`) {
-            progressPercent.textContent = `${roundedProgress}%`;
-          }
-
-          // Show progress percent when scrolled, hide at the top
-          if (roundedProgress > 2) {
-            progressPercent.classList.remove('hidden');
-          } else {
-            progressPercent.classList.add('hidden');
-          }
-        }
-
-        // Continue animation if we're not close enough to target
-        if (Math.abs(targetProgress - lastProgress) > 0.1) {
-          animationFrameId = requestAnimationFrame(updateProgressBar);
-        }
-      };
-
-      // Throttled scroll handler
-      const onScroll = () => {
-        const now = Date.now();
-
-        // Throttle updates to prevent too many calculations
-        if (now - lastScrollTime < throttleDelay) return;
-        lastScrollTime = now;
-
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        targetProgress = scrollHeight ? (scrollTop / scrollHeight) * 100 : 0;
-
-        // Cancel any existing animation frame and start a new one
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
-        animationFrameId = requestAnimationFrame(updateProgressBar);
-      };
-
-      // Use passive event listener for better performance
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      // Initial calculation
-      onScroll();
-    }
-
-    // Checklist persistence
-    document.querySelectorAll('.checklist input[type="checkbox"]').forEach((checkbox, idx) => {
-      const key = `checklist_${idx}`;
-      const saved = localStorage.getItem(key);
-      if (saved !== null) checkbox.checked = saved === 'true';
-      checkbox.addEventListener('change', () => {
-        localStorage.setItem(key, checkbox.checked.toString());
-      });
-    });
     
     // Make mermaid diagrams responsive
     makeMermaidResponsive();
@@ -880,6 +805,11 @@ function toggleSidebar() {
   sidebar.classList.toggle('closed');
   toggle.classList.toggle('sidebar-closed');
   body.classList.toggle('sidebar-closed');
+
+  // Persist sidebar state
+  try {
+    localStorage.setItem('sidebarClosed', sidebar.classList.contains('closed'));
+  } catch {}
 
   // Ensure proper z-index and visibility on mobile
   if (window.innerWidth <= 768) {
@@ -911,6 +841,11 @@ function closeSidebar() {
   
   // Restore body scrolling
   document.body.style.overflow = '';
+
+  // Persist sidebar state
+  try {
+    localStorage.setItem('sidebarClosed', true);
+  } catch {}
 }
 
 // Close sidebar on mobile when clicking overlay
@@ -953,6 +888,7 @@ document.addEventListener('keydown', function (event) {
     }
     closeStuckModal();
     closeCommunityModal();
+    closeCostModal();
   }
 });
 
@@ -1379,8 +1315,8 @@ const phaseWeights = {
   'phase6': { weeks: 3, name: 'Phase 6: Ansible' },
   'phase7': { weeks: 2, name: 'Phase 7: Docker' },
   'phase8': { weeks: 7, name: 'Phase 8: Kubernetes' },
-  'phase9': { weeks: 5, name: 'Phase 9: CI/CD' },
-  'phase9a': { weeks: 2, name: 'Phase 9A: Testing & QA' },
+  'phase9': { weeks: 0, name: 'Phase 9: CI/CD' },
+  'phase9-testing': { weeks: 2, name: 'Phase 9A: Testing & QA' },
   'phase9b': { weeks: 2, name: 'Phase 9B: GitOps' },
   'phase9c': { weeks: 1, name: 'Phase 9C: Policy as Code' },
   'phase10': { weeks: 3, name: 'Phase 10: Monitoring' },
@@ -1434,6 +1370,7 @@ function updateProgressBar() {
   try {
     const progressBar = document.getElementById('reading-progress-bar');
     const progressPercent = document.getElementById('reading-progress-percent');
+    const progressPhase = document.getElementById('reading-progress-phase');
     if (!progressBar || !progressPercent) return;
 
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -1459,6 +1396,7 @@ function updateProgressBar() {
       progressBar.style.width = `${Math.round(simple)}%`;
       progressPercent.textContent = `${Math.round(simple)}%`;
       progressPercent.classList.remove('hidden');
+      if (progressPhase) progressPhase.classList.add('hidden');
       window._lastProgressPercent = simple;
       return;
     }
@@ -1475,6 +1413,7 @@ function updateProgressBar() {
       progressBar.style.width = '0%';
       progressPercent.textContent = '0%';
       progressPercent.classList.add('hidden');
+      if (progressPhase) progressPhase.classList.add('hidden');
       window._lastProgressPercent = 0;
       return;
     }
@@ -1484,6 +1423,7 @@ function updateProgressBar() {
       progressBar.style.width = '100%';
       progressPercent.textContent = '100%';
       progressPercent.classList.remove('hidden');
+      if (progressPhase) progressPhase.classList.add('hidden');
       window._lastProgressPercent = 100;
       return;
     }
@@ -1539,13 +1479,48 @@ function updateProgressBar() {
     progressPercent.textContent = `${smoothed}%`;
     if (smoothed === 0) progressPercent.classList.add('hidden'); else progressPercent.classList.remove('hidden');
 
-    // optional tooltip with current phase name
-    if (cur && cur.name) progressPercent.title = `Currently viewing: ${cur.name}`;
+    // update sticky phase label
+    if (progressPhase) {
+      if (cur && cur.name && smoothed > 2 && smoothed < 100) {
+        progressPhase.textContent = cur.name;
+        progressPhase.classList.remove('hidden');
+      } else {
+        progressPhase.classList.add('hidden');
+      }
+    }
   } catch (err) {
     console.error('Error updating progress bar (weighted):', err);
   }
 }
 // ---------- end replaced block ----------
+
+// Throttle helper for scroll/resize progress updates
+const _progressThrottle = (fn, wait = 100) => {
+  let last = 0;
+  let timer;
+  return function () {
+    const now = Date.now();
+    const remaining = wait - (now - last);
+    if (remaining <= 0) {
+      clearTimeout(timer);
+      last = now;
+      fn();
+    } else if (!timer) {
+      timer = setTimeout(() => {
+        last = Date.now();
+        timer = null;
+        fn();
+      }, remaining);
+    }
+  };
+};
+
+// Attach listeners once DOM is interactive
+document.addEventListener('DOMContentLoaded', () => {
+  const throttled = _progressThrottle(updateProgressBar, 100);
+  window.addEventListener('scroll', throttled, { passive: true });
+  window.addEventListener('resize', throttled);
+});
 
 // Smooth scroll to section without changing URL
 function smoothScrollToSection(targetId) {

@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mermaid-fix.css">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    <script src="scripts.js"></script>
 
 </head>
 
@@ -25,8 +24,11 @@
     <!-- Reading Progress Bar -->
     <div id="reading-progress-bar"></div>
 
-    <!-- Reading Progress Percentage -->
-    <div id="reading-progress-percent">0%</div>
+        <!-- Reading Progress Percentage and Phase Label -->
+        <div style="display: flex; align-items: center; gap: 12px; position: relative;">
+            <div id="reading-progress-percent">0%</div>
+            <div id="reading-progress-phase" class="hidden"></div>
+        </div>
 
     <!-- Loading Screen -->
     <div id="loading-screen" style="width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; overflow: hidden; box-sizing: border-box;">
@@ -681,36 +683,39 @@
                 <li><a href="#readiness-quiz"><i class="fas fa-clipboard-check tech-icon"></i> Prerequisites
                         Self-Assessment Quiz</a></li>
                 <li><a href="#quick-start"><i class="fas fa-bolt tech-icon"></i> Quick Start Track (2-3 Weeks)</a></li>
-                <li><a href="#project-architecture"><i class="fas fa-project-diagram tech-icon"></i> Project
-                        Architecture Overview</a></li>
-                <li><a href="#project-alternatives"><i class="fas fa-code-branch tech-icon"></i> Project Alternatives &
-                        Options</a></li>
+        <li><a href="#project-alternatives"><i class="fas fa-code-branch tech-icon"></i> Project Alternatives &
+            Options</a></li>
+        <li><a href="#project-architecture"><i class="fas fa-project-diagram tech-icon"></i> Project
+            Architecture Overview</a></li>
                 <li><a href="#impact-statement"><i class="fas fa-star tech-icon"></i> Professional Impact Statement</a>
                 </li>
                 <li><a href="#prerequisites"><i class="fas fa-book-open tech-icon"></i> Prerequisites & Preparation</a>
                 </li>
-                <li><a href="#phase1"><i class="fas fa-flag tech-icon"></i> Phase 1: DevOps Fundamentals</a></li>
-                <li><a href="#phase2"><i class="devicon-git-plain tech-icon icon-git"></i> Phase 2: Version Control &
+        <li><a href="#phase1" data-phase-target="phase1"><i class="fas fa-flag tech-icon"></i> Phase 1: DevOps Fundamentals</a></li>
+        <li><a href="#phase2" data-phase-target="phase2"><i class="devicon-git-plain tech-icon icon-git"></i> Phase 2: Version Control &
                         Collaboration</a></li>
-                <li><a href="#phase3"><i class="devicon-linux-plain tech-icon icon-linux"></i> Phase 3: Linux
+        <li><a href="#phase3" data-phase-target="phase3"><i class="devicon-linux-plain tech-icon icon-linux"></i> Phase 3: Linux
                         Administration & Networking</a></li>
-                <li><a href="#phase4"><i class="devicon-amazonwebservices-original tech-icon icon-aws"></i> Phase 4:
+        <li><a href="#phase4" data-phase-target="phase4"><i class="devicon-amazonwebservices-original tech-icon icon-aws"></i> Phase 4:
                         Cloud Infrastructure (AWS)</a></li>
-                <li><a href="#phase5"><i class="devicon-terraform-plain tech-icon icon-terraform"></i> Phase 5:
+        <li><a href="#phase5" data-phase-target="phase5"><i class="devicon-terraform-plain tech-icon icon-terraform"></i> Phase 5:
                         Infrastructure as Code (Terraform)</a></li>
-                <li><a href="#phase6"><i class="devicon-ansible-plain tech-icon icon-ansible"></i> Phase 6:
+        <li><a href="#phase6" data-phase-target="phase6"><i class="devicon-ansible-plain tech-icon icon-ansible"></i> Phase 6:
                         Configuration Management (Ansible)</a></li>
-                <li><a href="#phase7"><i class="devicon-docker-plain tech-icon icon-docker"></i> Phase 7:
+        <li><a href="#phase7" data-phase-target="phase7"><i class="devicon-docker-plain tech-icon icon-docker"></i> Phase 7:
                         Containerization (Docker)</a></li>
-                <li><a href="#phase8"><i class="devicon-kubernetes-plain tech-icon icon-kubernetes"></i> Phase 8:
+        <li><a href="#phase8" data-phase-target="phase8"><i class="devicon-kubernetes-plain tech-icon icon-kubernetes"></i> Phase 8:
                         Orchestration (Kubernetes)</a></li>
-                <li><a href="#phase9"><i class="devicon-github-original tech-icon icon-github"></i> Phase 9: CI/CD
+        <li><a href="#phase9" data-phase-target="phase9"><i class="devicon-github-original tech-icon icon-github"></i> Phase 9: CI/CD
                         Automation</a></li>
-                <li><a href="#phase10"><i class="devicon-prometheus-original tech-icon icon-prometheus"></i> Phase 10:
+        <li><a href="#phase9-testing" data-phase-target="phase9a"><i class="fas fa-vial tech-icon"></i> Phase 9A: Testing & QA</a></li>
+        <li><a href="#phase9b" data-phase-target="phase9b"><i class="fas fa-code-branch tech-icon"></i> Phase 9B: GitOps</a></li>
+        <li><a href="#phase9c" data-phase-target="phase9c"><i class="fas fa-balance-scale tech-icon"></i> Phase 9C: Policy as Code</a></li>
+        <li><a href="#phase10" data-phase-target="phase10"><i class="devicon-prometheus-original tech-icon icon-prometheus"></i> Phase 10:
                         Monitoring & Observability</a></li>
-                <li><a href="#phase11"><i class="fas fa-shield-alt tech-icon"></i> Phase 11: Security & Compliance</a>
+        <li><a href="#phase11" data-phase-target="phase11"><i class="fas fa-shield-alt tech-icon"></i> Phase 11: Security & Compliance</a>
                 </li>
-                <li><a href="#phase12"><i class="devicon-amazonwebservices-original tech-icon icon-aws"></i> Phase 12:
+        <li><a href="#phase12" data-phase-target="phase12"><i class="devicon-amazonwebservices-original tech-icon icon-aws"></i> Phase 12:
                         Serverless & Advanced Patterns</a></li>
                 <li><a href="#soft-skills"><i class="fas fa-users tech-icon"></i> Soft Skills & Professional
                         Development</a></li>

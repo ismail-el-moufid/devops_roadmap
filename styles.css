@@ -15,6 +15,41 @@ html {
 	-webkit-tap-highlight-color: transparent;
 }
 
+/* Sticky phase label near progress percent */
+#reading-progress-phase {
+	position: fixed;
+	top: 24px;
+	left: 70px;
+	background: #0f172a;
+	border: 1px solid #334155;
+	color: #e2e8f0;
+	padding: 6px 12px;
+	border-radius: 6px;
+	font-size: 13px;
+	z-index: 1000;
+	pointer-events: none;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+	max-width: 60vw;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	transition: opacity 0.2s, top 0.2s, left 0.2s;
+}
+#reading-progress-phase.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+@media (max-width: 768px) {
+	#reading-progress-phase {
+		font-size: 11px;
+		top: 16px;
+		left: 60px;
+		padding: 5px 8px;
+		max-width: 80vw;
+	}
+}
+
 /* Tech Icon Styles */
 .tech-icon {
 	display: inline-block;
