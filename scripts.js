@@ -482,6 +482,24 @@ function fixMermaidSvgLayering() {
 
 // Function removed to simplify - keeping only the layer fixes
 
+// Ensure loading screen fits within viewport on mobile
+function fixLoadingScreenDimensions() {
+  const loadingScreen = document.getElementById('loading-screen');
+  if (!loadingScreen) return;
+  
+  // Ensure loading screen fits within viewport
+  loadingScreen.style.width = '100vw';
+  loadingScreen.style.height = '100vh';
+  loadingScreen.style.maxWidth = '100vw';
+  loadingScreen.style.maxHeight = '100vh';
+  loadingScreen.style.overflow = 'hidden';
+  loadingScreen.style.boxSizing = 'border-box';
+}
+
+// Call this function when page loads
+window.addEventListener('DOMContentLoaded', fixLoadingScreenDimensions);
+window.addEventListener('resize', fixLoadingScreenDimensions);
+
 function hideLoadingScreen() {
   const loadingScreen = document.getElementById('loading-screen');
   if (!loadingScreen) return;
@@ -1217,11 +1235,15 @@ window.addEventListener('load', () => {
   makeMermaidResponsive();
   fixProgressIndicatorsForMobile();
   
+  // Fix loading screen dimensions immediately
+  fixLoadingScreenDimensions();
+  
   // Handle loading screen differently on mobile vs desktop
   const isMobile = window.innerWidth <= 768;
   
   if (isMobile) {
     // On mobile, hide loading screen quickly for better UX
+    fixLoadingScreenDimensions(); // Apply fix again to be sure
     setTimeout(() => {
       hideLoadingScreen();
       makeMermaidResponsive();

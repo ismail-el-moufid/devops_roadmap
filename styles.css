@@ -1578,6 +1578,7 @@ hr::before {
 	box-shadow: none;
 	flex-shrink: 0; /* Prevent the loader from shrinking */
 	margin: 0 auto;
+	box-sizing: border-box;
 	padding: 0;
 }
 
