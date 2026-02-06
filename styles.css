@@ -7,7 +7,11 @@
 html {
 	margin: 0;
 	padding: 0;
-	background: #000000;
+	background: #000000 !important;
+	background-color: #000000 !important; /* Force black overscroll */
+	min-height: 100%;
+	height: 100%;
+	color-scheme: dark;
 	scroll-behavior: smooth;
 	scroll-padding-top: 80px; /* Offset for fixed elements at top */
 	-webkit-font-smoothing: antialiased;
@@ -54,10 +58,12 @@ html {
 .tech-icon {
 	display: inline-block;
 	font-size: 1.1em;
-	margin-right: 8px;
+	margin-right: 12px;
 	vertical-align: middle;
 	transition: all 0.15s ease;
 	filter: none;
+	position: relative;
+	top: -2px;
 }
 
 .tech-icon:hover {
@@ -68,10 +74,12 @@ html {
 
 .tech-icon-lg {
 	font-size: 1.5em;
-	margin-right: 10px;
+	margin-right: 15px;
 	vertical-align: middle;
 	transition: all 0.15s ease;
 	filter: none;
+	position: relative;
+	top: -3px;
 }
 
 .tech-icon-lg:hover {
@@ -81,7 +89,7 @@ html {
 }
 
 h2 .tech-icon-lg {
-	margin-right: 15px;
+	margin-right: 25px;
 }
 
 .sidebar-content .tech-icon {
@@ -184,26 +192,18 @@ button .fas, button .far, button .fab {
 	color: inherit;
 }
 
-/* Emoji replacement icons */
-.icon-emoji {
-	display: inline-block;
-	margin-right: 6px;
-	vertical-align: middle;
-	transition: opacity 0.15s ease;
-}
-
-.icon-emoji:hover {
-	opacity: 0.7;
-}
+/* Emoji replacement icons - Removed */
 
 body {
-	background: #000000;
+	background: #000000 !important;
+	background-color: #000000 !important;
+	min-height: 100vh;
 	color: #D1D5DB;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
 	line-height: 1.65;
 	padding: 0;
 	margin: 0;
-	padding-left: 380px;
+	padding-left: 420px;
 	transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	overflow-x: hidden;
 	-webkit-text-size-adjust: 100%;
@@ -736,7 +736,7 @@ hr {
 }
 
 hr::before {
-	content: '✦';
+	content: '★';
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -752,7 +752,7 @@ hr::before {
 	position: fixed;
 	left: 0;
 	top: 0;
-	width: 380px;
+	width: 420px;
 	height: 100vh;
 	background: #000000;
 	border-right: 1px solid #2A2A2A;
@@ -763,7 +763,7 @@ hr::before {
 }
 
 .sidebar.closed {
-	left: -380px;
+	left: -420px;
 }
 
 /* Custom scrollbar for sidebar */
@@ -1936,3 +1936,674 @@ hr::before {
 	}
 }
 
+
+/* --- Gamification & HUD --- */
+#gamer-hud {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 280px;
+    background: rgba(15, 23, 42, 0.85); /* Deep transparent slate */
+    backdrop-filter: blur(12px); /* Glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+    border-left: 3px solid #8B5CF6; /* Clean accent indicator */
+    border-radius: 8px; /* Standard rounded aesthetic */
+    padding: 16px;
+    color: #f8fafc;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5); /* Deep shadow */
+    z-index: 9999;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    opacity: 0;
+    pointer-events: none;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+#gamer-hud.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#gamer-hud:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.3);
+    background: rgba(15, 23, 42, 0.95);
+}
+
+.hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.player-title {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #e2e8f0;
+    letter-spacing: 0.3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 170px;
+}
+
+.level-badge {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+    padding: 3px 10px;
+    border-radius: 99px; /* Pill shape */
+    font-weight: 600;
+    font-size: 0.75em;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    box-shadow: none;
+    letter-spacing: 0.5px;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 0.75em;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.xp-bar-container {
+    width: 100%;
+    height: 6px; /* Sleek thin bar */
+    background: rgba(255, 255, 255, 0.05); /* Very faint track */
+    border-radius: 99px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 4px;
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #8B5CF6, #c084fc); /* Purple to lighter purple */
+    width: 0%;
+    transition: width 0.5s ease-out;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.6); /* Purple Glow */
+    border-radius: 99px;
+}
+
+/* Gamified List Items */
+.gamified-list li {
+    position: relative;
+    list-style: none; /* Hide default bullets */
+    padding-left: 30px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-radius: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.gamified-list li:hover {
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.gamified-list li::before {
+    content: '\f0c8'; /* FontAwesome square */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 400; /* Regular */
+    position: absolute;
+    left: 5px;
+    top: 6px; /* Adjust based on line-height */
+    color: #94a3b8;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gamified-list li.completed {
+    color: #94a3b8;
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.gamified-list li.completed::before {
+    content: '\f14a'; /* FontAwesome check-square */
+    font-weight: 900; /* Solid */
+    color: #10b981;
+    transform: scale(1.2);
+}
+
+/* XP Float Animation */
+.xp-float {
+    position: absolute;
+    color: #fbbf24;
+    font-weight: bold;
+    font-size: 14px;
+    pointer-events: none;
+    animation: floatUp 1s ease-out forwards;
+    z-index: 10000;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-30px) scale(1.5); }
+}
+
+/* Level Up Modal */
+
+
+/* --- Sidebar Locking --- */
+.sidebar-content a.locked-phase {
+    color: #475569;
+    pointer-events: none; /* Prevent clicking */
+    position: relative;
+    filter: grayscale(1);
+}
+
+.sidebar-content a.locked-phase::after {
+    content: '\f023'; /* FontAwesome Lock Icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 0.9em;
+}
+
+.sidebar-content a.locked-phase .tech-icon,
+.sidebar-content a.locked-phase .tech-icon-lg {
+    opacity: 0.5;
+}
+
+/* Optional: Slight hover effect to show it's interactable but locked? 
+   Actually user said "scroll to build anticipation", maybe let them click but it scrolls to a blurred section?
+   "lock phases from the navbar ... and scroll to build anticipation"
+   
+   If pointer-events: none is set, they can't click.
+   Let's remove pointer-events: none so we can intercept the click and show a message.
+*/
+.sidebar-content a.locked-phase {
+    pointer-events: auto; 
+    cursor: not-allowed;
+}
+
+/* Locked Section (In Content) - Optional Blur effect */
+.phase-locked-content {
+    filter: blur(5px);
+    opacity: 0.7;
+    pointer-events: none;
+    user-select: none;
+    position: relative;
+}
+
+.phase-locked-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #8B5CF6;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+/* --- Locked Navbar Items --- */
+.nav-locked {
+    opacity: 0.5;
+    pointer-events: none; /* Disable clicking */
+    position: relative;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+}
+
+.nav-locked::after {
+    content: '\f023'; /* FontAwesome Lock Icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 0.8em;
+}
+
+/* Unlock Animation */
+.nav-unlocked {
+    filter: grayscale(0%);
+    opacity: 1;
+    pointer-events: auto;
+    animation: unlockFlash 1s ease-out;
+}
+
+@keyframes unlockFlash {
+    0% { background-color: rgba(16, 185, 129, 0.5); transform: scale(1.05); }
+    100% { background-color: transparent; transform: scale(1); }
+}
+
+/* Auto-generated checkboxes */
+.checklist-item.auto-generated {
+    margin-right: 10px;
+    accent-color: #8B5CF6;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Make lists look more actionable */
+ul li {
+    position: relative;
+    padding-left: 5px;
+}
+
+/* --- Phase Locking & Gating --- */
+
+/* The locked overlay container */
+.phase-locked-container {
+    position: relative;
+    /* transition: all 0.5s ease; */ /* Removed transition to avoid jank on load */
+}
+
+/* The visual blur/lock effect */
+.phase-locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(15, 23, 42, 0.6); /* Slightly Darker for better contrast */
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
+    padding: 20px;
+    border-radius: 8px;
+    
+    /* Prevent interaction */
+    user-select: none; 
+    pointer-events: all; /* Blocks clicks to potential underlying links */
+}
+
+.phase-locked-message {
+    background: #1e293b;
+    border: 2px solid #ef4444; /* Thicker border */
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    color: #f1f5f9;
+    max-width: 90%;
+    width: auto;
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.phase-locked-message i {
+    font-size: 2.5em; /* Larger Icon */
+    color: #ef4444;
+    margin-bottom: 16px;
+    display: block;
+}
+
+/* Fix navbar lock icon positioning */
+.nav-locked {
+    padding-right: 30px !important; /* Make room for icon */
+}
+
+.nav-locked::after {
+    /* Existing content is fine, just ensure right/top are good */
+    right: 10px;
+}
+
+/* --- Visual Locking (Grayed Out) --- */
+
+/* The Container: Rendered FULL height with protection */
+.phase-locked-container.locked-active {
+    display: block !important;
+    position: relative;
+    clear: both; /* Prevents floating elements from previous phase interfering */
+    margin-top: 20px; /* Safety buffer */
+    pointer-events: none; 
+    user-select: none;
+    overflow: hidden; /* Ensures the overlay doesn't bleed out */
+    border-radius: 8px;
+}
+
+/* Gray out the actual CONTENT, without overlay */
+.phase-locked-container.locked-active > * {
+    opacity: 0.15; /* Match content opacity */
+    filter: grayscale(100%) blur(2px); /* Blurred for disabled look */
+    pointer-events: none; /* Ensure no clicks */
+}
+
+/* The Overlay Background & Title */
+.phase-locked-container.locked-active::before {
+    content: "LOCKED";
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 800;
+    font-size: 3rem;
+    letter-spacing: 0.5rem;
+    color: #475569; /* Slate-600 */
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: auto; 
+    
+    /* Background: Semi-transparent gray */
+    background: rgba(15, 23, 42, 0.4); 
+    backdrop-filter: grayscale(1) blur(1px);
+
+    /* Center the Text */
+    display: flex;
+    align-items: flex-start; /* Moved to top */
+    justify-content: center;
+    padding-top: 100px; /* Offset from the very top border */
+    
+    /* Text Shadow for depth */
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* The Overlay Instruction Text (Subtitle) */
+.phase-locked-container.locked-active::after {
+    content: "Complete checks in the previous phase to unlock";
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #94a3b8; /* Slate-400 */
+    
+    position: absolute;
+    top: 160px; /* Positioned below the LOCKED title (100px padding + text size) */
+    left: 0;
+    width: 100%;
+    
+    z-index: 101; /* Above the ::before layer */
+    pointer-events: none;
+    
+    display: flex;
+    justify-content: center;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+/* The Header: Consistent gray style */
+.locked-header {
+    display: block !important;
+    opacity: 0.5; /* Match content opacity */
+    filter: grayscale(100%); /* Match content filter */
+    color: #94a3b8 !important;
+    margin-bottom: 20px;
+}
+
+/* The Overlay: Covers the container */
+.phase-locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: auto; 
+    /* Gradient: Clear at top to see header, then fade to opaque dark */
+    background: linear-gradient(to bottom, 
+        rgba(15, 23, 42, 0.4) 0%, 
+        #0f172a 400px, 
+        #0f172a 100%
+    );
+    /* Flexbox to center the wrapper vertically and horizontally relative to the locked phase start */
+    display: flex;
+    align-items: flex-start; /* We want it near the top of the phase, not dead center of a 5000px container */
+    justify-content: center;
+}
+
+/* Wrapper: Positioned ABSOLUTELY near the top of the container */
+.lock-message-wrapper {
+    position: absolute; 
+    top: 120px; 
+    left: 50%; /* Start at center */
+    transform: translateX(-50%); /* Clean Center */
+    width: auto; 
+    display: flex;
+    justify-content: center;
+    z-index: 101;
+    margin: 0;
+}
+
+/* Sticky Wrapper: Clean alignment at the top */
+.lock-message-wrapper {
+    /* Removed absolute positioning to allow sticky behavior from new rule */
+    display: none; /* Just removing this rule block so the previous one takes precedence/cleans up */
+}
+
+/* The Message Box - Fully Opaque and Sharp */
+.phase-locked-message {
+    background: #0f172a; /* Solid color, no transparency */
+    border: 2px solid #ef4444;
+    padding: 30px 50px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(0,0,0,0.9);
+    color: #f1f5f9;
+    max-width: 500px;
+    opacity: 1 !important; /* Force visibility */
+    filter: none !important;
+}
+
+.phase-locked-message i {
+    font-size: 2.5em; /* Larger Icon */
+    color: #ef4444;
+    margin-bottom: 16px;
+    display: block;
+}
+
+/* DEPRECATED STYLES OVERRIDE */
+.phase-locked-container.locked-active > *:not(.phase-locked-overlay) {
+    display: block !important; /* Force content show */
+}
+.locked-hidden {
+    display: block !important;
+}
+
+/* Subphase locking styling if needed */
+.subphase-locked {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* --- Professional Checklist Styles (Core Concepts) --- */
+.pro-checklist {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 16px;
+}
+
+.pro-checklist li {
+    background: rgba(30, 41, 59, 0.4);
+    margin-bottom: 10px;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.pro-checklist li:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(139, 92, 246, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.pro-checklist label {
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 16px;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    color: #cbd5e1;
+}
+
+/* Hide default checkbox but keep it accessible/focusable */
+.pro-checklist input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    min-width: 22px;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #64748b;
+    border-radius: 6px;
+    margin-right: 16px;
+    margin-top: 2px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #0f172a;
+    flex-shrink: 0;
+}
+
+/* Checked State */
+.pro-checklist input[type="checkbox"]:checked {
+    background-color: #8B5CF6; /* Purple accent */
+    border-color: #8B5CF6;
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+/* Checkmark Icon */
+.pro-checklist input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Text Styling */
+.pro-checklist strong {
+    color: #f3f4f6; /* Brighter white for keys */
+    font-weight: 600;
+}
+
+/* Optional: Strikethrough on completion */
+.pro-checklist input[type="checkbox"]:checked + span {
+    opacity: 1; /* Keep it readable, don't fade out */
+}
+
+/* Code Snippets inside checklist matching theme */
+.pro-checklist code {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+/* Career Milestone Box */
+.career-milestone {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-left: 5px solid #0ea5e9; /* Sky Blue accent */
+    padding: 25px;
+    margin: 40px 0;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    border: 1px solid #1e293b;
+    border-left-width: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle glow effect */
+.career-milestone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(14, 165, 233, 0.1), transparent 40%);
+    pointer-events: none;
+}
+
+.career-milestone h2 {
+    color: #38bdf8 !important; /* Sky 400 */
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 15px;
+}
+
+.career-milestone p {
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.career-milestone ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+    padding-left: 0;
+}
+
+.career-milestone ul li {
+    list-style: none;
+    background: rgba(30, 41, 59, 0.5);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    display: flex;
+    align-items: center;
+    color: #e2e8f0;
+    font-weight: 500;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.career-milestone ul li:hover {
+    transform: translateY(-2px);
+    background: #334155;
+    border-color: #0ea5e9;
+}
+
+.career-milestone ul li i {
+    margin-right: 10px;
+}
+
+/* Style for the Action Plan list (OL) */
+.career-milestone ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.career-milestone ol li {
+    color: #cbd5e1;
+    line-height: 1.6;
+    padding-left: 5px;
+}
+
+.career-milestone ol li strong {
+    color: #38bdf8;
+    margin-right: 5px;
+}

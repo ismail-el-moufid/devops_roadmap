@@ -1,8 +1,119 @@
 // scripts.js
 // Initializes Mermaid, loads chart definitions from charts.json, renders them, and moves all inline UI logic here.
 
+// Centralized Timeline Configuration - Single Source of Truth
+const timelineConfig = [
+    { id: "phase1", duration: 1, title: "Fundamentals & Prerequisites" },
+    { id: "phase2", duration: 1, title: "Git & Version Control" },
+    { id: "phase3", duration: 3, title: "Linux Basics" }, // Extended to 3 weeks per request
+    { id: "phase4", duration: 10, title: "AWS & Advanced Networking" },
+    { id: "phase5", duration: 4, title: "Terraform (IaC)" },
+    { id: "phase6", duration: 3, title: "Ansible (Config Mgmt)" },
+    { id: "phase7", duration: 2, title: "Docker (Containerization)" },
+    { id: "phase8", duration: 7, title: "Kubernetes & EKS" },
+    { id: "phase9", duration: 5, title: "CI/CD Pipelines", children: [
+        { id: "phase9a", duration: 2, title: "Testing & QA" },
+        { id: "phase9b", duration: 2, title: "GitOps" },
+        { id: "phase9c", duration: 1, title: "Policy as Code" }
+    ]},
+    { id: "phase10", duration: 3, title: "Monitoring & Observability" },
+    { id: "phase11", duration: 4, title: "Security & Compliance" },
+    { id: "phase12", duration: 3, title: "Production Hardening" }
+];
+
+// Function to update HTML text content with calculated weeks
+function updateRoadmapTimelines() {
+    console.log("Updating roadmap timelines...");
+    let currentWeek = 1;
+    
+    // Helper to format text
+    const formatWeeks = (start, duration) => {
+        const end = start + duration - 1;
+        return duration === 1 ? `(Week ${start})` : `(Weeks ${start}-${end})`;
+    };
+
+    timelineConfig.forEach(phase => {
+        const duration = phase.duration;
+        const timeText = formatWeeks(currentWeek, duration);
+        
+        // Update Timeline Header (H3) without wiping title
+        const timelineEl = document.getElementById(`timeline-${phase.id}`);
+        if (timelineEl) {
+             let badge = timelineEl.querySelector('.time-badge');
+             if (!badge) {
+                 badge = document.createElement('span');
+                 badge.className = 'time-badge';
+                 badge.style.fontSize = '0.85em';
+                 badge.style.marginLeft = '10px';
+                 badge.style.opacity = '0.9';
+                 timelineEl.appendChild(badge);
+             }
+             badge.textContent = timeText;
+        }
+        
+        // Update Duration Paragraph (P)
+        const durationEl = document.getElementById(`duration-${phase.id}`);
+        if (durationEl) {
+             // Standardize duration text
+             durationEl.innerHTML = `<em>Duration: ${duration} ${duration === 1 ? 'Week' : 'Weeks'} ${timeText}</em>`;
+        }
+        
+        // Handle children
+        if (phase.children) {
+            let subStart = currentWeek;
+            phase.children.forEach(child => {
+                const childText = formatWeeks(subStart, child.duration);
+                
+                const cDurEl = document.getElementById(`duration-${child.id}`);
+                if (cDurEl) cDurEl.innerHTML = `<em>Duration: ${child.duration} ${child.duration === 1 ? 'Week' : 'Weeks'} ${childText}</em>`;
+                
+                const cTimeEl = document.getElementById(`timeline-${child.id}`);
+                if (cTimeEl) {
+                      let badge = cTimeEl.querySelector('.time-badge');
+                      if (!badge) {
+                          badge = document.createElement('span');
+                          badge.className = 'time-badge';
+                          badge.style.fontSize = '0.85em';
+                          badge.style.marginLeft = '8px';
+                          cTimeEl.appendChild(badge);
+                      }
+                      badge.textContent = childText;
+                }
+                subStart += child.duration;
+            });
+        }
+        
+        currentWeek += duration;
+    });
+    
+    // Update Global Totals
+    const totalWeeks = timelineConfig.reduce((sum, phase) => sum + phase.duration, 0);
+    const totalMonths = Math.ceil(totalWeeks / 4.3);
+    
+    // Standard pace (10-15h/week)
+    document.querySelectorAll('.total-weeks-text').forEach(el => {
+        el.textContent = totalWeeks;
+    });
+    const totalMonthsEl = document.getElementById('total-months-text');
+    if (totalMonthsEl) totalMonthsEl.textContent = totalMonths;
+    
+    // Slower pace (5h/week) - approx 2.5x longer
+    // 12.5h avg / 5h = 2.5 factor
+    const extendedWeeks = Math.ceil(totalWeeks * 2.5);
+    const extendedMonths = Math.ceil(extendedWeeks / 4.3);
+    
+    const extWeeksEl = document.getElementById('extended-weeks');
+    if (extWeeksEl) extWeeksEl.textContent = extendedWeeks;
+    
+    const extMonthsEl = document.getElementById('extended-months');
+    if (extMonthsEl) extMonthsEl.textContent = extendedMonths;
+}
+
 // First, load mermaid via the script tag to ensure it's available
 document.addEventListener('DOMContentLoaded', () => {
+  // Update timelines immediately
+  updateRoadmapTimelines();
+
   // Add mermaid script tag if not already present
   if (!window.mermaid) {
     const script = document.createElement('script');
@@ -163,7 +274,11 @@ async function loadCharts() {
         },
         {
           "id": "timeline",
-          "definition": "flowchart LR\n    subgraph \"Learning Timeline\"\n        direction TB\n        \n        subgraph \"Fundamentals\"\n            p1[\"Phase 1: Fundamentals & Prerequisites<br/>(1 week)\"] -.-> p2[\"Phase 2: Git & Version Control<br/>(1 week)\"] \n        end\n        \n        subgraph \"Infrastructure\"\n            p3[\"Phase 3: Linux Basics<br/>(1 week)\"] -.-> p4[\"Phase 4: AWS & Networking<br/>(9 weeks)\"]  \n        end\n        \n        subgraph \"Automation\"\n            p5[\"Phase 5: Terraform (IaC)<br/>(4 weeks)\"] -.-> p6[\"Phase 6: Ansible (Config Mgmt)<br/>(3 weeks)\"] \n        end\n        \n        subgraph \"Containers\"\n            p7[\"Phase 7: Docker (Containerization)<br/>(2 weeks)\"] -.-> p8[\"Phase 8: Kubernetes & EKS<br/>(7 weeks)\"] \n        end\n        \n        subgraph \"CI/CD & Quality\"\n            p9[\"Phase 9: CI/CD Pipelines<br/>(5 weeks)\"] \n            p9a[\"Phase 9A: Testing & QA<br/>(2 weeks)\"] \n            p9b[\"Phase 9B: GitOps<br/>(2 weeks)\"] \n            p9c[\"Phase 9C: Policy as Code<br/>(1 week)\"] \n        end\n        \n        subgraph \"Operations\"\n            p10[\"Phase 10: Monitoring & Observability<br/>(3 weeks)\"] -.-> p11[\"Phase 11: Security & Compliance<br/>(4 weeks)\"] \n        end\n        \n        subgraph \"Advanced\"\n            p12[\"Phase 12: Production Hardening<br/>(3 weeks)\"]\n        end\n    \n        p2 --> p3\n        p4 --> p5\n        p6 --> p7\n        p8 --> p9\n        p9 --> p9a\n        p9a --> p9b\n        p9b --> p9c\n        p9c --> p10\n        p11 --> p12\n        \n        classDef done fill:#4caf50,color:#fff,stroke:#2e7d32,stroke-width:2px\n        classDef active fill:#ff9800,color:#fff,stroke:#ef6c00,stroke-width:2px\n        classDef todo fill:#1e293b,color:#fff,stroke:#8B5CF6,stroke-width:1px\n        \n        class p1,p2 done\n        class p3 active\n        class p4,p5,p6,p7,p8,p9,p9a,p9b,p9c,p10,p11,p12 todo\n    end"
+          "definition": "flowchart LR\n    subgraph \"Learning Timeline\"\n        direction TB\n        \n        subgraph \"Fundamentals\"\n            p1[\"Phase 1: Fundamentals & Prerequisites<br/>(1 week)\"] -.-> p2[\"Phase 2: Git & Version Control<br/>(1 week)\"] \n        end\n        \n        subgraph \"Infrastructure\"\n            p3[\"Phase 3: Linux Basics<br/>(1 week)\"] -.-> p4[\"Phase 4: AWS & Networking<br/>(9 weeks)\"]  \n        end\n        \n        subgraph \"Automation\"\n            p5[\"Phase 5: Terraform (IaC)<br/>(4 weeks)\"] -.-> p6[\"Phase 6: Ansible (Config Mgmt)<br/>(3 weeks)\"] \n        end\n        \n        subgraph \"Containers\"\n            p7[\"Phase 7: Docker (Containerization)<br/>(2 weeks)\"] -.-> p8[\"Phase 8: Kubernetes & EKS<br/>(7 weeks)\"] \n        end\n        \n        subgraph \"CI/CD & Quality\"\n            p9[\"Phase 9: CI/CD Pipelines<br/>(5 weeks)\"] \n            p9a[\"Phase 9A: Testing & QA<br/>(2 weeks)\"] \n            p9b[\"Phase 9B: GitOps<br/>(2 weeks)\"] \n            p9c[\"Phase 9C: Policy as Code<br/>(1 week)\"] \n        end\n        \n        subgraph \"Operations\"\n            p10[\"Phase 10: Monitoring & Observability<br/>(3 weeks)\"] -.-> p11[\"Phase 11: Security & Compliance<br/>(4 weeks)\"] \n        end\n        \n        subgraph \"Advanced\"\n            p12[\"Phase 12: Production Hardening<br/>(3 weeks)\"]\n        end\n    \n        p2 --> p3\n        p4 --> p5\n        p6 --> p7\n        p8 --> p9\n        p9 --> p9a\n        p9a --> p9b\n        p9b --> p9c\n        p9c --> p10\n        p11 --> p12\n        \n        classDef done fill:#10b981,color:#fff,stroke:#059669,stroke-width:2px\n        classDef active fill:#8B5CF6,color:#fff,stroke:#7c3aed,stroke-width:2px\n        classDef todo fill:#1e293b,color:#fff,stroke:#8B5CF6,stroke-width:1px\n        \n        class p1,p2,p3,p4,p5,p6,p7,p8,p9,p9a,p9b,p9c,p10,p11,p12 todo\n    end"
+        },
+        {
+          "id": "linux-basics",
+          "definition": "graph TD\n    A[Linux Mastery] --> B(Basics: Filesystem & CLI)\n    A --> C(Administration: Users & Processes)\n    A --> D(Networking: DNS & Security)\n    A --> E(Automation: Bash Scripting)\n    B --> B1[ls, cd, grep, cat]\n    B --> B2[Permissions: chmod, chown]\n    C --> C1[systemd services]\n    C --> C2[Package Management: apt/yum]\n    D --> D1[SSH Hardening]\n    D --> D2[Firewalls: UFW/IPTables]\n    E --> E1[Variables & Loops]\n    E --> E2[Cron Jobs]\n    \n    style A fill:#f59e0b,color:#000"
         },
         {
           "id": "three-ways",
@@ -242,6 +357,108 @@ async function loadCharts() {
 
     // Use the embedded chart definitions
     let charts = Array.isArray(data) ? data : (Array.isArray(data?.charts) ? data.charts : []);
+
+    // --- Dynamic Timeline Update ---
+    // Updates the mermaid timeline chart based on timelineConfig
+    if (typeof timelineConfig !== 'undefined') {
+        const timelineChart = charts.find(c => c.id === 'timeline');
+        if (timelineChart) {
+            console.log("Updating timeline chart definition dynamically...");
+            let def = timelineChart.definition;
+            
+            // Calculate total duration
+            const totalDuration = timelineConfig.reduce((sum, phase) => sum + phase.duration, 0);
+
+            // Update main subgraph title with total duration
+            def = def.replace(/subgraph "Learning Timeline"/, `subgraph "Learning Timeline (Total: ${totalDuration} Weeks)"`);
+
+            // Map node IDs to timelineConfig IDs or accessors
+            const nodeMap = {
+                'p1': 'phase1',
+                'p2': 'phase2',
+                'p3': 'phase3',
+                'p4': 'phase4',
+                'p5': 'phase5',
+                'p6': 'phase6',
+                'p7': 'phase7',
+                'p8': 'phase8',
+                'p9': 'phase9', // Group parent
+                'p10': 'phase10',
+                'p11': 'phase11',
+                'p12': 'phase12'
+            };
+
+            const subNodeMap = {
+                'p9a': { parentId: 'phase9', index: 0 },
+                'p9b': { parentId: 'phase9', index: 1 },
+                'p9c': { parentId: 'phase9', index: 2 }
+            };
+
+            // Calculate start weeks for each phase for proper "Week X-Y" display
+            let currentWeekMap = new Map();
+            let runningWeek = 1;
+            
+            timelineConfig.forEach(phase => {
+                currentWeekMap.set(phase.id, { start: runningWeek, duration: phase.duration });
+                
+                if (phase.children) {
+                     let subStart = runningWeek;
+                     phase.children.forEach((child, idx) => {
+                         // We key children by "phaseId_index" or similar? 
+                         // No, we need to map via subNodeMap logic.
+                         // But here we just build a lookup by traversing config.
+                         // Let's rely on finding them again properly.
+                     });
+                }
+                runningWeek += phase.duration;
+            });
+
+            // Helper to get text like "(Week 3)" or "(Weeks 4-12)"
+            const getWeekText = (start, duration) => {
+                const end = start + duration - 1;
+                return duration === 1 ? `(Week ${start})` : `(Weeks ${start}-${end})`;
+            };
+
+            // Function to perform replacement
+            const replaceDuration = (nodeId, startWeek, duration) => {
+                const timeText = getWeekText(startWeek, duration);
+                
+                // Regex matches: nodeId["Title<br/>(old_text)"] 
+                const regex = new RegExp(`(${nodeId}\\[".*?)<br\\/>\\([^)]+\\)(?=")`);
+                if (regex.test(def)) {
+                    def = def.replace(regex, `$1${timeText}`);
+                }
+            };
+
+            // Update standard phases
+            for (const [nodeId, configId] of Object.entries(nodeMap)) {
+                if (currentWeekMap.has(configId)) {
+                    const info = currentWeekMap.get(configId);
+                    replaceDuration(nodeId, info.start, info.duration);
+                }
+            }
+
+            // Update sub-phases - Re-calculate specific sub-phase starts
+            // We need to re-find the parent to get the correct start offset
+            for (const [nodeId, info] of Object.entries(subNodeMap)) {
+                const parent = timelineConfig.find(c => c.id === info.parentId);
+                const parentStart = currentWeekMap.get(info.parentId)?.start || 1;
+                
+                if (parent && parent.children && parent.children[info.index]) {
+                    // Calculate start of this specific child
+                    let subStart = parentStart;
+                    for (let i = 0; i < info.index; i++) {
+                        subStart += parent.children[i].duration;
+                    }
+                    const child = parent.children[info.index];
+                    replaceDuration(nodeId, subStart, child.duration);
+                }
+            }
+
+            timelineChart.definition = def;
+        }
+    }
+    // -------------------------------
 
     // Strategy: Find placeholders with data-chart-id or .mermaid blocks in order
     // Prefer explicit placeholders: <div class="mermaid" data-chart-id="architecture"></div>
@@ -736,35 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('sidebar-closed');
     }
 
-    // Replace emoji shortcodes like :sparkles: with Unicode (safe traversal, no innerHTML rewrite)
-    (function replaceShortcodesSafely() {
-      const shortcodeMap = {
-        ':sparkles:': '✨',
-        ':rocket:': '🚀',
-        ':warning:': '⚠️',
-        ':white_check_mark:': '✅',
-        ':x:': '❌'
-      };
-      const shouldSkip = (el) => el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || el.classList?.contains('mermaid');
-
-      function walk(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-          let text = node.textContent;
-          let changed = false;
-          for (const [code, emoji] of Object.entries(shortcodeMap)) {
-            if (text.includes(code)) {
-              text = text.split(code).join(emoji);
-              changed = true;
-            }
-          }
-          if (changed) node.textContent = text;
-        } else if (node.nodeType === Node.ELEMENT_NODE && !shouldSkip(node)) {
-          const children = Array.from(node.childNodes);
-          for (const child of children) walk(child);
-        }
-      }
-      walk(document.body);
-    })();
+    /* Emoji shortcode replacement removed */
 
     // Add devicon icons for tech badges
     document.querySelectorAll('.tech-icon[data-icon]').forEach(el => {
@@ -898,6 +1087,13 @@ function openStuckModal() {
   if (modal) {
     modal.classList.add('show');
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
+
+    // Achievement: Step Bro Is Here
+    if (typeof Gamification !== 'undefined') {
+        Gamification.metrics.stuckCount = (Gamification.metrics.stuckCount || 0) + 1;
+        Gamification.saveProgress();
+        Gamification.checkAchievements();
+    }
   }
 }
 
@@ -959,92 +1155,7 @@ window.onclick = function (event) {
   }
 }
 
-// Replace emojis with Font Awesome icons
-document.addEventListener('DOMContentLoaded', function () {
-  const emojiReplacements = {
-    '✅': '<i class="fas fa-check-circle icon-emoji" style="color: #6EE7B7;"></i>',
-    '❌': '<i class="fas fa-times-circle icon-emoji"></i>',
-    '⚠️': '<i class="fas fa-exclamation-triangle icon-emoji"></i>',
-    '💡': '<i class="fas fa-lightbulb icon-emoji"></i>',
-    '🎯': '<i class="fas fa-bullseye icon-emoji"></i>',
-    '📅': '<i class="far fa-calendar icon-emoji"></i>',
-    '📚': '<i class="fas fa-book icon-emoji"></i>',
-    '🧩': '<i class="fas fa-puzzle-piece icon-emoji"></i>',
-    '💪': '<i class="fas fa-dumbbell icon-emoji"></i>',
-    '🔥': '<i class="fas fa-fire icon-emoji"></i>',
-    '⚡': '<i class="fas fa-bolt icon-emoji"></i>',
-    '🚀': '<i class="fas fa-rocket icon-emoji"></i>',
-    '📊': '<i class="fas fa-chart-bar icon-emoji"></i>',
-    '🔒': '<i class="fas fa-lock icon-emoji"></i>',
-    '🧑‍🤝‍🧑': '<i class="fas fa-users icon-emoji"></i>',
-    '🛠️': '<i class="fas fa-tools icon-emoji"></i>',
-    '💸': '<i class="fas fa-dollar-sign icon-emoji"></i>',
-    '💰': '<i class="fas fa-money-bill-wave icon-emoji"></i>',
-    '🤔': '<i class="fas fa-question-circle icon-emoji"></i>',
-    '💻': '<i class="fas fa-laptop-code icon-emoji"></i>',
-    '⏰': '<i class="fas fa-clock icon-emoji"></i>',
-    '😫': '<i class="fas fa-tired icon-emoji"></i>',
-    '🚫': '<i class="fas fa-ban icon-emoji"></i>',
-    '📞': '<i class="fas fa-phone icon-emoji"></i>',
-    '🌟': '<i class="fas fa-star icon-emoji"></i>',
-    '🧭': '<i class="fas fa-compass icon-emoji"></i>',
-    '🔀': '<i class="fas fa-code-branch icon-emoji"></i>',
-    '☁️': '<i class="fas fa-cloud icon-emoji"></i>',
-    '🧱': '<i class="fas fa-layer-group icon-emoji"></i>',
-    '⚙️': '<i class="fas fa-cog icon-emoji"></i>',
-    '🔁': '<i class="fas fa-sync icon-emoji"></i>',
-    '🆘': '<i class="fas fa-life-ring icon-emoji"></i>',
-    '📑': '<i class="fas fa-list icon-emoji"></i>',
-    '🐧': '<i class="fab fa-linux icon-emoji"></i>',
-    '🐳': '<i class="fab fa-docker icon-emoji"></i>',
-    '☸️': '<i class="fas fa-dharmachakra icon-emoji"></i>',
-    '🎓': '<i class="fas fa-graduation-cap icon-emoji"></i>',
-    '📦': '<i class="fas fa-box icon-emoji"></i>',
-    '📖': '<i class="fas fa-book-open icon-emoji"></i>',
-    '📋': '<i class="fas fa-clipboard icon-emoji"></i>',
-    '🤖': '<i class="fas fa-robot icon-emoji"></i>',
-    '💼': '<i class="fas fa-briefcase icon-emoji"></i>',
-    '📝': '<i class="fas fa-edit icon-emoji"></i>',
-    '📍': '<i class="fas fa-map-marker-alt icon-emoji"></i>',
-    '🎤': '<i class="fas fa-microphone icon-emoji"></i>',
-    '🧪': '<i class="fas fa-flask icon-emoji"></i>',
-    '🏗️': '<i class="fas fa-hammer icon-emoji"></i>',
-    '🔄': '<i class="fas fa-sync-alt icon-emoji"></i>'
-  };
-
-  // Replace emojis in all text nodes
-  function replaceEmojis(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      let text = node.textContent;
-      let hasEmoji = false;
-
-      for (let [emoji, icon] of Object.entries(emojiReplacements)) {
-        if (text.includes(emoji)) {
-          hasEmoji = true;
-          break;
-        }
-      }
-
-      if (hasEmoji) {
-        let newHTML = text;
-        for (let [emoji, icon] of Object.entries(emojiReplacements)) {
-          newHTML = newHTML.split(emoji).join(icon);
-        }
-
-        const span = document.createElement('span');
-        span.innerHTML = newHTML;
-        node.parentNode.replaceChild(span, node);
-      }
-    } else if (node.nodeType === Node.ELEMENT_NODE &&
-      node.tagName !== 'SCRIPT' &&
-      node.tagName !== 'STYLE' &&
-      !node.classList.contains('mermaid')) {
-      Array.from(node.childNodes).forEach(child => replaceEmojis(child));
-    }
-  }
-
-  replaceEmojis(document.body);
-});
+/* Emoji replacement with Font Awesome icons removed - Done statically in HTML */
 
 // Add tech icons to specific mentions
 document.addEventListener('DOMContentLoaded', function () {
@@ -1300,6 +1411,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Reading Progress Bar with weighted phases
+// Generated dynamically from timelineConfig to ensure consistency
 const phaseWeights = {
   'readiness-quiz': { weeks: 0, name: 'Prerequisites Assessment' },
   'quick-start': { weeks: 0, name: 'Quick Start Track (Optional)' },
@@ -1307,27 +1419,31 @@ const phaseWeights = {
   'project-alternatives': { weeks: 0, name: 'Project Alternatives' },
   'impact-statement': { weeks: 0, name: 'Impact Statement' },
   'prerequisites': { weeks: 0, name: 'Prerequisites' },
-  'phase1': { weeks: 1, name: 'Phase 1: DevOps Fundamentals' },
-  'phase2': { weeks: 1, name: 'Phase 2: Version Control' },
-  'phase3': { weeks: 1, name: 'Phase 3: Linux Basics' },
-  'phase4': { weeks: 9, name: 'Phase 4: AWS & Networking' },
-  'phase5': { weeks: 4, name: 'Phase 5: Terraform IaC' },
-  'phase6': { weeks: 3, name: 'Phase 6: Ansible' },
-  'phase7': { weeks: 2, name: 'Phase 7: Docker' },
-  'phase8': { weeks: 7, name: 'Phase 8: Kubernetes' },
-  'phase9': { weeks: 0, name: 'Phase 9: CI/CD' },
-  'phase9-testing': { weeks: 2, name: 'Phase 9A: Testing & QA' },
-  'phase9b': { weeks: 2, name: 'Phase 9B: GitOps' },
-  'phase9c': { weeks: 1, name: 'Phase 9C: Policy as Code' },
-  'phase10': { weeks: 3, name: 'Phase 10: Monitoring' },
-  'phase11': { weeks: 4, name: 'Phase 11: Security' },
-  'phase12': { weeks: 3, name: 'Phase 12: Production Hardening' },
   'soft-skills': { weeks: 0, name: 'Soft Skills' },
   'cost-breakdown': { weeks: 0, name: 'Cost Breakdown' },
   'final-polish': { weeks: 0, name: 'Final Polish & Portfolio' },
   'career-tips': { weeks: 0, name: 'Career Tips' },
   'final-thoughts': { weeks: 0, name: 'Final Thoughts' }
 };
+
+// Populate weights from config
+timelineConfig.forEach(p => {
+  // Main phase
+  phaseWeights[p.id] = { 
+    weeks: p.duration, 
+    name: p.title.startsWith('Phase') ? p.title : `Phase ${p.id.replace('phase', '')}: ${p.title}` 
+  };
+  
+  // Children phases (for Phase 9 etc)
+  if (p.children) {
+    p.children.forEach(c => {
+      phaseWeights[c.id] = { 
+        weeks: c.duration, 
+        name: c.title.startsWith('Phase') ? c.title : `Phase ${c.id.replace('phase', '').toUpperCase()}: ${c.title}` 
+      };
+    });
+  }
+});
 
 // Calculate total weeks (only count phases with actual time investment)
 const totalWeeks = Object.values(phaseWeights).reduce((sum, phase) => sum + phase.weeks, 0);
@@ -1407,16 +1523,26 @@ function updateProgressBar() {
     // phase1 start Y (use explicit phase1 anchor if present)
     const phase1El = document.querySelector('h2#phase1, h3#phase1');
     const phase1Start = phase1El ? getElementOffset(phase1El) : phases[0].top;
-
-    // if document too short or before phase1 => keep 0%
-    if (documentEnd <= phase1Start + 1 || scrollTop < phase1Start) {
+    
+    // Gamification HUD reference
+    const hud = document.getElementById('gamer-hud');
+    
+    // NEW Early Exit: Allow showing if we are "close enough" to Phase 1 (e.g. header is in bottom half of screen)
+    // If scrollTop is within windowHeight * 0.6 of phase1Start, we are "entering" Phase 1
+    const START_OFFSET = windowHeight * 0.6; 
+    
+    // if document too short or way before phase1
+    if (documentEnd <= phase1Start + 1 || scrollTop < (phase1Start - START_OFFSET)) {
       progressBar.style.width = '0%';
       progressPercent.textContent = '0%';
       progressPercent.classList.add('hidden');
       if (progressPhase) progressPhase.classList.add('hidden');
+      if (hud) hud.classList.remove('visible'); // Hide HUD
       window._lastProgressPercent = 0;
       return;
     }
+
+    if (hud) hud.classList.add('visible'); // Show HUD if we passed the relaxed start check
 
     // if near bottom => 100%
     if (scrollTop >= documentEnd - 10) {
@@ -1442,11 +1568,31 @@ function updateProgressBar() {
     const totalWeeks = phasesFromStart.reduce((s, p) => s + p.weight, 0);
 
     // Find current phase index (last phase whose top <= scrollTop), clamp to last index
+    // Use an offset so it switches "early" (when header is near top, not past it)
+    const VIEWPORT_TRIGGER_OFFSET = windowHeight * 0.5; // Trigger when 50% down the screen (center)
     let idx = 0;
+    
+    // For calculation logic (strict percentage), keep using exact scrollTop
     for (let i = 0; i < phasesFromStart.length; i++) {
       if (scrollTop >= phasesFromStart[i].top) idx = i;
       else break;
     }
+
+    // For display logic (visual label), check what is actually ON SCREEN
+    // Find the first phase that is currently visible or just above
+    let visualIdx = 0;
+    const scrollBottom = scrollTop + windowHeight;
+    
+    // Find the last phase that has started (top < scrollBottom - offset)
+    for (let i = 0; i < phasesFromStart.length; i++) {
+        // If the phase top is above the "trigger line" (e.g. bottom 20% of screen), show it
+        if ((scrollTop + VIEWPORT_TRIGGER_OFFSET) >= phasesFromStart[i].top) {
+            visualIdx = i;
+        } else {
+            break; 
+        }
+    }
+    const visualCur = phasesFromStart[visualIdx];
 
     // compute progress within current phase segment
     const cur = phasesFromStart[idx];
@@ -1481,8 +1627,10 @@ function updateProgressBar() {
 
     // update sticky phase label
     if (progressPhase) {
-      if (cur && cur.name && smoothed > 2 && smoothed < 100) {
-        progressPhase.textContent = cur.name;
+      // Use visualCur (offset-based) for the label text so it updates earlier/smoother
+      // Removed > 1 check so label appears immediately when valid
+      if (visualCur && visualCur.name && smoothed < 100) {
+        progressPhase.textContent = visualCur.name;
         progressPhase.classList.remove('hidden');
       } else {
         progressPhase.classList.add('hidden');
@@ -1587,7 +1735,10 @@ document.addEventListener('DOMContentLoaded', function () {
   checklistItems.forEach(checkbox => {
     checkbox.addEventListener('change', function () {
       const listItem = this.closest('li');
-      if (this.checked) {
+      const isChecked = this.checked;
+      
+      // Update visual state
+      if (isChecked) {
         listItem.classList.add('completed');
       } else {
         listItem.classList.remove('completed');
@@ -1616,6 +1767,12 @@ function calculateAndDisplayScore() {
     scores[input.dataset.skill] = score;
   });
 
+  // Calculate dynamic totals for recommendations
+  const totalWeeks = typeof timelineConfig !== 'undefined' 
+    ? timelineConfig.reduce((sum, phase) => sum + phase.duration, 0)
+    : 45; // fallback
+  const totalMonths = Math.ceil(totalWeeks / 4.3);
+
   // Update total score display
   const totalScoreElement = document.getElementById('total-score');
   if (totalScoreElement) {
@@ -1643,10 +1800,12 @@ function calculateAndDisplayScore() {
             <h4 style="color: #fbbf24; margin-top: 0;">Score: ${totalScore}/24 - Good foundation!</h4>
             <p><strong><em>Recommendation:</em></strong> Follow the roadmap as written, but allocate extra time for weaker areas.</p>
             <p><strong>Focus Areas:</strong> Review the skills where you scored 0-1 and strengthen them as you progress through the roadmap.</p>
-            <p style="color: #94a3b8;"><strong>Estimated Timeline:</strong> 34-40 weeks (8-9 months)</p>
+            <p style="color: #94a3b8;"><strong>Estimated Timeline:</strong> ${totalWeeks} weeks (${totalMonths} months)</p>
             <p style="color: #10b981;">✓ You're ready to start the DevOps journey!</p>
         `;
   } else if (totalScore >= 17 && totalScore <= 24) {
+    const fastWeeks = Math.ceil(totalWeeks * 0.7);
+    const fastMonths = Math.ceil(fastWeeks / 4.3);
     interpretation = `
             <h4 style="color: #10b981; margin-top: 0;">Score: ${totalScore}/24 - Strong foundation!</h4>
             <p><strong><em>Recommendation:</em></strong> You can move through phases faster. Consider accelerating your learning pace.</p>
@@ -1656,7 +1815,7 @@ function calculateAndDisplayScore() {
                 <li>Focus more time on advanced topics (Phase 9-12)</li>
                 <li>Consider contributing to open-source projects while learning</li>
             </ul>
-            <p style="color: #94a3b8;"><strong>Estimated Timeline:</strong> 6-8 months</p>
+            <p style="color: #94a3b8;"><strong>Estimated Timeline:</strong> ${fastWeeks}-${totalWeeks - 4} weeks (${fastMonths}-${totalMonths - 1} months)</p>
             <p style="color: #10b981;">✓✓ You're well-prepared for this DevOps roadmap!</p>
         `;
   }
@@ -1799,7 +1958,7 @@ function displayWeakAreasFocus(scores) {
     });
 
     html += '</div>';
-    html += '<p style="color: #94a3b8; margin-top: 15px; font-size: 0.95em;"><strong>⏱️ Timeline:</strong> Spend 1-2 months on these fundamentals before starting the full DevOps roadmap. Building a strong foundation will make everything else much easier!</p>';
+    html += '<p style="color: #94a3b8; margin-top: 15px; font-size: 0.95em;"><strong>️ Timeline:</strong> Spend 1-2 months on these fundamentals before starting the full DevOps roadmap. Building a strong foundation will make everything else much easier!</p>';
 
     phasesList.innerHTML = html;
 
@@ -1838,8 +1997,7 @@ function displayWeakAreasFocus(scores) {
       { phase: 'Phase 4', name: 'Cloud Infrastructure (AWS)', reason: 'Configure VPCs, subnets, and security groups' }
     ],
     'webdev': [
-      { phase: 'Phase 2', name: 'Version Control & Collaboration', reason: 'Build and version control applications' },
-      { phase: 'Quick Start Track', name: 'Quick Start (Weeks 1-3)', reason: 'Build a simple web application from scratch' }
+      { phase: 'Phase 2', name: 'Version Control & Collaboration', reason: 'Build and version control applications' }
     ],
     'linux': [
       { phase: 'Phase 3', name: 'Linux Administration & Networking', reason: 'Comprehensive Linux system administration training' },
@@ -1877,7 +2035,7 @@ function displayWeakAreasFocus(scores) {
   // Reset heading and description for phase recommendations
   const headingElement = weakAreasDiv.querySelector('h4');
   if (headingElement) {
-    headingElement.innerHTML = '🎯 Recommended Focus Areas';
+    headingElement.innerHTML = 'Recommended Focus Areas';
   }
   const descElement = weakAreasDiv.querySelector('p');
   if (descElement) {
@@ -1936,7 +2094,7 @@ function displayWeakAreasFocus(scores) {
   });
 
   html += '</div>';
-  html += '<p style="color: #94a3b8; margin-top: 15px; font-size: 0.95em;"><strong>💡 Tip:</strong> Don\'t worry if you have weak areas! This roadmap is designed to teach you everything from scratch. Pay extra attention and allocate more time to these phases.</p>';
+  html += '<p style="color: #94a3b8; margin-top: 15px; font-size: 0.95em;"><strong>Tip:</strong> Don\'t worry if you have weak areas! This roadmap is designed to teach you everything from scratch. Pay extra attention and allocate more time to these phases.</p>';
 
   phasesList.innerHTML = html;
   weakAreasDiv.style.display = 'block';
@@ -1981,7 +2139,7 @@ function updateChecklistProgress(checklistId) {
     progressBar.style.width = percentage + '%';
     if (percentage === 100) {
       progressBar.style.background = 'linear-gradient(90deg, #10b981 0%, #059669 100%)';
-      progressBar.innerHTML = '🎉 Complete!';
+      progressBar.innerHTML = 'Complete!';
     } else {
       progressBar.style.background = 'linear-gradient(90deg, #3730a3 0%, #10b981 100%)';
       progressBar.innerHTML = '';
@@ -2062,3 +2220,714 @@ function loadChecklistStates() {
     });
   }
 }
+
+/* --- Gamification Logic --- */
+const Gamification = {
+    xp: 0,
+    level: 1,
+    metrics: { toggles: 0, lastActivity: Date.now() },
+    xpPerTask: 25,
+    unlockedAchievements: [],
+    
+    achievements: [
+        { id: 'start', name: 'First Steps', label: 'Achievement', desc: 'Earn your first XP', icon: 'fa-shoe-prints', condition: (g) => g.xp > 0 },
+        { id: 'clickops', name: 'ClickOps Engineer', label: 'Too Much UI', desc: 'Toggle 10 items manually', icon: 'fa-mouse-pointer', condition: (g) => g.metrics.toggles >= 10 },
+        { id: 'nightowl', name: 'Night Shift', label: 'Sleep is for the weak', desc: 'Working between 12AM and 5AM', icon: 'fa-moon', condition: (g) => {
+            const h = new Date().getHours();
+            return g.metrics.lastActivity && (h >= 0 && h < 5);
+        }},
+        { id: 'stepbro', name: 'Step Bro Is Here', label: 'Help Me', desc: 'Opened the "I\'m Stuck" modal', icon: 'fa-life-ring', condition: (g) => g.metrics.stuckCount > 0 },
+        { id: 'lvl3', name: 'It Was Like That', label: 'Git Blame', desc: 'Reach Level 3 (Git)', icon: 'fa-code-branch', condition: (g) => g.level >= 3 },
+        { id: 'lvl5', name: 'Other People\'s Computers', label: 'Cloud Truth', desc: 'Reach Level 5 (AWS)', icon: 'fa-cloud', condition: (g) => g.level >= 5 },
+        { id: 'lvl8', name: 'Works On My Machine', label: 'Containerization', desc: 'Reach Level 8 (Docker)', icon: 'fa-box-open', condition: (g) => g.level >= 8 },
+        { id: 'internready', name: 'Son, Get Out', label: 'Internship Ready', desc: 'Acquired the Holy Trinity (Linux, AWS, Terraform, Docker)', icon: 'fa-briefcase', condition: (g) => g.level >= 8 },
+        { id: 'lvl9', name: 'YAML Wrangler', label: 'Indentation Error', desc: 'Reach Level 9 (K8s)', icon: 'fa-network-wired', condition: (g) => g.level >= 9 },
+        { id: 'godmode', name: 'Sudo Mode', label: 'Unlimited Power', desc: 'Enable God Mode', icon: 'fa-bolt', condition: (g) => g.godMode },
+        { id: 'lvl13', name: 'Production Access', label: 'Drop Database', desc: 'Reach Max Level', icon: 'fa-server', condition: (g) => g.level >= 13 }
+    ],
+
+    titles: [
+        "DevOps curious",           // Lvl 1: Starting
+        "Foundation Builder",       // Lvl 2: Completed Phase 1 (Fundamentals)
+        "Source Controller",        // Lvl 3: Completed Phase 2 (Git)
+        "Terminal Tinkerer",        // Lvl 4: Completed Phase 3 (Linux)
+        "Cloud Cadet",              // Lvl 5: Completed Phase 4 (AWS)
+        "Infrastructure Architect", // Lvl 6: Completed Phase 5 (Terraform)
+        "Automation Engineer",      // Lvl 7: Completed Phase 6 (Ansible)
+        "Container Captain",        // Lvl 8: Completed Phase 7 (Docker)
+        "Cluster Commander",        // Lvl 9: Completed Phase 8 (Kubernetes)
+        "Pipeline Master",          // Lvl 10: Completed Phase 9 (CI/CD)
+        "Observability Oracle",     // Lvl 11: Completed Phase 10 (Monitoring)
+        "SecOps Sentinel",          // Lvl 12: Completed Phase 11 (Security)
+        "DevOps Legend"             // Lvl 13: Completed Phase 12 (Production)
+    ],
+
+    init() {
+        this.loadProgress();
+        this.renderHUD();
+        this.updateSidebarLocks();
+        this.setupNavigationIntercept();
+    },
+
+    // ... existing load/save methods ...
+
+    setupNavigationIntercept() {
+        const sidebar = document.querySelector('.sidebar-content');
+        if (sidebar) {
+            sidebar.addEventListener('click', (e) => {
+                const link = e.target.closest('a');
+                if (link && link.classList.contains('locked-phase')) {
+                    e.preventDefault();
+                    // Optional: Show "Locked" toast or shake effect
+                    this.showLockedMessage(link);
+                    
+                    // "Scroll to build anticipation": 
+                    // Maybe scroll to the PREVIOUS unlocked phase's bottom? 
+                    // Or effectively do nothing in nav, forcing them to scroll manually.
+                    // The user prompt: "lock phases from the navbar ... and scroll to build anticipation"
+                    // Interpretation: The navigation doesn't work. To see it, you MUST scroll manually.
+                    return false;
+                }
+            });
+        }
+    },
+
+    showLockedMessage(element) {
+        const toast = document.createElement('div');
+        toast.style.position = 'fixed';
+        toast.style.top = '50%';
+        toast.style.left = '50%';
+        toast.style.transform = 'translate(-50%, -50%)';
+        toast.style.background = 'rgba(15, 23, 42, 0.95)';
+        toast.style.color = '#ef4444';
+        toast.style.padding = '15px 25px';
+        toast.style.borderRadius = '8px';
+        toast.style.border = '1px solid #ef4444';
+        toast.style.zIndex = '10002';
+        toast.style.fontWeight = 'bold';
+        toast.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.4)';
+        toast.style.backdropFilter = 'blur(5px)';
+        toast.innerHTML = '<i class="fas fa-lock"></i> Locked! Level up to unlock this phase.';
+        
+        document.body.appendChild(toast);
+        
+        setTimeout(() => toast.remove(), 2000);
+    },
+
+    updateSidebarLocks() {
+        // Map Phases to Level Requirements
+        // If we have 12 Phases, maybe:
+        // Level 1: Phase 1
+        // Level 2: Phase 2
+        // ...
+        // Level 12: Phase 12
+        
+        // Simpler: Just map index of phase to level.
+        // Or better yet, define a config.
+        const lockConfig = {
+            'phase1': 1,
+            'phase2': 2,
+            'phase3': 3,
+            'phase4': 4,
+            'phase5': 5,
+            'phase6': 6,
+            'phase7': 7,
+            'phase8': 8,
+            'phase9': 9,
+            'phase9a': 9,
+            'phase9b': 9,
+            'phase9c': 9,
+            'phase10': 10,
+            'phase11': 11,
+            'phase12': 12
+        };
+
+        const links = document.querySelectorAll('.sidebar-content a[data-phase-target]');
+        links.forEach(link => {
+            const target = link.getAttribute('data-phase-target');
+            const reqLevel = lockConfig[target] || 1; // Default to 1 (unlocked)
+            
+            if (this.level < reqLevel) {
+                link.classList.add('locked-phase');
+                link.title = `Locked: Requires Level ${reqLevel}`;
+            } else {
+                link.classList.remove('locked-phase');
+                link.title = '';
+            }
+        });
+    },
+
+    loadProgress() {
+        const saved = localStorage.getItem('devops-gamer-progress');
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                this.xp = parseInt(data.xp) || 0;
+                this.level = this.calculateLevelFromXP(this.xp);
+                this.unlockedAchievements = data.achievements || [];
+                this.metrics = data.metrics || { toggles: 0, lastActivity: Date.now() };
+            } catch (e) {
+                console.error("Error loading progress", e);
+                this.xp = 0;
+                this.level = 1;
+                this.unlockedAchievements = [];
+                this.metrics = { toggles: 0, lastActivity: Date.now() };
+            }
+        } else {
+             // New user?
+             this.metrics = { toggles: 0, lastActivity: Date.now() };
+        }
+    },
+
+    saveProgress() {
+        localStorage.setItem('devops-gamer-progress', JSON.stringify({
+            xp: this.xp,
+            level: this.level,
+            achievements: this.unlockedAchievements,
+            metrics: this.metrics
+        }));
+    },
+
+    // Total XP required to REACH a specific level
+    // Level 1: 0 XP
+    // Level 2: 100 XP (Phase 1 Complete)
+    // Level N: (N-1) * 100
+    getRequiredXPForLevel(lvl) {
+        if (lvl <= 1) return 0;
+        return (lvl - 1) * 100;
+    },
+
+    calculateLevelFromXP(currentXP) {
+        return Math.floor(currentXP / 100) + 1;
+    },
+
+    addXP(amount, element) {
+        const oldLevel = this.level;
+        this.xp += amount;
+        
+        // Recalculate level based on new total XP
+        this.level = this.calculateLevelFromXP(this.xp);
+        
+        this.checkAchievements();
+        this.saveProgress();
+        this.renderHUD();
+        this.showFloatingXP(amount, element);
+        
+        if (this.level > oldLevel) {
+            this.triggerLevelUp();
+        }
+    },
+
+    removeXP(amount) {
+        this.xp = Math.max(0, this.xp - amount);
+        this.level = this.calculateLevelFromXP(this.xp);
+        this.saveProgress();
+        this.renderHUD();
+    },
+
+    triggerLevelUp() {
+        // Use Xbox-style notification instead of modal
+        this.showAchievementToast({
+            label: "Level Up!",
+            name: this.getTitle(),
+            desc: `Reached Level ${this.level}`,
+            icon: "fa-level-up-alt"
+        });
+
+        // Confetti celebration
+        if (window.confetti) {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#8B5CF6', '#10b981', '#f59e0b']
+            });
+        }
+    },
+
+    getTitle() {
+        return this.titles[Math.min(this.level - 1, this.titles.length - 1)];
+    },
+
+    renderHUD() {
+        const titleEl = document.getElementById('player-title');
+        const levelEl = document.getElementById('player-level');
+        const xpEl = document.getElementById('current-xp');
+        const nextXpEl = document.getElementById('next-level-xp');
+        const barFill = document.getElementById('xp-bar-fill');
+        
+        // Progress for CURRENT level
+        const currentLevelStart = this.getRequiredXPForLevel(this.level);
+        const nextLevelStart = this.getRequiredXPForLevel(this.level + 1);
+        const levelDuration = nextLevelStart - currentLevelStart;
+        const xpInLevel = this.xp - currentLevelStart;
+        
+        if (titleEl) titleEl.textContent = this.getTitle();
+        if (levelEl) levelEl.textContent = "Lvl " + this.level;
+        
+        // Show XP progress within this level (e.g. 50 / 150)
+        if (xpEl) xpEl.textContent = xpInLevel;
+        if (nextXpEl) nextXpEl.textContent = levelDuration; // "Target" for this level
+        
+        if (barFill) {
+            const pct = Math.min(100, Math.max(0, (xpInLevel / levelDuration) * 100));
+            barFill.style.width = pct + '%';
+        }
+    },
+
+    showFloatingXP(amount, element) {
+        if (!element) return;
+        
+        const floatEl = document.createElement('div');
+        floatEl.className = 'xp-float';
+        floatEl.textContent = '+' + amount + ' XP';
+        
+        const rect = element.getBoundingClientRect();
+        floatEl.style.left = (rect.left + 20) + 'px'; 
+        floatEl.style.top = rect.top + 'px';
+        
+        document.body.appendChild(floatEl);
+        
+        setTimeout(() => {
+            floatEl.remove();
+        }, 1000);
+    },
+
+    checkAchievements() {
+        if (!this.achievements) return;
+        this.achievements.forEach(ach => {
+            // Check if not already unlocked AND condition is met
+            if (!this.unlockedAchievements.includes(ach.id) && ach.condition(this)) {
+                this.unlockAchievement(ach);
+            }
+        });
+    },
+
+    unlockAchievement(ach) {
+        this.unlockedAchievements.push(ach.id);
+        this.saveProgress();
+        this.showAchievementToast(ach);
+        
+        // Bonus XP for achievement? Optional.
+        // this.addXP(50); // Be careful of infinite loops if condition is based on XP
+    },
+
+    showAchievementToast(ach) {
+        // Create container if not exists
+        let container = document.getElementById('achievement-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'achievement-container';
+            container.style.cssText = 'position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10005; display: flex; flex-direction: column; gap: 15px; align-items: center; pointer-events: none;';
+            document.body.appendChild(container);
+        }
+
+        const toast = document.createElement('div');
+        // Xbox Style: Pill shape, sound, animation
+        // Theme Colors: Dark Slate BG, Purple Accent
+        toast.style.cssText = `
+            background: #0f172a; 
+            border: 2px solid #8B5CF6; 
+            color: white; 
+            padding: 10px 25px; 
+            border-radius: 50px; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4); 
+            opacity: 0; 
+            transform: translateY(50px); 
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-width: 320px;
+        `;
+
+        toast.innerHTML = `
+            <div style="width: 45px; height: 45px; background: #8B5CF6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 0 10px rgba(139,92,246,0.6);">
+                <i class="fas ${ach.icon}"></i>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <span style="font-size: 0.75em; text-transform: uppercase; color: #94a3b8; letter-spacing: 1.5px; font-weight: 700;">${ach.label || 'Achievement Unlocked'}</span>
+                <span style="font-weight: 800; font-size: 1.1em; letter-spacing: 0.5px;">${ach.name}</span>
+                <span style="font-size: 0.85em; color: #cbd5e1;">${ach.desc}</span>
+            </div>
+        `;
+
+        container.appendChild(toast);
+
+        // Play Sound (Optional, subtle click/pop)
+        // const audio = new Audio('achievement.mp3'); audio.play().catch(e=>{});
+
+        // Animate In
+        requestAnimationFrame(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+        });
+
+        // Animate Out
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            setTimeout(() => toast.remove(), 500); 
+        }, 5000);
+    }
+};
+
+// Auto-init
+document.addEventListener('DOMContentLoaded', () => {
+    Gamification.init();
+});
+
+/* --- Update Gamification Logic --- */
+Gamification.init = function() {
+    this.loadProgress();
+    this.bindCheckboxes(); // New: Only binds to existing Core Concepts checkboxes
+    this.initPhaseGating(); // Wraps and LOCKS based on checkboxes
+    this.renderHUD();
+    this.setupNavigationIntercept();
+};
+
+Gamification.bindCheckboxes = function() {
+    console.log("Binding to Core Concepts checkboxes...");
+    const coreLists = document.querySelectorAll('ul.pro-checklist');
+    let count = 0;
+    
+    // Iterate through each Phase's core list
+    coreLists.forEach((list, listIdx) => {
+        // Find which phase this list belongs to
+        const parentContainer = list.closest('.phase-locked-container');
+        const phaseId = parentContainer ? parentContainer.dataset.phaseId : ('phase-' + listIdx);
+        const isQuickStart = list.id === 'quickstart-checklist';
+        
+        const checkboxes = list.querySelectorAll('input[type="checkbox"]');
+        
+        // Dynamic XP Calculation: 1 Phase = 1 Level (approx 100 XP)
+        // We divide 100 XP among the number of tasks in this phase.
+        // Math.ceil ensures we always hit at least 100 XP upon completion.
+        const taskXP = checkboxes.length > 0 ? Math.ceil(100 / checkboxes.length) : 0;
+        
+        // Helper to update Quick Start Progress
+        const updateQS = () => {
+             if (!isQuickStart) return;
+             const total = checkboxes.length;
+             const checked = list.querySelectorAll('input:checked').length;
+             const pBar = document.getElementById('quickstart-progress');
+             if (pBar) {
+                 const pText = pBar.querySelector('.progress-text');
+                 const pFill = pBar.querySelector('.progress-bar');
+                 if (pText) pText.textContent = `${checked} / ${total} completed`;
+                 if (pFill) pFill.style.width = `${(checked/total)*100}%`;
+             }
+        };
+
+        if (isQuickStart) updateQS(); // Init state
+
+        checkboxes.forEach((cb, itemIdx) => {
+             // Create a stable unique ID
+             let uId = `core-${phaseId}-${itemIdx}`;
+             if (isQuickStart) {
+                 uId = `quickstart-${itemIdx}`; 
+             }
+             
+             cb.dataset.item = uId;
+             
+             // Load saved state
+             if (this.isTaskCompleted(uId)) {
+                 cb.checked = true;
+                 cb.closest('li').classList.add('completed');
+             }
+
+             // Bind Listener
+             cb.addEventListener('change', (e) => {
+                const isChecked = e.target.checked;
+                this.saveTaskState(uId, isChecked);
+                
+                if (isChecked) {
+                    e.target.closest('li').classList.add('completed');
+                    if (!isQuickStart) this.addXP(taskXP, e.target);
+                    if (isQuickStart) updateQS();
+                } else {
+                    e.target.closest('li').classList.remove('completed');
+                    if (!isQuickStart) this.removeXP(taskXP);
+                    if (isQuickStart) updateQS();
+                }
+             });
+             count++;
+        });
+    });
+    console.log(`Bound ${count} Core Concept checkboxes.`);
+};
+
+// Start of removed logic
+/*
+Gamification.gamifyContent = function() {
+    // ... removed ...
+};
+*/
+// End of removed logic
+
+Gamification.isTaskCompleted = function(id) {
+    const saved = localStorage.getItem('devops-gamer-tasks');
+    if (saved) {
+        const data = JSON.parse(saved);
+        return !!data[id];
+    }
+    return false;
+};
+
+Gamification.saveTaskState = function(id, completed) {
+    let data = {};
+    const saved = localStorage.getItem('devops-gamer-tasks');
+    if (saved) data = JSON.parse(saved);
+    
+    if (completed) data[id] = true;
+    else delete data[id];
+    
+    localStorage.setItem('devops-gamer-tasks', JSON.stringify(data));
+};
+
+Gamification.setupNavigationIntercept = function() {
+    const sidebar = document.querySelector('.sidebar-content');
+    if (sidebar) {
+        sidebar.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link && link.classList.contains('nav-locked')) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.showLockedMessage(link);
+            }
+        });
+    }
+};
+
+Gamification.refreshLocks = function() {
+    // Deprecated in favor of strict phase gating
+};
+
+/* --- Strict Phase Gating & Locking --- */
+
+Gamification.showLockedMessage = function(element) {
+    let toast = document.getElementById('locked-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'locked-toast';
+        // Updated colors to match theme: Purple (#8B5CF6) and Slate (#0f172a)
+        toast.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(15, 23, 42, 0.95); color: #A78BFA; padding: 25px 40px; border: 2px solid #8B5CF6; border-radius: 12px; z-index: 10002; font-weight: 800; font-size: 1.25em; text-align: center; box-shadow: 0 0 40px rgba(139, 92, 246, 0.5); backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.3s; pointer-events: none; min-width: 300px;';
+        toast.innerHTML = '<i class="fas fa-lock" style="font-size: 2.2em; margin-bottom: 12px; display: block; color: #8B5CF6; text-shadow: 0 0 15px rgba(139, 92, 246, 0.6);"></i><span style="letter-spacing: 1px; text-transform: uppercase;">Phase Locked</span><div style="font-size: 0.7em; color: #cbd5e1; margin-top: 8px; font-weight: normal; line-height: 1.5;">Complete the previous phase first.<br>Scroll up to find pending tasks!</div>';
+        document.body.appendChild(toast);
+    }
+    
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+};
+
+Gamification.initPhaseGating = function() {
+    this.wrapPhaseContent();
+    this.applyPhaseLocks(); 
+};
+
+Gamification.wrapPhaseContent = function() {
+    // Only run once
+    if (document.querySelector('.phase-locked-container')) return;
+
+    const wrapperConfig = [
+        { id: 'phase1', title: 'Phase 1' },
+        { id: 'phase2', title: 'Phase 2' },
+        { id: 'phase3', title: 'Phase 3' },
+        { id: 'phase4', title: 'Phase 4' },
+        { id: 'phase5', title: 'Phase 5' },
+        { id: 'phase6', title: 'Phase 6' },
+        { id: 'phase7', title: 'Phase 7' },
+        { id: 'phase8', title: 'Phase 8' },
+        { id: 'phase9', title: 'Phase 9' },
+        { id: 'phase9-testing', title: 'Phase 9A' },
+        { id: 'phase9b', title: 'Phase 9B' },
+        { id: 'phase9c', title: 'Phase 9C' },
+        { id: 'phase10', title: 'Phase 10' },
+        { id: 'phase11', title: 'Phase 11' },
+        { id: 'phase12', title: 'Phase 12' },
+        { id: 'soft-skills', title: 'Soft Skills' },
+        { id: 'final-polish', title: 'Final Polish' },
+        { id: 'career-tips', title: 'Career Tips' },
+        { id: 'final-thoughts', title: 'Final Thoughts' }
+    ];
+
+    wrapperConfig.forEach((cfg, index) => {
+        const startEl = document.getElementById(cfg.id);
+        if (!startEl) return;
+        
+        const nextId = wrapperConfig[index + 1]?.id;
+        let nodesToWrap = [];
+        let nextSibling = startEl.nextSibling;
+        
+        while (nextSibling) {
+            // Stop conditions
+            if (nextSibling.nodeType === 1 && nextSibling.id === nextId) break;
+            if (nextSibling.nodeType === 1 && nextSibling.tagName === 'H2' && nextSibling.id && nextSibling.id.startsWith('phase')) break;
+            // Stop at scripts or footer
+            if (nextSibling.tagName === 'SCRIPT' || nextSibling.tagName === 'FOOTER') break;
+            
+            nodesToWrap.push(nextSibling);
+            nextSibling = nextSibling.nextSibling;
+        }
+        
+        const container = document.createElement('div');
+        container.className = 'phase-locked-container';
+        container.id = 'container-' + cfg.id;
+        container.dataset.phaseId = cfg.id;
+        
+        startEl.parentNode.insertBefore(container, startEl.nextSibling);
+        nodesToWrap.forEach(node => container.appendChild(node));
+    });
+};
+
+Gamification.checkPhaseCompletion = function(phaseId) {
+    if (this.godMode) return true; // GOD MODE: Bypass
+    const container = document.getElementById('container-' + phaseId);
+    if (!container) return true;
+
+    // Check checkboxes inside this container
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    if (checkboxes.length === 0) return true;
+    
+    // Also check if any are unchecked
+    for (let cb of checkboxes) {
+        if (!cb.checked) return false;
+    }
+    return true;
+};
+
+Gamification.applyPhaseLocks = function() {
+    const phases = [
+        'phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 
+        'phase7', 'phase8', 'phase9', 'phase9-testing', 'phase9b', 'phase9c',
+        'phase10', 'phase11', 'phase12',
+        'soft-skills', 'final-polish', 'career-tips', 'final-thoughts'
+    ];
+    
+    let isPreviousComplete = true; // Phase 1 unlocked by default
+    
+    phases.forEach((phaseId) => {
+        const container = document.getElementById('container-' + phaseId);
+        const header = document.getElementById(phaseId);
+        
+        // Link locking (Navbar)
+        const navLinks = document.querySelectorAll(`.sidebar-content a[href="#${phaseId}"]`);
+        
+        if (isPreviousComplete) {
+            // Unlock
+            this.unlockPhase(container, header);
+            navLinks.forEach(l => {
+                l.classList.remove('nav-locked');
+                l.classList.add('nav-unlocked');
+            });
+            
+            // Check completion for NEXT phase
+            isPreviousComplete = this.checkPhaseCompletion(phaseId);
+        } else {
+            // Lock
+            this.lockPhase(container, header);
+            navLinks.forEach(l => {
+                l.classList.add('nav-locked');
+                l.classList.remove('nav-unlocked');
+            });
+            
+            // If this is locked/incomplete, next is definitely locked
+            isPreviousComplete = false;
+        }
+    });
+};
+
+Gamification.lockPhase = function(container, header) {
+    if (container) {
+        container.classList.add('locked-active');
+        // Overlay removed per user request - simple grayscale lock
+    }
+    // Visually mute the header too
+    if (header) header.classList.add('locked-header');
+};
+
+Gamification.unlockPhase = function(container, header) {
+    if (container) {
+        container.classList.remove('locked-active');
+        const overlay = container.querySelector('.phase-locked-overlay');
+        if (overlay) overlay.remove();
+    }
+    if (header) header.classList.remove('locked-header');
+};
+
+// Unified Init - Overrides previous init safely
+Gamification.init = function() {
+    this.loadProgress();
+    this.bindCheckboxes(); // New: Only binds to existing Core Concepts checkboxes
+    this.initPhaseGating(); // Wraps and LOCKS based on checkboxes
+    this.renderHUD();
+    this.setupNavigationIntercept(); // Intercepts clicks on locked links
+};
+
+// Override addXP to trigger lock checks
+if (!Gamification.addXP.isWrapper) {
+    const _originalAddXP = Gamification.addXP; 
+    Gamification.addXP = function(amount, element) {
+        _originalAddXP.call(this, amount, element);
+        this.applyPhaseLocks();
+    };
+    Gamification.addXP.isWrapper = true;
+}
+
+// Kickstart if DOM is already ready (fixes race condition)
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    // Clear any existing HUD to avoid duplicates if re-init
+    const hud = document.querySelector('.gamification-hud');
+    if (hud) hud.remove();
+    
+    Gamification.init();
+}
+
+/* --- Scroll Guard (Strict Blocking) --- */
+window.addEventListener('scroll', () => {
+    const firstLocked = document.querySelector('.phase-locked-container.locked-active');
+    if (firstLocked) {
+        // Allow seeing the header and a bit of the overlay (e.g. 300px), but no more.
+        // This lets the user see "Phase 2" and the "LOCKED" message, but stops them from scrolling past it.
+        const lockTop = firstLocked.getBoundingClientRect().top + window.scrollY;
+        
+        // The limit is the top of the locked phase + 1/2 viewport (enough to see the lock message)
+        const limit = lockTop - (window.innerHeight * 0.3);
+
+        // Bypass if God Mode is active
+        if (Gamification.godMode) return;
+
+        if (window.scrollY > limit) {
+            window.scrollTo({ top: limit, behavior: 'auto' });
+            
+            // Re-trigger the toast removed (User preference: permanent overlay instead)
+        }
+    }
+}, { passive: false });
+
+/* --- GOD MODE (Developer Cheat) --- */
+Gamification.godMode = false;
+
+window.addEventListener('keydown', (e) => {
+    // Check for Ctrl+G (or Cmd+G on Mac)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'g') {
+        e.preventDefault(); // Prevent browser find-next or other defaults
+        
+        Gamification.godMode = !Gamification.godMode;
+        
+        // Show Toast
+        const status = Gamification.godMode ? "ENABLED" : "DISABLED";
+        const color = Gamification.godMode ? "#10b981" : "#ef4444"; // Green vs Red
+        
+        let toast = document.createElement('div');
+        toast.style.cssText = `position: fixed; top: 20px; right: 20px; background: rgba(15, 23, 42, 0.95); color: ${color}; padding: 15px 25px; border: 2px solid ${color}; border-radius: 8px; z-index: 20000; font-weight: bold; box-shadow: 0 0 20px ${color}; pointer-events: none;`;
+        toast.innerHTML = `<i class="fas fa-bolt"></i> GOD MODE: ${status}`;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => toast.remove(), 2000);
+        
+        // Refresh locks to visually unlock everything if enabled
+        Gamification.applyPhaseLocks();
+        Gamification.checkAchievements();
+    }
+});
