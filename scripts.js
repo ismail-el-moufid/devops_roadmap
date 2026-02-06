@@ -1773,6 +1773,10 @@ function calculateAndDisplayScore() {
     : 45; // fallback
   const totalMonths = Math.ceil(totalWeeks / 4.3);
 
+  // Calculated accelerated timeline for high scores
+  const fastWeeks = Math.max(1, totalWeeks - 10);
+  const fastMonths = Math.ceil(fastWeeks / 4.3);
+
   // Update total score display
   const totalScoreElement = document.getElementById('total-score');
   if (totalScoreElement) {
@@ -1783,9 +1787,9 @@ function calculateAndDisplayScore() {
   const interpretationElement = document.getElementById('score-interpretation');
   let interpretation = '';
 
-  if (totalScore >= 0 && totalScore <= 8) {
+  if (totalScore >= 0 && totalScore <= 7) {
     interpretation = `
-            <h4 style="color: #ef4444; margin-top: 0;">Score: ${totalScore}/24 - Start with fundamentals first!</h4>
+            <h4 style="color: #ef4444; margin-top: 0;">Score: ${totalScore}/21 - Start with fundamentals first!</h4>
             <p><strong><em>Recommendation:</em></strong> Spend 1-2 months on basic programming, Linux, and networking before starting this roadmap.</p>
             <p><strong>Suggested Resources:</strong></p>
             <ul>
@@ -1795,19 +1799,17 @@ function calculateAndDisplayScore() {
             </ul>
             <p style="color: #94a3b8;"><strong>Timeline:</strong> 2-3 months of foundational learning, then begin this roadmap</p>
         `;
-  } else if (totalScore >= 9 && totalScore <= 16) {
+  } else if (totalScore >= 8 && totalScore <= 14) {
     interpretation = `
-            <h4 style="color: #fbbf24; margin-top: 0;">Score: ${totalScore}/24 - Good foundation!</h4>
+            <h4 style="color: #fbbf24; margin-top: 0;">Score: ${totalScore}/21 - Good foundation!</h4>
             <p><strong><em>Recommendation:</em></strong> Follow the roadmap as written, but allocate extra time for weaker areas.</p>
             <p><strong>Focus Areas:</strong> Review the skills where you scored 0-1 and strengthen them as you progress through the roadmap.</p>
             <p style="color: #94a3b8;"><strong>Estimated Timeline:</strong> ${totalWeeks} weeks (${totalMonths} months)</p>
             <p style="color: #10b981;">✓ You're ready to start the DevOps journey!</p>
         `;
-  } else if (totalScore >= 17 && totalScore <= 24) {
-    const fastWeeks = Math.ceil(totalWeeks * 0.7);
-    const fastMonths = Math.ceil(fastWeeks / 4.3);
+  } else if (totalScore >= 15 && totalScore <= 21) {
     interpretation = `
-            <h4 style="color: #10b981; margin-top: 0;">Score: ${totalScore}/24 - Strong foundation!</h4>
+            <h4 style="color: #10b981; margin-top: 0;">Score: ${totalScore}/21 - Strong foundation!</h4>
             <p><strong><em>Recommendation:</em></strong> You can move through phases faster. Consider accelerating your learning pace.</p>
             <p><strong>Advanced Options:</strong></p>
             <ul>
@@ -1842,13 +1844,12 @@ function displayWeakAreasFocus(scores) {
   const weakAreasDiv = document.getElementById('weak-areas-focus');
   const phasesList = document.getElementById('focus-phases-list');
 
-  // If score is 0-8, show prerequisite resources instead
-  if (totalScore >= 0 && totalScore <= 8) {
+  // If score is 0-7, show prerequisite resources instead
+  if (totalScore >= 0 && totalScore <= 7) {
     const skillNames = {
       'commandline': 'Command Line',
       'programming': 'Programming',
       'networking': 'Networking',
-      'webdev': 'Web Development',
       'linux': 'Linux/Unix',
       'git': 'Version Control',
       'cloud': 'Cloud Platforms',
@@ -1895,13 +1896,6 @@ function displayWeakAreasFocus(scores) {
         resources: [
           { name: 'Networking Fundamentals', url: 'https://www.youtube.com/watch?v=3QhU9jd03a0', type: 'Video' },
           { name: 'Computer Networks Course', url: 'https://www.coursera.org/learn/computer-networking', type: 'Course' }
-        ]
-      },
-      'webdev': {
-        name: 'Web Development Basics',
-        resources: [
-          { name: 'HTML/CSS/JavaScript', url: 'https://www.freecodecamp.org/learn/responsive-web-design/', type: 'Course' },
-          { name: 'Build Your First Web App', url: 'https://www.theodinproject.com/', type: 'Project-based' }
         ]
       },
       'linux': {
@@ -1996,9 +1990,6 @@ function displayWeakAreasFocus(scores) {
       { phase: 'Phase 3', name: 'Linux Administration & Networking', reason: 'Deep dive into networking concepts, DNS, and protocols' },
       { phase: 'Phase 4', name: 'Cloud Infrastructure (AWS)', reason: 'Configure VPCs, subnets, and security groups' }
     ],
-    'webdev': [
-      { phase: 'Phase 2', name: 'Version Control & Collaboration', reason: 'Build and version control applications' }
-    ],
     'linux': [
       { phase: 'Phase 3', name: 'Linux Administration & Networking', reason: 'Comprehensive Linux system administration training' },
       { phase: 'Phase 4', name: 'Cloud Infrastructure (AWS)', reason: 'Manage Linux servers in the cloud' }
@@ -2049,7 +2040,6 @@ function displayWeakAreasFocus(scores) {
     'commandline': 'Command Line',
     'programming': 'Programming',
     'networking': 'Networking',
-    'webdev': 'Web Development',
     'linux': 'Linux/Unix',
     'git': 'Version Control',
     'cloud': 'Cloud Platforms',
